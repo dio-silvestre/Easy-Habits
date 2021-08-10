@@ -2,10 +2,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useHistory } from "react-router";
-import api from '../../services'
+import api from "../../services/api";
 
 const Signup = () => {
-
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -18,7 +17,7 @@ const Signup = () => {
     passwordConfirm: yup
       .string()
       .required("Campo obrigatório")
-      .oneOf([yup.ref("password"), null], "As senhas devem ser iguais")
+      .oneOf([yup.ref("password"), null], "As senhas devem ser iguais"),
   });
 
   const {
@@ -30,10 +29,11 @@ const Signup = () => {
   const handleForm = ({ username, email, password }) => {
     const newUser = { username, email, password };
 
-    api.post('/users/', newUser)
+    api
+      .post("/users/", newUser)
       .then((res) => console.log(res))
-      .catch((e) => console.log(e))
-  }
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div>
@@ -47,21 +47,27 @@ const Signup = () => {
           {errors.email?.message}
         </div>
         <div>
-          <input placeholder="Senha" type='password'{...register("password")} />
+          <input
+            placeholder="Senha"
+            type="password"
+            {...register("password")}
+          />
           {errors.password?.message}
         </div>
         <div>
-          <input placeholder="Email" type='password'{...register("passwordConfirm")} />
+          <input
+            placeholder="Email"
+            type="password"
+            {...register("passwordConfirm")}
+          />
           {errors.passwordConfirm?.message}
         </div>
         <div>
-          <button type="submit">
-            Cadastrar
-          </button>
+          <button type="submit">Cadastrar</button>
         </div>
       </form>
-    </div>);
+    </div>
+  );
 };
 
 export default Signup;
-
