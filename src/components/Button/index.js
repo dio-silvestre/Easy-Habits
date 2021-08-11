@@ -1,8 +1,8 @@
-import '../Button/styles.css'
+import { StyledButton } from './styles.js'
 
 function Button () {
     return (
-        <button></button>
+        <StyledButton />
     )
 }
 

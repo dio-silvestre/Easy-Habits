@@ -1,15 +1,26 @@
-import './App.css';
+import Routes from "./routes";
+import GlobalStyle from "./styles/global";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
-import Button from './components/Button';
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Button />
-      </header>
+    <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <Routes />
+      <GlobalStyle />
     </div>
   );
-}
+};
 
 export default App;
