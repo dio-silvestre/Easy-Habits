@@ -1,28 +1,11 @@
-import logo from "./logo.svg";
-import "./App.css";
-import LottieAnimation from "./lotties";
-import Animation from "./assets/homeAnimation.json";
+import Routes from "./routes";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <LottieAnimation lotti={Animation} height={300} width={300} />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes />
     </div>
   );
-}
+};
 
 export default App;
