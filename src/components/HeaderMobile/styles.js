@@ -12,14 +12,19 @@ export const HeaderContainer = styled.div`
     font-weight: 600;
   }
 
+  .MuiSvgIcon-root {
+    color: var(--violetCore);
+    font-size: 2.5rem;
+  }
+
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     visibility: visible;
   }
 `;
 
-export const HeaderNav = styled.nav`
+export const HeaderNav = styled.div`
   width: 55vw;
-  min-height: 50vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -34,7 +39,7 @@ export const HeaderNav = styled.nav`
     min-width: 100%;
     text-align: right;
     padding: 10px 15px;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--white);
     font-weight: 600;
   }
