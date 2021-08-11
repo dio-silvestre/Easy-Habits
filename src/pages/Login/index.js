@@ -1,4 +1,4 @@
-import { Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -43,8 +43,9 @@ const Login = ({ authenticated, setAuthenticated }) => {
 
   return (
     <div>
+      <h1>Login</h1>
+      <h3>Entre com seu usuário e senha</h3>
       <form onSubmit={handleSubmit(onSubmitFunction)}>
-        <h1>Login</h1>
         <input
           {...register("username")}
           name="username"
@@ -54,12 +55,19 @@ const Login = ({ authenticated, setAuthenticated }) => {
         <input
           {...register("password")}
           name="password"
-          placeholder="Sua senha"
+          placeholder="Senha"
           type="password"
           error={errors.password?.message}
         ></input>
-        <button type="submit">Enviar</button>
+        <button type="submit">Entrar</button>
       </form>
+      <p>
+        Não tem uma conta? Faça o seu <Link to="/signup">cadastro</Link>
+      </p>
+
+      <p>
+        <Link to="/">Página inicial</Link>
+      </p>
     </div>
   );
 };

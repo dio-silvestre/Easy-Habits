@@ -28,12 +28,18 @@ const Dashboard = ({ authenticated }) => {
     loadHabits();
   });
 
-  const onSubmit = ({ habit }) => {
+  const onSubmit = ({ habit, category, difficulty, frequency }) => {
     api
       .post(
-        `/habits/personal/`,
+        `/habits/`,
         {
           title: habit,
+          category: category,
+          difficulty: difficulty,
+          frequency: frequency,
+          achieved: false,
+          how_much_achieved: 0,
+          user: 1623,
         },
         {
           headers: {
@@ -47,16 +53,12 @@ const Dashboard = ({ authenticated }) => {
       });
   };
 
-  const handleDelete = (id) => {
-    const newHabits = habits.filter((habit) => habit.id !== id);
-
-    api
-      .delete(`/habits/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(setHabits(newHabits));
+  const handleDelete = ({ id }) => {
+    api.delete(`/habits/${id}/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   if (!authenticated) {
@@ -66,18 +68,15 @@ const Dashboard = ({ authenticated }) => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <section>
-          <input
-            placeholder="Novo hábito"
-            {...register("habit")}
-            name="habit"
-          />
-          <button type="submit">Adicionar</button>
-        </section>
+        <input placeholder="Novo hábito" {...register("habit")} name="habit" />
+        <input name="category" value="Saúde" />
+        <input name="difficulty" value="Fácil" />
+        <input name="frequency" value="Diária" />
+        <button type="submit">Adicionar</button>
       </form>
       <div>
         {habits.map((habit) => (
-          <div>
+          <div key={habit.id}>
             <p>{habit.title}</p>
             <button onClick={() => handleDelete(habit)}>Remover</button>
           </div>
