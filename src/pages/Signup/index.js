@@ -1,8 +1,17 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useHistory } from "react-router";
+import { useHistory, Link } from "react-router-dom";
 import api from "../../services/api";
+import {
+  Container,
+  Background,
+  Content,
+  AnimationContainer,
+  Button,
+} from "./styles";
+
+import TextField from "@material-ui/core/TextField";
 
 const Signup = () => {
   const history = useHistory();
@@ -36,37 +45,27 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(handleForm)}>
-        <div>
-          <input placeholder="Nome de Usuario" {...register("username")} />
-          {errors.username?.message}
-        </div>
-        <div>
-          <input placeholder="Email" {...register("email")} />
-          {errors.email?.message}
-        </div>
-        <div>
-          <input
-            placeholder="Senha"
-            type="password"
-            {...register("password")}
-          />
-          {errors.password?.message}
-        </div>
-        <div>
-          <input
-            placeholder="Email"
-            type="password"
-            {...register("passwordConfirm")}
-          />
-          {errors.passwordConfirm?.message}
-        </div>
-        <div>
-          <button type="submit">Cadastrar</button>
-        </div>
-      </form>
-    </div>
+    <Container>
+      <Background>
+        <section></section>
+      </Background>
+      <Content>
+        <AnimationContainer>
+          <form>
+            <h1>Cadastre -se</h1>
+            <TextField id="standard-basic" label="Email" />
+
+            <TextField id="standard-basic" label="Email" />
+            <TextField id="standard-basic" label="Senha" />
+            <TextField id="standard-basic" label="Confirme sua senha" />
+            <Button>Enviar</Button>
+            <p>
+              Já tem uma conta ? Faça o <Link to="/login">Login</Link>
+            </p>
+          </form>
+        </AnimationContainer>
+      </Content>
+    </Container>
   );
 };
 
