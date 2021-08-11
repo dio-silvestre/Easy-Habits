@@ -3,7 +3,7 @@ import '../Button/styles.css'
 function Button () {
     return (
         <>
-            <button>OLÁ</button>
+            <button></button>
         </>
     )
 }
