@@ -5,7 +5,9 @@ const Header = () => {
   return (
     <>
       <HeaderContainer>
-        <div className="easyHabits">EasyHabits</div>
+        <Link to="/">
+          <div className="easyHabits">EasyHabits</div>
+        </Link>
         <HeaderNav>
           <Link className="link-nav" to="#">
             Como funciona
@@ -13,8 +15,8 @@ const Header = () => {
           <Link className="link-nav" to="#">
             Contato
           </Link>
-          {/* <Button>Login</Button>
-          <Button>Cadastro</Button> */}
+          <button>Login</button>
+          <button>Cadastro</button>
         </HeaderNav>
       </HeaderContainer>
     </>
