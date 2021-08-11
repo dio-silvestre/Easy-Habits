@@ -25,12 +25,10 @@ const Login = ({ authenticated, setAuthenticated }) => {
     api
       .post("/sessions/", data)
       .then((response) => {
-        console.log(response);
         reset();
-        const { token, user } = response.data;
+        const token = response.data.access;
 
-        localStorage.setItem("@Habits:token", JSON.stringify(token));
-        localStorage.setItem("@Habits:user", JSON.stringify(user));
+        localStorage.setItem("Habits:token", JSON.stringify(token));
 
         setAuthenticated(true);
 
