@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
 
-const Dashboard = ({ authenticated }) => {
+const Dashboard = () => {
   const [habits, setHabits] = useState([]);
   const [token] = useState(
     JSON.parse(localStorage.getItem("Habits:token")) || ""
   );
-
-  const decodedUser = useAuth();
-
+  const { userDecode } = useAuth();
   const { register, handleSubmit, reset } = useForm();
 
   const loadHabits = () => {
@@ -41,7 +39,7 @@ const Dashboard = ({ authenticated }) => {
           frequency: frequency,
           achieved: false,
           how_much_achieved: 0,
-          user: 1623,
+          user: userDecode.user_id,
         },
         {
           headers: {
