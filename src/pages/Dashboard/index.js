@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import { useAuth } from '../../Providers/Auth'
+import { useAuth } from "../../Providers/Auth";
 
 const Dashboard = () => {
   const [habits, setHabits] = useState([]);
@@ -58,7 +58,6 @@ const Dashboard = () => {
       })
       .then(setHabits(newHabits));
   };
-
 
   return (
     <div>
