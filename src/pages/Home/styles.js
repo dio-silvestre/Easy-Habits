@@ -50,10 +50,19 @@ export const AboutContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 50px 70px;
 
   figure {
     width: 60vw;
-    height: 300px;
+    height: 400px;
+    background-color: var(--violetLight);
+
+    img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      align-self: center;
+    }
   }
 
   .aboutInfo {
