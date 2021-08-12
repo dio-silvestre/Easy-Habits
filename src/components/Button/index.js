@@ -1,9 +1,7 @@
-import { StyledButton } from './styles.js'
+import { StyledButton } from "./styles.js";
 
-function Button () {
-    return (
-        <StyledButton />
-    )
+function Button() {
+  return <StyledButton></StyledButton>;
 }
 
-export default Button
+export default Button;

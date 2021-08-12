@@ -1,8 +1,8 @@
+import api from "../../services/api";
+import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useHistory, Link } from "react-router-dom";
-import api from "../../services/api";
+import { Link } from "react-router-dom";
 import {
   Container,
   Background,
@@ -10,12 +10,9 @@ import {
   AnimationContainer,
   Button,
 } from "./styles";
-
 import TextField from "@material-ui/core/TextField";
 
 const Signup = () => {
-  const history = useHistory();
-
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório"),
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
@@ -35,14 +32,11 @@ const Signup = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const handleForm = ({ username, email, password }) => {
-    const newUser = { username, email, password };
-
-    api
-      .post("/users/", newUser)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+  const onSubmitFunction = (data) => {
+    return console.log(data);
   };
+
+  console.log(errors);
 
   return (
     <Container>
@@ -51,18 +45,39 @@ const Signup = () => {
       </Background>
       <Content>
         <AnimationContainer>
-          <form>
-            <h1>Cadastre -se</h1>
-            <TextField id="standard-basic" label="Nome de usuario" />
-
-            <TextField id="standard-basic" label="Email" />
-            <TextField id="standard-basic" label="Senha" />
-            <TextField id="standard-basic" label="Confirme sua senha" />
-            <Button>Enviar</Button>
+          <form onSubmit={handleSubmit(onSubmitFunction)}>
+            <h1>Cadastre-se</h1>
+            <h3> Primeiro, cadastre sua conta</h3>
+            <TextField
+              id="standard-basic"
+              label="Nome de usuário"
+              {...register("username")}
+            />
+            <div className="error"> {errors.username?.message}</div>
+            <TextField
+              id="standard-basic"
+              label="Email"
+              {...register("email")}
+            />
+            <div className="error"> {errors.email?.message}</div>
+            <TextField
+              id="standard-basic"
+              label="Senha"
+              {...register("password")}
+            />
+            <div className="error"> {errors.password?.message}</div>
+            <TextField
+              id="standard-basic"
+              label="Confirme sua senha"
+              {...register("passwordConfirm")}
+            />
+            <div className="error"> {errors.passwordConfirm?.message}</div>
+            <Button type="submit"> CADASTRAR </Button>
             <p>
               Já tem uma conta ? Faça o <Link to="/login">Login</Link>
             </p>
           </form>
+          <span>Página inicial --> </span>
         </AnimationContainer>
       </Content>
     </Container>

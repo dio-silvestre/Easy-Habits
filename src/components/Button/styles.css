@@ -1,20 +1,20 @@
 button {
-    cursor: pointer;
-    background-color: #5965E0;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    box-sizing: border-box;
-    margin: 1em;
-    padding: 1em 2em;
+  cursor: pointer;
+  background-color: #5965e0;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  box-sizing: border-box;
+  margin: 1em;
+  padding: 1em 2em;
 }
 
 button:hover {
-    transition: all 250ms linear;
-    opacity: .60;     
+  transition: all 250ms linear;
+  opacity: 0.6;
 }
 
 button:active {
-    transition: all 150ms linear;
-    opacity: .75;
+  transition: all 150ms linear;
+  opacity: 0.75;
 }
