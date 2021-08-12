@@ -5,7 +5,7 @@ import { useAuth } from "../../Providers/Auth";
 
 const Login = () => {
 
-  const { logIn } = useAuth()
+  const { logIn, userDecode } = useAuth()
 
   const schema = yup.object().shape({
     username: yup.string().required("Nome de usuário obrigatório"),
@@ -21,10 +21,10 @@ const Login = () => {
   });
 
   const onSubmitFunction = (data) => {
-    console.log(data)
     logIn(data)
   };
 
+  console.log(userDecode);
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmitFunction)}>
