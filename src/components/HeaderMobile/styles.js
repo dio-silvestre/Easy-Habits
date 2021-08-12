@@ -5,6 +5,7 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   visibility: hidden;
+  padding: 10px;
 
   .easyHabits {
     color: var(--violetCore);
@@ -36,12 +37,17 @@ export const HeaderNav = styled.div`
   visibility: ${({ menuDisplay }) => `${menuDisplay}`};
 
   .closeMenu {
-    min-width: 100%;
-    text-align: right;
-    padding: 10px 15px;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    margin: 15px;
     font-size: 1rem;
     color: var(--white);
     font-weight: 600;
+    border: 1px solid var(--violetCore);
+    border-radius: 4px;
+    align-self: flex-start;
+    text-align: center;
   }
 
   .link-nav {

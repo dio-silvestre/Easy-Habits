@@ -5,12 +5,19 @@ export const HomeContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  strong {
+    font-size: 1rem;
+    color: var(--violetCore);
+    text-align: center;
+    margin: 20px;
+  }
 `;
 
 export const HeroContainer = styled.div`
   display: flex;
-  margin: auto;
   width: 80vw;
+  padding: 50px 150px;
 
   .heroInfo {
     width: 35vw;
@@ -33,7 +40,6 @@ export const HeroContainer = styled.div`
 
     button {
       margin-top: 60px;
-      align-self: center;
       width: 300px;
       height: 45px;
       z-index: 1;
@@ -46,29 +52,35 @@ export const HeroContainer = styled.div`
   }
 
   @media only screen and (min-width: 320px) and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 335px;
+    padding: 10px;
+    margin-top: 5px;
+
     .heroInfo {
-      width: 100vw;
+      width: 90%;
+      padding: 0;
       margin: 0;
-      align-items: center;
-    }
-    h1 {
-      color: var(--darkBlue);
-      font-size: 1rem;
-      width: fit-content;
-    }
+      padding: 0;
 
-    p {
-      color: var(--darkBlue);
-      font-size: 0.5rem;
-      width: fit-content;
-    }
+      h1 {
+        display: none;
+      }
 
-    button {
-      margin-top: 60px;
-      align-self: center;
-      width: 300px;
-      height: 45px;
-      z-index: 1;
+      p {
+        color: var(--darkBlue);
+        font-size: 1.3rem;
+        width: 100%;
+      }
+
+      button {
+        margin-top: 10px;
+        width: 50%;
+        height: 45px;
+        align-self: flex-start;
+        z-index: -1;
+      }
     }
 
     .lootie {
@@ -132,8 +144,8 @@ export const AboutContainer = styled.div`
 
   .ellipse2 {
     position: absolute;
-    right: -500px;
-    top: 900px;
+    right: -450px;
+    top: 1000px;
   }
 
   .ellipse2 img {
@@ -141,8 +153,28 @@ export const AboutContainer = styled.div`
   }
 
   @media only screen and (min-width: 320px) and (max-width: 768px) {
-    display: none;
-    * {
+    width: 100vw;
+    padding: 0px;
+    margin: 0;
+    background-color: var(--lightViolet);
+
+    .ellipse1,
+    .ellipse2 {
+      display: none;
+    }
+
+    figure {
+      margin: 0;
+      width: 100vw;
+      z-index: -2;
+    }
+
+    figure img {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .aboutInfo {
       display: none;
     }
   }
