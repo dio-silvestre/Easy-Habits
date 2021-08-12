@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { useAuth } from "../../Providers/Auth";
 
 const Dashboard = ({ authenticated }) => {
   const [habits, setHabits] = useState([]);
   const [token] = useState(
     JSON.parse(localStorage.getItem("Habits:token")) || ""
   );
+
+  const decodedUser = useAuth();
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -64,9 +67,9 @@ const Dashboard = ({ authenticated }) => {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input placeholder="Novo hábito" {...register("habit")} name="habit" />
-        <input name="category" value="Saúde" />
-        <input name="difficulty" value="Fácil" />
-        <input name="frequency" value="Diária" />
+        <input name="category" value="Saúde" {...register("category")} />
+        <input name="difficulty" value="Fácil" {...register("difficulty")} />
+        <input name="frequency" value="Diária" {...register("frequency")} />
         <button type="submit">Adicionar</button>
       </form>
       <div>

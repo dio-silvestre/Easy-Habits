@@ -1,15 +1,17 @@
 import { createContext, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
-import jwtDecode from "jwt-decode";
+import jwt_decode from "jwt-decode";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const token = localStorage.getItem("Habits:token") || "";
-
-  const decoded = jwtDecode(token);
+  const [decodedUser, setDecodedUser] = useState();
+  const decoded = jwt_decode(token);
+  console.log(token);
   console.log(decoded);
+  console.log(decodedUser);
 
   const [auth, setAuth] = useState(token);
 
@@ -26,6 +28,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.clear();
         localStorage.setItem("Habits:token", JSON.stringify(token));
         setAuth(token);
+        setDecodedUser(decoded);
 
         return history.push("/dashboard");
       })
@@ -33,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token: auth, setAuth, logIn }}>
+    <AuthContext.Provider value={{ token: auth, setAuth, logIn, decodedUser }}>
       {children}
     </AuthContext.Provider>
   );
