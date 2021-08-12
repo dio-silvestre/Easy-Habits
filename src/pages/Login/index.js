@@ -2,9 +2,11 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../../services/api";
+import { useAuth } from "../../Providers/Auth";
 
-const Login = ({ authenticated, setAuthenticated }) => {
+const Login = () => {
+  const logIn = useAuth();
+
   const schema = yup.object().shape({
     username: yup.string().required("Nome de usuário obrigatório"),
     password: yup.string().required("Senha obrigatória"),
@@ -13,33 +15,14 @@ const Login = ({ authenticated, setAuthenticated }) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const history = useHistory();
-
   const onSubmitFunction = (data) => {
-    api
-      .post("/sessions/", data)
-      .then((response) => {
-        reset();
-        const token = response.data.access;
-
-        localStorage.setItem("Habits:token", JSON.stringify(token));
-
-        setAuthenticated(true);
-
-        return history.push("/dashboard");
-      })
-      .catch((err) => console.log(err));
+    logIn(data);
   };
-
-  if (authenticated) {
-    return <Redirect to="/dashboard" />;
-  }
 
   return (
     <div>
