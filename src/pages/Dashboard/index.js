@@ -1,4 +1,3 @@
-import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
@@ -59,9 +58,6 @@ const Dashboard = ({ authenticated }) => {
       .then(setHabits(newHabits));
   };
 
-  if (!authenticated) {
-    return <Redirect to="/login" />;
-  }
 
   return (
     <div>
