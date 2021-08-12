@@ -50,12 +50,15 @@ export const AboutContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 70px;
+  padding: 60px 80px;
 
   figure {
-    width: 60vw;
+    width: 50vw;
     height: 400px;
     background-color: var(--violetLight);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     img {
       width: 300px;
@@ -68,5 +71,18 @@ export const AboutContainer = styled.div`
   .aboutInfo {
     width: 40vw;
     height: 300px;
+    margin: 60px;
+
+    h4 {
+      color: var(--whiteText);
+      font-weight: normal;
+    }
+
+    h2 {
+      color: var(--whiteText);
+      width: 360px;
+      font-size: 2rem;
+      margin-top: 50px;
+    }
   }
 `;

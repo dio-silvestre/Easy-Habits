@@ -39,11 +39,11 @@ const Home = () => {
             <img src={Bulb} alt="bulb" />
           </figure>
           <div className="aboutInfo">
-            <h6>POR QUE EASYHABITS?</h6>
-            <h4>
+            <h4>POR QUE EASYHABITS?</h4>
+            <h2>
               Grandes mudanças começam com pequenos passos. Construa seu novo
-              futuro com EasyHabits
-            </h4>
+              futuro com EasyHabits!
+            </h2>
           </div>
         </AboutContainer>
       </HomeContainer>
