@@ -8,12 +8,12 @@ const Dashboard = () => {
   const [token] = useState(
     JSON.parse(localStorage.getItem("Habits:token")) || ""
   );
-  const { userDecode } = useAuth();
+  const { decodedUser } = useAuth();
   const { register, handleSubmit, reset } = useForm();
 
   const loadHabits = () => {
     api
-      .get(`/habits/personal/`, {
+      .get("/habits/personal/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -28,12 +28,18 @@ const Dashboard = () => {
     loadHabits();
   });
 
-  const onSubmit = ({ habit }) => {
+  const onSubmit = ({ habit, category, difficulty, frequency }) => {
     api
       .post(
-        `/habits/personal/`,
+        "/habits/personal/",
         {
           title: habit,
+          category: category,
+          difficulty: difficulty,
+          frequency: frequency,
+          achieved: "false",
+          how_much_achieved: 0,
+          user: decodedUser.user_id,
         },
         {
           headers: {
@@ -47,16 +53,12 @@ const Dashboard = () => {
       });
   };
 
-  const handleDelete = (id) => {
-    const newHabits = habits.filter((habit) => habit.id !== id);
-
-    api
-      .delete(`/habits/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(setHabits(newHabits));
+  const handleDelete = ({ id }) => {
+    api.delete(`/habits/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   return (
@@ -67,6 +69,24 @@ const Dashboard = () => {
             placeholder="Novo hábito"
             {...register("habit")}
             name="habit"
+          />
+          <input
+            placeholder="Categoria"
+            {...register("category")}
+            name="category"
+            value="Esporte"
+          />
+          <input
+            placeholder="Dificuldade"
+            {...register("difficulty")}
+            name="difficulty"
+            value="Fácil"
+          />
+          <input
+            placeholder="Frequência"
+            {...register("frequency")}
+            name="frequency"
+            value="Diária"
           />
           <button type="submit">Adicionar</button>
         </section>
