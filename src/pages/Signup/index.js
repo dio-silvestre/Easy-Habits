@@ -2,7 +2,10 @@ import api from "../../services/api";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { toast } from "react-toastify";
+import TextField from "@material-ui/core/TextField";
 import {
   Container,
   Background,
@@ -10,9 +13,10 @@ import {
   AnimationContainer,
   Button,
 } from "./styles";
-import TextField from "@material-ui/core/TextField";
 
 const Signup = () => {
+  const history = useHistory();
+
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório"),
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
@@ -32,11 +36,16 @@ const Signup = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmitFunction = (data) => {
-    return console.log(data);
+  const onSubmitFunction = ({ username, email, password }) => {
+    const newUser = { username, email, password };
+    api
+      .post("/users/", newUser)
+      .then((_) => {
+        toast.success("Sucesso ao criar conta");
+        return history.push("/login");
+      })
+      .catch((err) => toast.error("Erro ao criar conta"));
   };
-
-  console.log(errors);
 
   return (
     <Container>
@@ -63,12 +72,14 @@ const Signup = () => {
             <TextField
               id="standard-basic"
               label="Senha"
+              type="password"
               {...register("password")}
             />
             <div className="error"> {errors.password?.message}</div>
             <TextField
               id="standard-basic"
               label="Confirme sua senha"
+              type="password"
               {...register("passwordConfirm")}
             />
             <div className="error"> {errors.passwordConfirm?.message}</div>
@@ -77,7 +88,12 @@ const Signup = () => {
               Já tem uma conta ? Faça o <Link to="/login">Login</Link>
             </p>
           </form>
-          <span>Página inicial --> </span>
+          <span>Página inicial </span>
+          <p>
+            <Link to="/dashboard">
+              <ArrowForwardIosIcon />
+            </Link>
+          </p>
         </AnimationContainer>
       </Content>
     </Container>

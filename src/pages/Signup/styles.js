@@ -76,9 +76,7 @@ export const AnimationContainer = styled.div`
   }
 
   span {
-    margin: 0 auto;
-    font-size: 14px;
-    text-align: center;
+    margin-bottom: 10px;
   }
 
   form {
@@ -93,7 +91,7 @@ export const AnimationContainer = styled.div`
     }
 
     h1 {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       color: #5965e0;
       font-size: 34px;
     }
@@ -105,7 +103,7 @@ export const AnimationContainer = styled.div`
     }
 
     p {
-      margin: 25px auto;
+      margin: 5px auto;
       color: #2e384d;
       font-size: 16px;
     }
@@ -131,7 +129,6 @@ export const AnimationContainer = styled.div`
       height: 100%;
 
       .MuiInputBase-input {
-        color: ;
       }
     }
   }
@@ -145,6 +142,7 @@ export const Button = styled.button`
   border-radius: 15px;
   box-sizing: border-box;
   margin: 1em;
+  margin-top: 20px;
   padding: 5px;
   width: 220px;
   height: 30px;
@@ -160,7 +158,7 @@ export const Button = styled.button`
   }
 
   @media (max-width: 1100px) {
-    margin-top: 60px;
+    margin-top: 30px;
     height: 34px;
     width: 210px;
   }
