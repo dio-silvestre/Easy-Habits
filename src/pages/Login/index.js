@@ -3,10 +3,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../Providers/Auth";
 
-
 const Login = () => {
 
-  const logIn = useAuth();
+  const { logIn } = useAuth()
 
   const schema = yup.object().shape({
     username: yup.string().required("Nome de usuário obrigatório"),
@@ -22,7 +21,8 @@ const Login = () => {
   });
 
   const onSubmitFunction = (data) => {
-    logIn(data);
+    console.log(data)
+    logIn(data)
   };
 
   return (

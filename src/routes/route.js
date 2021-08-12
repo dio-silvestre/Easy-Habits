@@ -4,7 +4,7 @@ import { useAuth } from '../Providers/Auth'
 
 const Route = ({ isPrivate = false, component: Component }) => {
 
-    const token = useAuth();
+    const { token } = useAuth();
 
     return (
         <ReactRout

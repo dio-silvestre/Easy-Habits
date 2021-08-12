@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("Habits:token") || "";
@@ -12,7 +12,6 @@ export const AuthProvider = ({ children }) => {
     const history = useHistory();
 
     const logIn = (data) => {
-        console.log(data)
         api
             .post("/sessions/", data)
             .then((response) => {
