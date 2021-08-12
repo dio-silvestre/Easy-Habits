@@ -60,7 +60,6 @@ const Dashboard = ({ authenticated }) => {
     });
   };
 
-
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
