@@ -23,10 +23,10 @@ const HeaderMobile = () => {
           <Link className="link-nav" to="#">
             Contato
           </Link>
-          <Link className="link-nav" to="#">
+          <Link className="link-nav" to="/login">
             Login
           </Link>
-          <Link className="link-nav" to="#">
+          <Link className="link-nav" to="/signup">
             Cadastro
           </Link>
         </HeaderNav>

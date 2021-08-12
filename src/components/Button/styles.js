@@ -1,25 +1,22 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-    cursor: pointer;
-    background-color: #5965E0;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    box-sizing: border-box;
-    margin: 1em;
-    padding: 1em 2em;
+  font-family: "Raleway", sans-serif;
+  background-color: var(--violetCore);
+  color: var(--white);
+  border: none;
+  padding: 10px;
+  width: 10vw;
+  font-weight: 600;
+  font-size: 1.2rem;
+  border-radius: 20.45px;
 
-    button:hover {
+  &:hover {
+    filter: brightness(1.1);
     transition: all 250ms linear;
-    opacity: .60;     
-    }
+  }
 
-    button:active {
+  &:active {
     transition: all 150ms linear;
-    opacity: .75;
-} 
-
-
-`
-
+  }
+`;

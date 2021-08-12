@@ -31,16 +31,4 @@ export const HeaderNav = styled.nav`
       text-decoration: underline;
     }
   }
-
-  button {
-    background-color: var(--violetCore);
-    color: var(--white);
-    border: none;
-    font-family: "Raleway", sans-serif;
-    padding: 10px;
-    width: 10vw;
-    font-weight: 600;
-    font-size: 1.2rem;
-    border-radius: 20.45px;
-  }
 `;

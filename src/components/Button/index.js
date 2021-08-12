@@ -1,9 +1,11 @@
-import { StyledButton } from './styles.js'
+import { StyledButton } from "./styles";
 
-function Button () {
-    return (
-        <StyledButton />
-    )
-}
+const Button = ({ children, ...rest }) => {
+  return (
+    <StyledButton type="button" {...rest}>
+      {children}
+    </StyledButton>
+  );
+};
 
-export default Button
+export default Button;

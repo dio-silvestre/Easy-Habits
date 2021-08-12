@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { HeaderContainer, HeaderNav } from "./styles";
+import Button from "../Button";
 
 const Header = () => {
+  const history = useHistory();
+
+  const handleNavigation = (path) => {
+    history.push(path);
+  };
+
   return (
     <>
       <HeaderContainer>
@@ -15,8 +22,8 @@ const Header = () => {
           <Link className="link-nav" to="#">
             Contato
           </Link>
-          <button>Login</button>
-          <button>Cadastro</button>
+          <Button onClick={() => handleNavigation("/login")}>Login</Button>
+          <Button onClick={() => handleNavigation("/signup")}>Cadastro</Button>
         </HeaderNav>
       </HeaderContainer>
     </>
