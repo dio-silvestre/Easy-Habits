@@ -5,7 +5,10 @@ import LottieAnimation from "../../components/Lotties";
 import Animation from "../../assets/HomeAnimation.json";
 import Button from "../../components/Button";
 import Bulb from "../../assets/Bulb.svg";
+import Ellipse1 from "../../assets/Ellipse1.svg";
+import Ellipse2 from "../../assets/Ellipse2.svg";
 import { useHistory } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   const history = useHistory();
@@ -35,6 +38,9 @@ const Home = () => {
           </div>
         </HeroContainer>
         <AboutContainer>
+          <div className="ellipse1">
+            <img src={Ellipse1} alt="ellipse" />
+          </div>
           <figure>
             <img src={Bulb} alt="bulb" />
           </figure>
@@ -45,7 +51,14 @@ const Home = () => {
               futuro com EasyHabits!
             </h2>
           </div>
+          <div className="ellipse2">
+            <img src={Ellipse2} alt="ellipse" />
+          </div>
         </AboutContainer>
+        <Footer />
+        <strong>
+          <em>&copy;Copyright 2021 - EasyHabits, Corp.</em>
+        </strong>
       </HomeContainer>
     </>
   );
