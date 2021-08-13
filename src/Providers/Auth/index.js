@@ -7,9 +7,10 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const token = localStorage.getItem("Habits:token") || "";
-  const [decodedUser, setDecodedUser] = useState(token);
+  const [decodedUser, setDecodedUser] = useState(jwt_decode(localStorage.getItem("Habits:token")));
   const [auth, setAuth] = useState(token);
   const history = useHistory();
+
   const logIn = (data) => {
     api
       .post("/sessions/", data)
