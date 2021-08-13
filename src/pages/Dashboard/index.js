@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [habits, setHabits] = useState([]);
@@ -10,6 +12,7 @@ const Dashboard = () => {
   );
   const { decodedUser } = useAuth();
   const { register, handleSubmit, reset } = useForm();
+  const history = useHistory();
 
   const loadHabits = () => {
     api
@@ -28,10 +31,10 @@ const Dashboard = () => {
     loadHabits();
   });
 
-  const onSubmit = ({ habit, category, difficulty, frequency }) => {
+  const addNewHabit = ({ habit, category, difficulty, frequency }) => {
     api
       .post(
-        "/habits/personal/",
+        "/habits/",
         {
           title: habit,
           category: category,
@@ -49,12 +52,11 @@ const Dashboard = () => {
       )
       .then((response) => {
         reset();
-        loadHabits();
       });
   };
 
   const handleDelete = ({ id }) => {
-    api.delete(`/habits/${id}`, {
+    api.delete(`/habits/${id}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -63,7 +65,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(addNewHabit)}>
         <section>
           <input
             placeholder="Novo hábito"
@@ -99,6 +101,15 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
+      <button
+        onClick={() => {
+          localStorage.clear();
+          return history.push("/");
+        }}
+      >
+        Sair
+      </button>
+      <Link to="/groups">Grupos</Link>
     </div>
   );
 };
