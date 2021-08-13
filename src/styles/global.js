@@ -24,7 +24,8 @@ body {
     background-color: var(--bkgdColor);
     font-family: 'Nunito', sans-serif;
     font-size: 1rem;
-    padding: 30px 100px;
+    min-width: 90vw;
+    max-width: 100vw;
     -webkit-font-smoothing: antialiased !important
 }
 
@@ -43,12 +44,6 @@ a {
 
 li {
     list-style-type: none;
-}
-
-@media only screen and (min-width: 320px) and (max-width: 768px) {
-    body {
-        padding: 20px;
-    }
 }
 
 `;
