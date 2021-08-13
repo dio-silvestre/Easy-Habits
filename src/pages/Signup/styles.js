@@ -119,6 +119,7 @@ export const AnimationContainer = styled.div`
       color: #c1292e;
       padding-left: 22px;
       font-size: 12px;
+      margin-top: 5px;
     }
   }
 
