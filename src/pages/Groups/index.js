@@ -84,7 +84,7 @@ const Groups = () => {
         </section>
       </form>
       <div>
-        <h1>Grupos</h1>
+        <h1>Grupos Abertos</h1>
         {groups.map((group) => (
           <div>
             <p>{group.name}</p>
