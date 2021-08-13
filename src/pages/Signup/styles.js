@@ -1,11 +1,39 @@
 import styled, { keyframes } from "styled-components";
 import SignupImage from "../../assets/Cadastro.svg";
 
+const apppearFromRight = keyframes`
+from {
+  opacity : 0 ;
+  transform: translateX(50px)
+} 
+
+to{
+  opacity: 1;
+  transform: translateX(0px)
+}
+`;
+
+export const HeaderContainer = styled.div`
+  padding: 40px 50px 0px;
+
+  .easyHabits {
+    color: var(--violetCore);
+    font-size: 2rem;
+    font-weight: 600;
+    height: 90px;
+    padding-left: 40px;
+  }
+`;
+
 export const Container = styled.div`
-  height: 100vh;
+  height: 84vh;
   display: flex;
-  align-items: stretch;
-  justify-content: center;
+  align-items: center;
+  justify-content: stretch;
+
+  @media (max-width: 1100px) {
+    height: 73vh;
+  }
 `;
 
 export const Background = styled.div`
@@ -17,6 +45,7 @@ export const Background = styled.div`
 
   section {
     height: 100vh;
+    width: 100%;
     background: url(${SignupImage}) no-repeat right;
   }
 `;
@@ -40,20 +69,7 @@ export const Content = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
-    padding-top: 50px;
   }
-`;
-
-const apppearFromRight = keyframes`
-from {
-  opacity : 0 ;
-  transform: translateX(50px)
-} 
-
-to{
-  opacity: 1;
-  transform: translateX(0px)
-}
 `;
 
 export const AnimationContainer = styled.div`
@@ -76,7 +92,6 @@ export const AnimationContainer = styled.div`
   }
 
   span {
-    margin-bottom: 10px;
   }
 
   form {
@@ -125,7 +140,7 @@ export const AnimationContainer = styled.div`
 
   @media (max-width: 1100px) {
     form {
-      margin: 20px 0;
+      margin: 10px 0;
       text-align: center;
       height: 100%;
 
@@ -143,7 +158,7 @@ export const Button = styled.button`
   border-radius: 15px;
   box-sizing: border-box;
   margin: 1em;
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 5px;
   width: 220px;
   height: 30px;

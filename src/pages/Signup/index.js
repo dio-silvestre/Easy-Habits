@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useHistory } from "react-router-dom";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import HomeIcon from "@material-ui/icons/Home";
 import { toast } from "react-toastify";
 import TextField from "@material-ui/core/TextField";
 import {
@@ -12,6 +12,7 @@ import {
   Content,
   AnimationContainer,
   Button,
+  HeaderContainer,
 } from "./styles";
 
 const Signup = () => {
@@ -48,55 +49,60 @@ const Signup = () => {
   };
 
   return (
-    <Container>
-      <Background>
-        <section></section>
-      </Background>
-      <Content>
-        <AnimationContainer>
-          <form onSubmit={handleSubmit(onSubmitFunction)}>
-            <h1>Cadastre-se</h1>
-            <h3> Primeiro, cadastre sua conta</h3>
-            <TextField
-              id="standard-basic"
-              label="Nome de usuário"
-              {...register("username")}
-            />
-            <div className="error"> {errors.username?.message}</div>
-            <TextField
-              id="standard-basic"
-              label="Email"
-              {...register("email")}
-            />
-            <div className="error"> {errors.email?.message}</div>
-            <TextField
-              id="standard-basic"
-              label="Senha"
-              type="password"
-              {...register("password")}
-            />
-            <div className="error"> {errors.password?.message}</div>
-            <TextField
-              id="standard-basic"
-              label="Confirme sua senha"
-              type="password"
-              {...register("passwordConfirm")}
-            />
-            <div className="error"> {errors.passwordConfirm?.message}</div>
-            <Button type="submit"> CADASTRAR </Button>
+    <HeaderContainer>
+      <Link to="/">
+        <div className="easyHabits">EasyHabits</div>
+      </Link>
+      <Container>
+        <Background>
+          <section></section>
+        </Background>
+        <Content>
+          <AnimationContainer>
+            <form onSubmit={handleSubmit(onSubmitFunction)}>
+              <h1>Cadastre-se</h1>
+              <h3> Primeiro, cadastre sua conta</h3>
+              <TextField
+                id="standard-basic"
+                label="Nome de usuário"
+                {...register("username")}
+              />
+              <div className="error"> {errors.username?.message}</div>
+              <TextField
+                id="standard-basic"
+                label="Email"
+                {...register("email")}
+              />
+              <div className="error"> {errors.email?.message}</div>
+              <TextField
+                id="standard-basic"
+                label="Senha"
+                type="password"
+                {...register("password")}
+              />
+              <div className="error"> {errors.password?.message}</div>
+              <TextField
+                id="standard-basic"
+                label="Confirme sua senha"
+                type="password"
+                {...register("passwordConfirm")}
+              />
+              <div className="error"> {errors.passwordConfirm?.message}</div>
+              <Button type="submit"> CADASTRAR </Button>
+              <p>
+                Já tem uma conta ? Faça o <Link to="/login">Login</Link>
+              </p>
+            </form>
+            <span>Página inicial </span>
             <p>
-              Já tem uma conta ? Faça o <Link to="/login">Login</Link>
+              <Link to="/dashboard">
+                <HomeIcon />
+              </Link>
             </p>
-          </form>
-          <span>Página inicial </span>
-          <p>
-            <Link to="/dashboard">
-              <ArrowForwardIosIcon />
-            </Link>
-          </p>
-        </AnimationContainer>
-      </Content>
-    </Container>
+          </AnimationContainer>
+        </Content>
+      </Container>
+    </HeaderContainer>
   );
 };
 

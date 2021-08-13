@@ -1,9 +1,11 @@
+import api from "../../services/api";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../Providers/Auth";
 import { Link, useHistory } from "react-router-dom";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { toast } from "react-toastify";
+import HomeIcon from "@material-ui/icons/Home";
 import TextField from "@material-ui/core/TextField";
 import {
   Container,
@@ -11,6 +13,7 @@ import {
   Content,
   AnimationContainer,
   Button,
+  HeaderContainer,
 } from "./styles";
 
 const Login = () => {
@@ -27,50 +30,61 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmitFunction = ({ username, password }) => {
-    const User = { username, password };
-    console.log(User);
+  const onSubmitFunction = (data) => {
+    console.log(data);
+    api
+      .post("/sessions/", data)
+      .then((_) => {
+        toast.success("Sucesso ao fazer login ");
+        return history.push("/");
+      })
+      .catch((err) => toast.error("Email ou senha invalidos"));
   };
 
   return (
-    <Container>
-      <Content>
-        <AnimationContainer>
-          <form onSubmit={handleSubmit(onSubmitFunction)}>
-            <h1>Entrar</h1>
-            <h3> Entre com seu usuário e senha </h3>
-            <TextField
-              id="standard-basic"
-              label="Nome de usuário"
-              {...register("username")}
-            />
-            <div className="error"> {errors.username?.message}</div>
+    <HeaderContainer>
+      <Link to="/">
+        <div className="easyHabits">EasyHabits</div>
+      </Link>
+      <Container>
+        <Content>
+          <AnimationContainer>
+            <form onSubmit={handleSubmit(onSubmitFunction)}>
+              <h1>Entrar</h1>
+              <h3> Entre com seu usuário e senha </h3>
+              <TextField
+                id="standard-basic"
+                label="Nome de usuário"
+                {...register("username")}
+              />
+              <div className="error"> {errors.username?.message}</div>
 
-            <TextField
-              id="standard-basic"
-              label="Senha"
-              type="password"
-              {...register("password")}
-            />
-            <div className="error"> {errors.password?.message}</div>
+              <TextField
+                id="standard-basic"
+                label="Senha"
+                type="password"
+                {...register("password")}
+              />
+              <div className="error"> {errors.password?.message}</div>
 
-            <Button type="submit"> ENTRAR </Button>
+              <Button type="submit"> ENTRAR </Button>
+              <p>
+                Não tem uma conta ? Faça seu <Link to="/signup">Cadastro</Link>
+              </p>
+            </form>
+            <span>Página inicial </span>
             <p>
-              Não tem uma conta ? Faça seu <Link to="/signup">Cadastro</Link>
+              <Link to="/dashboard">
+                <HomeIcon />
+              </Link>
             </p>
-          </form>
-          <span>Página inicial </span>
-          <p>
-            <Link to="/dashboard">
-              <ArrowForwardIosIcon />
-            </Link>
-          </p>
-        </AnimationContainer>
-      </Content>
-      <Background>
-        <section></section>
-      </Background>
-    </Container>
+          </AnimationContainer>
+        </Content>
+        <Background>
+          <section></section>
+        </Background>
+      </Container>
+    </HeaderContainer>
   );
 };
 

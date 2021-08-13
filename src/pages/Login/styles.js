@@ -1,12 +1,28 @@
 import styled, { keyframes } from "styled-components";
-import SignupImage from "../../assets/Cadastro.svg";
+import LoginImage from "../../assets/Login.svg";
+
+export const HeaderContainer = styled.div`
+  padding: 40px 50px 0px;
+
+  .easyHabits {
+    color: var(--violetCore);
+    font-size: 2rem;
+    font-weight: 600;
+    height: 90px;
+    padding-left: 40px;
+  }
+`;
 
 export const Container = styled.div`
   // div pai
-  height: 100vh;
+  height: 75vh;
   display: flex;
-  align-items: stretch;
-  justify-content: center;
+  align-items: center;
+  justify-content: stretch;
+
+  @media (max-width: 1100px) {
+    height: 63vh;
+  }
 `;
 
 export const Background = styled.div`
@@ -18,8 +34,9 @@ export const Background = styled.div`
   }
 
   section {
-    height: 100vh;
-    background: url(${SignupImage}) no-repeat right;
+    height: 80vh;
+    background: url(${LoginImage}) no-repeat left;
+    margin-bottom: 35px;
   }
 `;
 
@@ -78,7 +95,6 @@ export const AnimationContainer = styled.div`
   }
 
   span {
-    margin-bottom: 10px;
   }
 
   form {
@@ -127,7 +143,7 @@ export const AnimationContainer = styled.div`
 
   @media (max-width: 1100px) {
     form {
-      margin: 20px 0;
+      margin: 10px 0;
       text-align: center;
       height: 100%;
 
@@ -145,7 +161,7 @@ export const Button = styled.button`
   border-radius: 15px;
   box-sizing: border-box;
   margin: 1em;
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 5px;
   width: 220px;
   height: 30px;
