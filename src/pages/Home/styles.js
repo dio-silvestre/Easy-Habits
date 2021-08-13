@@ -5,6 +5,7 @@ export const HomeContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-content: center;
 
   strong {
     font-size: 1rem;
@@ -24,7 +25,7 @@ export const HeroContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 25px;
-    margin: 30px 120px 0px 0px;
+    margin: 30px 120px 100px 0px;
 
     h1 {
       color: var(--darkBlue);
@@ -49,6 +50,7 @@ export const HeroContainer = styled.div`
   .lootie {
     width: 65vw;
     margin-bottom: 30px;
+    align-self: flex-end;
   }
 
   @media only screen and (min-width: 320px) and (max-width: 768px) {
@@ -79,7 +81,6 @@ export const HeroContainer = styled.div`
         width: 50%;
         height: 45px;
         align-self: flex-start;
-        z-index: -1;
       }
     }
 
@@ -166,7 +167,6 @@ export const AboutContainer = styled.div`
     figure {
       margin: 0;
       width: 100vw;
-      z-index: -2;
     }
 
     figure img {

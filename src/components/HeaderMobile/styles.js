@@ -35,6 +35,8 @@ export const HeaderNav = styled.div`
   right: 0;
   background-color: var(--darkBlue);
   visibility: ${({ menuDisplay }) => `${menuDisplay}`};
+  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
+  transition: transform 0.3s ease-in-out;
 
   .closeMenu {
     padding: 5px;
