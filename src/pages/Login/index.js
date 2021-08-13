@@ -4,8 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../Providers/Auth";
 
 const Login = () => {
-
-  const { logIn, userDecode } = useAuth()
+  const { logIn } = useAuth();
 
   const schema = yup.object().shape({
     username: yup.string().required("Nome de usuário obrigatório"),
@@ -21,10 +20,9 @@ const Login = () => {
   });
 
   const onSubmitFunction = (data) => {
-    logIn(data)
+    logIn(data);
   };
 
-  console.log(userDecode);
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmitFunction)}>
