@@ -1,73 +1,10 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import api from "../../services/api";
 import { Link } from "react-router-dom";
+import { useGroups } from "../../Providers/Groups";
 
 const Groups = () => {
-  const [groups, setGroups] = useState([]);
-  const [subscriptions, setSubscriptions] = useState([]);
-  const [token] = useState(
-    JSON.parse(localStorage.getItem("Habits:token")) || ""
-  );
-  const { register, handleSubmit, reset } = useForm();
-
-  const loadGroups = () => {
-    api
-      .get("/groups/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const filteredGroups = response.data.results.filter(
-          (group) => group.category === "CORINGA"
-        );
-        setGroups(filteredGroups);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const loadSubscriptions = () => {
-    api
-      .get("/groups/subscriptions/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const filteredGroups = response.data.filter(
-          (group) => group.category === "CORINGA"
-        );
-        setSubscriptions(filteredGroups);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    loadGroups();
-    loadSubscriptions();
-  });
-
-  const addNewGroup = ({ name, description, category }) => {
-    api
-      .post(
-        "/groups/",
-        {
-          name: name,
-          description: description,
-          category: category,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        reset();
-      });
-  };
+  const { register, handleSubmit } = useForm();
+  const { groups, subscriptions, addNewGroup } = useGroups();
 
   return (
     <div>
