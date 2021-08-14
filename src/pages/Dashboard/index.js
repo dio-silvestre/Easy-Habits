@@ -2,8 +2,11 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import Button from "../../components/Button";
+import { CardHabit } from "../../components/Card/styles";
+import { Link, useHistory } from "react-router-dom";
+import HeaderDash from "../../components/HeaderDashboard";
+import { NovoHabito } from "../../components/HeaderDashboard/styles";
 
 const Dashboard = () => {
   const [habits, setHabits] = useState([]);
@@ -64,43 +67,45 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(addNewHabit)}>
-        <section>
-          <input
-            placeholder="Novo hábito"
-            {...register("habit")}
-            name="habit"
-          />
-          <input
-            placeholder="Categoria"
-            {...register("category")}
-            name="category"
-            value="Esporte"
-          />
-          <input
-            placeholder="Dificuldade"
-            {...register("difficulty")}
-            name="difficulty"
-            value="Fácil"
-          />
-          <input
-            placeholder="Frequência"
-            {...register("frequency")}
-            name="frequency"
-            value="Diária"
-          />
-          <button type="submit">Adicionar</button>
-        </section>
-      </form>
-      <div>
-        {habits.map((habit) => (
+    <>
+    <HeaderDash />
+    <NovoHabito>
+        <form onSubmit={handleSubmit(addNewHabit)}>
+          <section>
+            <input
+              placeholder="Novo hábito"
+              {...register("habit")}
+              name="habit"
+            />
+            <input
+              placeholder="Categoria"
+              {...register("category")}
+              name="category"
+              value="Esporte"
+            />
+            <input
+              placeholder="Dificuldade"
+              {...register("difficulty")}
+              name="difficulty"
+              value="Fácil"
+            />
+            <input
+              placeholder="Frequência"
+              {...register("frequency")}
+              name="frequency"
+              value="Diária"
+            />
+            <Button type="submit">Novo Hábito</Button>
+            </section>
+          </form>
+      </NovoHabito>
+        <CardHabit>{habits.map((habit) => (
           <div>
             <p>{habit.title}</p>
             <button onClick={() => handleDelete(habit)}>Remover</button>
           </div>
         ))}
-      </div>
+        </CardHabit>
       <button
         onClick={() => {
           localStorage.clear();
@@ -110,7 +115,11 @@ const Dashboard = () => {
         Sair
       </button>
       <Link to="/groups">Grupos</Link>
-    </div>
+
+        <strong>
+          <em>&copy;Copyright 2021 - EasyHabits, Corp.</em>
+        </strong>
+    </>
   );
 };
 
