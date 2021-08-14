@@ -5,6 +5,17 @@ import { useState } from "react";
 
 const HeaderMobile = () => {
   const [menuDisplay, setMenuDisplay] = useState("hidden");
+  const [open, setOpen] = useState(false);
+
+  const openMobileMenu = () => {
+    setMenuDisplay("visible");
+    setOpen(!open);
+  };
+
+  const closeMobileMenu = () => {
+    setMenuDisplay("hidden");
+    setOpen(false);
+  };
 
   return (
     <>
@@ -12,9 +23,9 @@ const HeaderMobile = () => {
         <Link to="/">
           <div className="easyHabits">EasyHabits</div>
         </Link>
-        <MenuIcon onClick={() => setMenuDisplay("visible")}></MenuIcon>
-        <HeaderNav menuDisplay={menuDisplay}>
-          <div className="closeMenu" onClick={() => setMenuDisplay("hidden")}>
+        <MenuIcon onClick={openMobileMenu}></MenuIcon>
+        <HeaderNav menuDisplay={menuDisplay} open={open}>
+          <div className="closeMenu" onClick={closeMobileMenu}>
             X
           </div>
           <Link className="link-nav" to="#">

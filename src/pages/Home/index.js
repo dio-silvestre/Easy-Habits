@@ -44,7 +44,7 @@ const Home = () => {
           <figure>
             <img src={Bulb} alt="bulb" />
           </figure>
-          <div className="aboutInfo">
+          <div id="infoApp" className="aboutInfo">
             <h4>POR QUE EASYHABITS?</h4>
             <h2>
               Grandes mudanças começam com pequenos passos. Construa seu novo
