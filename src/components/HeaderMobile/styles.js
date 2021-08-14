@@ -24,7 +24,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const HeaderNav = styled.div`
-  width: 55vw;
+  width: 50vw;
   min-height: 60vh;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,6 @@ export const HeaderNav = styled.div`
   top: 0;
   right: 0;
   background-color: var(--darkBlue);
-  visibility: ${({ menuDisplay }) => `${menuDisplay}`};
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
   transition: transform 0.3s ease-in-out;
 
@@ -44,11 +43,11 @@ export const HeaderNav = styled.div`
     height: 30px;
     margin: 15px;
     font-size: 1rem;
-    color: var(--white);
+    color: var(--violetCore);
     font-weight: 600;
     border: 1px solid var(--violetCore);
-    border-radius: 4px;
-    align-self: flex-start;
+    border-radius: 50%;
+    align-self: flex-end;
     text-align: center;
   }
 
