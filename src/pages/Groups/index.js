@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useGroups } from "../../Providers/Groups";
 
 const Groups = () => {
-
   const { register, handleSubmit } = useForm();
   const { groups, subscriptions, addNewGroup } = useGroups();
 
@@ -23,7 +22,7 @@ const Groups = () => {
             placeholder="Categoria"
             {...register("category")}
             name="category"
-            value="Saúde"
+            value="CORINGA"
           />
           <button type="submit">Adicionar</button>
         </section>
