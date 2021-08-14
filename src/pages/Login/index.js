@@ -1,10 +1,8 @@
-import api from "../../services/api";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../Providers/Auth";
-import { Link, useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import TextField from "@material-ui/core/TextField";
 import {
@@ -17,7 +15,7 @@ import {
 } from "./styles";
 
 const Login = () => {
-  const history = useHistory();
+  const { logIn } = useAuth();
 
   const schema = yup.object().shape({
     username: yup.string().required("Nome de usuário obrigatório"),
@@ -31,14 +29,7 @@ const Login = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmitFunction = (data) => {
-    console.log(data);
-    api
-      .post("/sessions/", data)
-      .then((_) => {
-        toast.success("Sucesso ao fazer login ");
-        return history.push("/");
-      })
-      .catch((err) => toast.error("Email ou senha invalidos"));
+    logIn(data);
   };
 
   return (
@@ -51,7 +42,7 @@ const Login = () => {
           <AnimationContainer>
             <form onSubmit={handleSubmit(onSubmitFunction)}>
               <h1>Entrar</h1>
-              <h3> Entre com seu usuário e senha </h3>
+              <h3> Entre com seu usuário e senha</h3>
               <TextField
                 id="standard-basic"
                 label="Nome de usuário"
@@ -72,7 +63,7 @@ const Login = () => {
                 Não tem uma conta ? Faça seu <Link to="/signup">Cadastro</Link>
               </p>
             </form>
-            <span>Página inicial </span>
+            <span>Página inicial</span>
             <p>
               <Link to="/dashboard">
                 <HomeIcon />

@@ -19,7 +19,10 @@ const Groups = () => {
         },
       })
       .then((response) => {
-        setGroups(response.data.results);
+        const filteredGroups = response.data.results.filter(
+          (group) => group.category === "CORINGA"
+        );
+        setGroups(filteredGroups);
       })
       .catch((err) => console.log(err));
   };
@@ -32,7 +35,10 @@ const Groups = () => {
         },
       })
       .then((response) => {
-        setSubscriptions(response.data);
+        const filteredGroups = response.data.filter(
+          (group) => group.category === "CORINGA"
+        );
+        setSubscriptions(filteredGroups);
       })
       .catch((err) => console.log(err));
   };
@@ -58,6 +64,7 @@ const Groups = () => {
         }
       )
       .then((response) => {
+        console.log(response);
         reset();
       });
   };
@@ -78,7 +85,7 @@ const Groups = () => {
             placeholder="Categoria"
             {...register("category")}
             name="category"
-            value="Saúde"
+            value="CORINGA"
           />
           <button type="submit">Adicionar</button>
         </section>

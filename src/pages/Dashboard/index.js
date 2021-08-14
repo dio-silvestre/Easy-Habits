@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import { useHabits } from "../../Providers/Habits";
 
 const Dashboard = () => {
-
-  const { loadHabits, habits, addNewHabit, handleDelete } = useHabits();
+  const { habits, addNewHabit, handleDelete } = useHabits();
   const { register, handleSubmit } = useForm();
-
 
   return (
     <div>
