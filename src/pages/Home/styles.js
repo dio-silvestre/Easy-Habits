@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
-  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-content: center;
 
   strong {
     font-size: 1rem;
@@ -17,15 +15,12 @@ export const HomeContainer = styled.div`
 
 export const HeroContainer = styled.div`
   display: flex;
-  width: 80vw;
-  padding: 50px 150px;
+  justify-content: center;
 
   .heroInfo {
-    width: 35vw;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    margin: 30px 120px 100px 0px;
 
     h1 {
       color: var(--darkBlue);
@@ -48,9 +43,7 @@ export const HeroContainer = styled.div`
   }
 
   .lootie {
-    width: 65vw;
     margin-bottom: 30px;
-    align-self: flex-end;
   }
 
   @media only screen and (min-width: 320px) and (max-width: 768px) {
