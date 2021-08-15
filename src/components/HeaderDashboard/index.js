@@ -1,19 +1,20 @@
 import { Link, useHistory } from "react-router-dom";
-import { Logo, Menu } from "./styles";
+import { HContainer, Logo, MenuDesktop, MenuMobile } from "./styles";
 import { FiUsers } from "react-icons/fi"
 import Button from "../Button";
 
-const HeaderDash = () => {
+const HeaderDashboard = () => {
   const history = useHistory();
 
   return (
     <>
+    <HContainer>
       <Logo>
         <Link to="/">
           <div className="easyHabits">EasyHabits</div>
         </Link>
       </Logo>
-      <Menu>
+      <MenuDesktop>
           <Link className="icone-grupos" to="#">
             Grupos <FiUsers />
           </Link>
@@ -21,9 +22,19 @@ const HeaderDash = () => {
           localStorage.clear();
           return history.push("/");
         }}>Logout</Button>
-      </Menu>
+      </MenuDesktop>
+      <MenuMobile>
+          <Link className="icone-grupos" to="#">
+            <FiUsers />
+          </Link>
+          <Button onClick={() => {
+          localStorage.clear();
+          return history.push("/");
+        }}>X</Button>
+      </MenuMobile>
+      </HContainer>
     </>
   );
 };
 
-export default HeaderDash;
+export default HeaderDashboard;
