@@ -38,7 +38,7 @@ const Dashboard = () => {
       </form>
       <div>
         {habits.map((habit) => (
-          <div>
+          <div key={habit.id}>
             <p>{habit.title}</p>
             <button onClick={() => handleDelete(habit)}>Remover</button>
           </div>
