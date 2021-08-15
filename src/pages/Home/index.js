@@ -34,7 +34,7 @@ const Home = () => {
             </Button>
           </div>
           <div className="lootie">
-            <LottieAnimation lotti={Animation} height={500} width={700} />
+            <LottieAnimation lotti={Animation} height={500} width={500} />
           </div>
         </HeroContainer>
         <AboutContainer>
@@ -56,7 +56,7 @@ const Home = () => {
           </div>
         </AboutContainer>
         <Footer />
-        <strong>
+        <strong id="footer">
           <em>&copy;Copyright 2021 - EasyHabits, Corp.</em>
         </strong>
       </HomeContainer>
