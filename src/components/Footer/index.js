@@ -24,15 +24,15 @@ const Footer = () => {
         <li>Fale Conosco</li>
       </ul>
       <ul>
-        <li>
+        <li className="socialMedia">
           <InstagramIcon />
           Instagram
         </li>
-        <li>
+        <li className="socialMedia">
           <TwitterIcon />
           Twitter
         </li>
-        <li>
+        <li className="socialMedia">
           <LinkedInIcon />
           LinkedIn
         </li>

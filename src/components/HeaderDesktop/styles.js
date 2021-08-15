@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
+  max-width: 1400px;
+  margin: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  padding: 40px 50px 0px;
+  padding: 30px 0px;
 
   .easyHabits {
     color: var(--violetCore);
@@ -26,10 +28,12 @@ export const HeaderNav = styled.nav`
   .link-nav {
     color: var(--violetCore);
     font-size: 1.2rem;
+    border-bottom: 4px solid transparent;
+    line-height: 100%;
 
     &:hover {
       font-weight: 600;
-      text-decoration: underline;
+      border-bottom: 4px solid var(--violetCore);
     }
   }
 `;
