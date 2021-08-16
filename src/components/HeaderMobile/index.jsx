@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { HeaderContainer, HeaderNav } from "./styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
+import { HashLink as Anchor } from "react-router-hash-link";
 
 const HeaderMobile = () => {
-  const [menuDisplay, setMenuDisplay] = useState("hidden");
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -12,17 +13,17 @@ const HeaderMobile = () => {
         <Link to="/">
           <div className="easyHabits">EasyHabits</div>
         </Link>
-        <MenuIcon onClick={() => setMenuDisplay("visible")}></MenuIcon>
-        <HeaderNav menuDisplay={menuDisplay}>
-          <div className="closeMenu" onClick={() => setMenuDisplay("hidden")}>
+        <MenuIcon onClick={() => setOpen(!open)}></MenuIcon>
+        <HeaderNav open={open}>
+          <div className="closeMenu" onClick={() => setOpen(!open)}>
             X
           </div>
-          <Link className="link-nav" to="#">
+          <Link className="link-nav" to="/signup">
             Como funciona
           </Link>
-          <Link className="link-nav" to="#">
+          <Anchor className="link-nav" to="/#footer">
             Contato
-          </Link>
+          </Anchor>
           <Link className="link-nav" to="/login">
             Login
           </Link>

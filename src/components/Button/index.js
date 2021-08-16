@@ -1,8 +1,8 @@
 import { StyledButton } from "./styles";
 
-const Button = ({ children, ...rest }) => {
+const Button = ({ children, colorSchema = false, ...rest }) => {
   return (
-    <StyledButton type="button" {...rest}>
+    <StyledButton colorSchema={colorSchema} type="button" {...rest}>
       {children}
     </StyledButton>
   );

@@ -34,7 +34,7 @@ const Home = () => {
             </Button>
           </div>
           <div className="lootie">
-            <LottieAnimation lotti={Animation} height={500} width={700} />
+            <LottieAnimation lotti={Animation} height={500} width={500} />
           </div>
         </HeroContainer>
         <AboutContainer>
@@ -44,7 +44,7 @@ const Home = () => {
           <figure>
             <img src={Bulb} alt="bulb" />
           </figure>
-          <div className="aboutInfo">
+          <div id="infoApp" className="aboutInfo">
             <h4>POR QUE EASYHABITS?</h4>
             <h2>
               Grandes mudanças começam com pequenos passos. Construa seu novo
@@ -56,7 +56,7 @@ const Home = () => {
           </div>
         </AboutContainer>
         <Footer />
-        <strong>
+        <strong id="footer">
           <em>&copy;Copyright 2021 - EasyHabits, Corp.</em>
         </strong>
       </HomeContainer>

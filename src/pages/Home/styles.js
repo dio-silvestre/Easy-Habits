@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
-  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,15 +15,12 @@ export const HomeContainer = styled.div`
 
 export const HeroContainer = styled.div`
   display: flex;
-  width: 80vw;
-  padding: 50px 150px;
+  justify-content: center;
 
   .heroInfo {
-    width: 35vw;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    margin: 30px 120px 0px 0px;
 
     h1 {
       color: var(--darkBlue);
@@ -47,7 +43,6 @@ export const HeroContainer = styled.div`
   }
 
   .lootie {
-    width: 65vw;
     margin-bottom: 30px;
   }
 
@@ -79,7 +74,6 @@ export const HeroContainer = styled.div`
         width: 50%;
         height: 45px;
         align-self: flex-start;
-        z-index: -1;
       }
     }
 
@@ -166,7 +160,6 @@ export const AboutContainer = styled.div`
     figure {
       margin: 0;
       width: 100vw;
-      z-index: -2;
     }
 
     figure img {
