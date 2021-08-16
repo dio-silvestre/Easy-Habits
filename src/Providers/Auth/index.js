@@ -9,9 +9,8 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const token = localStorage.getItem("Habits:token") || "";
   const [auth, setAuth] = useState(token);
-  const [decodedUser, setDecodedUser] = useState(token);
+  //const [decodedUser, setDecodedUser] = useState(token);
   const userId = localStorage.getItem("Habits:userId") || "";
-  console.log(decodedUser);
   const history = useHistory();
 
   const logIn = (data) => {
@@ -21,23 +20,23 @@ export const AuthProvider = ({ children }) => {
         const token = response.data.access;
         localStorage.clear();
         localStorage.setItem("Habits:token", JSON.stringify(token));
-        if (token !== "") {
-          setDecodedUser(jwt_decode(token));
-          localStorage.setItem("Habits:userId", JSON.stringify(decodedUser));
-        }
         setAuth(token);
+        const decodingUserId = jwt_decode(token);
+        //setDecodedUser(decodingUserId.user_id);
+        localStorage.setItem(
+          "Habits:userId",
+          JSON.stringify(decodingUserId.user_id)
+        );
         toast.success("Sucesso ao fazer login");
         return history.push("/dashboard");
       })
       .catch((_) => toast.error("Nome de usuário ou senha inválidos"));
   };
 
-  console.log(userId);
+  //console.log(decodedUser);
 
   return (
-    <AuthContext.Provider
-      value={{ token: auth, setAuth, logIn, decodedUser, userId }}
-    >
+    <AuthContext.Provider value={{ token: auth, setAuth, logIn, userId }}>
       {children}
     </AuthContext.Provider>
   );
