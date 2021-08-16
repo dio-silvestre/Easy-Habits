@@ -46,7 +46,7 @@ export const Background = styled.div`
   section {
     height: 100vh;
     width: 100%;
-    background: url(${SignupImage}) no-repeat right;
+    background: url(${SignupImage}) no-repeat center;
   }
 `;
 
