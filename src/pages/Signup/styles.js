@@ -26,7 +26,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  height: 84vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: stretch;
