@@ -2,15 +2,17 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
-import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
+import { Link, useHistory } from "react-router-dom";
 // import HeaderDash from "../../components/HeaderDash";
 // import HeaderDashMobile from "../../components/HeaderDashMobile";
 import HeaderDashboard from "../../components/HeaderDashboard";
 import { PContainer, CarouselContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
 import Carousel from "styled-components-carousel";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const Dashboard = () => {
   const [habits, setHabits] = useState([]);
@@ -18,10 +20,22 @@ const Dashboard = () => {
     JSON.parse(localStorage.getItem("Habits:token")) || ""
   );
   const { decodedUser } = useAuth();
-  const { register, handleSubmit, reset } = useForm();
-  console.log(decodedUser);
+  const history = useHistory();
   const [openNewHabit, setOpenNewHabit] = useState(false);
   const [carroussel, setCarroussel] = useState(true);
+
+  console.log(habits);
+
+  const schema = yup.object().shape({
+    habit: yup.string().required("Campo obrigatório"),
+    category: yup.string().required("Campo obrigatório"),
+    difficulty: yup.string().required("Campo obrigatório"),
+    frequency: yup.string().required("Campo obrigatório"),
+  });
+
+  const { register, handleSubmit, reset } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const loadHabits = () => {
     api
@@ -38,10 +52,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadHabits();
-  });
+  }, []);
 
   const addNewHabit = ({ habit, category, difficulty, frequency }) => {
     console.log(decodedUser);
+    console.log(habit, category, difficulty, frequency);
     api
       .post(
         "/habits/",
@@ -50,7 +65,7 @@ const Dashboard = () => {
           category: category,
           difficulty: difficulty,
           frequency: frequency,
-          achieved: "false",
+          achieved: false,
           how_much_achieved: 0,
           user: decodedUser.user_id,
         },
@@ -61,9 +76,18 @@ const Dashboard = () => {
         }
       )
       .then((response) => {
+        console.log(response.data);
+        loadHabits();
         reset();
       });
   };
+
+  useEffect(() => {
+    if (addNewHabit) {
+      setOpenNewHabit(false);
+      setCarroussel(true);
+    }
+  }, []);
 
   const handleDelete = ({ id }) => {
     api.delete(`/habits/${id}/`, {
@@ -76,7 +100,7 @@ const Dashboard = () => {
   return (
     <>
       {/* <HeaderDash />
-    <HeaderDashMobile /> */}
+      <HeaderDashMobile /> */}
       <HeaderDashboard />
       <PContainer>
         Em progresso{" "}
@@ -98,34 +122,30 @@ const Dashboard = () => {
                   placeholder="Novo hábito"
                   {...register("habit")}
                   name="habit"
+                  //error={!!errors.habit}
                 />
                 <input
                   placeholder="Categoria"
                   {...register("category")}
                   name="category"
                   value="Esporte"
+                  //error={!!errors.category}
                 />
                 <input
                   placeholder="Dificuldade"
                   {...register("difficulty")}
                   name="difficulty"
                   value="Fácil"
+                  //error={!!errors.difficulty}
                 />
                 <input
                   placeholder="Frequência"
                   {...register("frequency")}
                   name="frequency"
                   value="Diária"
+                  //error={!!errors.frequency}
                 />
-                <Button
-                  type="submit"
-                  onClick={() => {
-                    setOpenNewHabit(false);
-                    setCarroussel(true);
-                  }}
-                >
-                  Adicionar
-                </Button>
+                <Button type="submit">Adicionar</Button>
               </section>
             </form>
           </CardNewHabit>
@@ -133,17 +153,10 @@ const Dashboard = () => {
       )}
       {carroussel && (
         <CarouselContainer>
-          <Carousel slidesToShow={3} infinite dots>
-            {/* <Carousel
-                
-                infinite
-                showArrows
-                showIndicator
-                slidesToShow={5}
-            > */}
+          <Carousel infinite dots showArrows showIndicator slidesToShow={5}>
             {habits.map((habit) => (
               <CardHabit>
-                <div>
+                <div key={habit.id}>
                   <p>{habit.title}</p>
                   <p>Período</p>
                   <button onClick={() => handleDelete(habit)}>Remover</button>
@@ -154,9 +167,15 @@ const Dashboard = () => {
         </CarouselContainer>
       )}
 
-      <div>
-        <Link to="/groups">Grupos</Link>
-      </div>
+      {/* <button
+        onClick={() => {
+          localStorage.clear();
+          return history.push("/");
+        }}
+      >
+        Sair
+      </button>
+      <Link to="/groups">Grupos</Link> */}
     </>
   );
 };
