@@ -20,7 +20,7 @@ const HeaderDashboard = () => {
           </Link>
           <Button onClick={() => {
           localStorage.clear();
-          return history.push("/");
+          history.push("/");
         }}>Logout</Button>
       </MenuDesktop>
       <MenuMobile>

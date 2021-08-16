@@ -8,7 +8,7 @@ import { Link, useHistory } from "react-router-dom";
 // import HeaderDash from "../../components/HeaderDash";
 // import HeaderDashMobile from "../../components/HeaderDashMobile";
 import HeaderDashboard from "../../components/HeaderDashboard";
-import { PContainer, CarouselContainer } from "./styles";
+import { PContainer, CarouselContainer, CardNovoHabito } from "./styles";
 import Popup from "../../components/Modal";
 import Carousel from 'styled-components-carousel';
 
@@ -85,7 +85,9 @@ const Dashboard = () => {
       setCarrossel(false)
       }}>+ Novo Hábito</Button>
     </PContainer>
-    {abrirNovoHabito && <Popup>
+    {abrirNovoHabito && 
+      <Popup>
+      <CardNovoHabito>
         <form onSubmit={handleSubmit(addNewHabit)}>
           <section>
             <input
@@ -114,9 +116,10 @@ const Dashboard = () => {
             <Button type="submit" onClick={() => {
               setAbrirNovoHabito(false)
               setCarrossel(true)
-              }}>Novo Hábito</Button>
+              }}>Adicionar</Button>
             </section>
-          </form> 
+          </form>
+          </CardNovoHabito>
           </Popup>}
           {carrossel && 
           <CarouselContainer>
@@ -141,7 +144,7 @@ const Dashboard = () => {
         
           
         
-      <button
+      {/* <button
         onClick={() => {
           localStorage.clear();
           return history.push("/");
@@ -149,7 +152,7 @@ const Dashboard = () => {
       >
         Sair
       </button>
-      <Link to="/groups">Grupos</Link>
+      <Link to="/groups">Grupos</Link> */}
     </>
   );
 };

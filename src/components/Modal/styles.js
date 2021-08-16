@@ -8,7 +8,7 @@ export const Flutua = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: pink;
+    background: rgba( 255, 255, 255, 0.9);
 
 
 `
