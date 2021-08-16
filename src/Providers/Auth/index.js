@@ -9,9 +9,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const token = localStorage.getItem("Habits:token") || "";
   const [auth, setAuth] = useState(token);
-  const [decodedUser, setDecodedUser] = useState(
-    jwt_decode(localStorage.getItem("Habits:token"))
-  );
+  const [decodedUser, setDecodedUser] = useState(token);
   console.log(decodedUser);
   const history = useHistory();
 
@@ -28,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         toast.success("Sucesso ao fazer login");
         return history.push("/dashboard");
       })
-      .catch((err) => toast.error("Nome de usuário ou senha inválidos"));
+      .catch((_) => toast.error("Nome de usuário ou senha inválidos"));
   };
 
   return (
