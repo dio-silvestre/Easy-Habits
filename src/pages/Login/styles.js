@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div`
 
 export const Container = styled.div`
   // div pai
-  height: 65vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: stretch;
@@ -35,6 +35,7 @@ export const Background = styled.div`
 
   section {
     height: 100vh;
+    width: 100%;
     background: url(${LoginImage}) no-repeat center;
   }
 `;
