@@ -27,7 +27,7 @@ export const CarouselContainer = styled.div`
 `;
 
 
-export const CardNovoHabito = styled.div`
+export const CardNewHabit = styled.div`
   section { 
     display: flex;
     flex-direction: column;

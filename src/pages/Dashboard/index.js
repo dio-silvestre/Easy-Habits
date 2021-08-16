@@ -64,7 +64,7 @@ import { Link, useHistory } from "react-router-dom";
 // import HeaderDash from "../../components/HeaderDash";
 // import HeaderDashMobile from "../../components/HeaderDashMobile";
 import HeaderDashboard from "../../components/HeaderDashboard";
-import { PContainer, CarouselContainer, CardNovoHabito } from "./styles";
+import { PContainer, CarouselContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
 import Carousel from 'styled-components-carousel';
 
@@ -77,8 +77,8 @@ const Dashboard = () => {
   const { decodedUser } = useAuth();
   const { register, handleSubmit, reset } = useForm();
   const history = useHistory();
-  const [abrirNovoHabito, setAbrirNovoHabito] = useState(false);
-  const [carrossel, setCarrossel] = useState(true)
+  const [openNewHabit, setOpenNewHabit] = useState(false);
+  const [carroussel, setCarroussel] = useState(true)
 
   const loadHabits = () => {
     api
@@ -137,13 +137,13 @@ const Dashboard = () => {
     <HeaderDashboard />
     <PContainer>
     Em progresso <Button onClick={() => {
-      setAbrirNovoHabito(true)
-      setCarrossel(false)
+      setOpenNewHabit(true)
+      setCarroussel(false)
       }}>+ Novo Hábito</Button>
     </PContainer>
-    {abrirNovoHabito && 
+    {openNewHabit && 
       <Popup>
-      <CardNovoHabito>
+      <CardNewHabit>
         <form onSubmit={handleSubmit(addNewHabit)}>
           <section>
             <input
@@ -170,14 +170,14 @@ const Dashboard = () => {
               value="Diária"
             />
             <Button type="submit" onClick={() => {
-              setAbrirNovoHabito(false)
-              setCarrossel(true)
+              setOpenNewHabit(false)
+              setCarroussel(true)
               }}>Adicionar</Button>
             </section>
           </form>
-          </CardNovoHabito>
+          </CardNewHabit>
           </Popup>}
-          {carrossel && 
+          {carroussel && 
           <CarouselContainer>
           <Carousel slidesToShow={3} infinite dots>
             {/* <Carousel
