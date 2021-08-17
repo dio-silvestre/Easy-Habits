@@ -20,6 +20,7 @@ const Dashboard = () => {
 
   //const history = useHistory();
   const [habits, setHabits] = useState([]);
+  const [finishedHabits, setFinishedHabits] = useState([])
   const [openNewHabit, setOpenNewHabit] = useState(false);
   const [carroussel, setCarroussel] = useState(true);
 
@@ -42,7 +43,10 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        setHabits(response.data);
+        setHabits(response.data.filter((habit) =>
+          habit.achieved === false));
+        setFinishedHabits(response.data.filter((habit) =>
+          habit.achieved === true));
       })
       .catch((err) => console.log(err));
   };
@@ -81,7 +85,7 @@ const Dashboard = () => {
     setCarroussel(true);
   };
 
-  console.log("habit", habits);
+  //console.log("habit", habits);
 
   const handleDelete = ({ id }) => {
     api.delete(`/habits/${id}/`, {
@@ -114,28 +118,28 @@ const Dashboard = () => {
                   placeholder="Novo hábito"
                   {...register("habit")}
                   name="habit"
-                  //error={!!errors.habit}
+                //error={!!errors.habit}
                 />
                 <input
                   placeholder="Categoria"
                   {...register("category")}
                   name="category"
                   value="Esporte"
-                  //error={!!errors.category}
+                //error={!!errors.category}
                 />
                 <input
                   placeholder="Dificuldade"
                   {...register("difficulty")}
                   name="difficulty"
                   value="Fácil"
-                  //error={!!errors.difficulty}
+                //error={!!errors.difficulty}
                 />
                 <input
                   placeholder="Frequência"
                   {...register("frequency")}
                   name="frequency"
                   value="Diária"
-                  //error={!!errors.frequency}
+                //error={!!errors.frequency}
                 />
                 <Button type="submit">Adicionar</Button>
               </section>
@@ -144,19 +148,40 @@ const Dashboard = () => {
         </Popup>
       )}
       {carroussel && (
-        <CarouselContainer>
-          <Carousel center showArrows showIndicator slidesToShow={3}>
-            {habits.map((habit) => (
-              <CardHabit>
-                <div key={habit.id}>
-                  <p>{habit.title}</p>
-                  <p>Período</p>
-                  <button onClick={() => handleDelete(habit)}>Remover</button>
-                </div>
-              </CardHabit>
-            ))}
-          </Carousel>
-        </CarouselContainer>
+        <>
+          <div>
+            <h1>Em progresso</h1>
+            <CarouselContainer>
+              <Carousel center showArrows showIndicator slidesToShow={3}>
+                {habits.map((habit) => (
+                  <CardHabit>
+                    <div key={habit.id}>
+                      <p>{habit.title}</p>
+                      <p>Período</p>
+                      <button onClick={() => handleDelete(habit)}>Remover</button>
+                    </div>
+                  </CardHabit>
+                ))}
+              </Carousel>
+            </CarouselContainer>
+          </div>
+          <div>
+            <h1>Concluidos</h1>
+            <CarouselContainer>
+              <Carousel center showArrows showIndicator slidesToShow={3}>
+                {finishedHabits.map((habit) => (
+                  <CardHabit>
+                    <div key={habit.id}>
+                      <p>{habit.title}</p>
+                      <p>Período</p>
+                      <button onClick={() => handleDelete(habit)}>Remover</button>
+                    </div>
+                  </CardHabit>
+                ))}
+              </Carousel>
+            </CarouselContainer>
+          </div>
+        </>
       )}
 
       {/* <button
