@@ -10,21 +10,20 @@ import { Link, useHistory } from "react-router-dom";
 import HeaderDashboard from "../../components/HeaderDashboard";
 import { PContainer, CarouselContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
-//import Carousel from "styled-components-carousel";
+import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const Dashboard = () => {
-  const [habits, setHabits] = useState([]);
   const [token] = useState(
     JSON.parse(localStorage.getItem("Habits:token")) || ""
   );
   const { userId } = useAuth();
-  const history = useHistory();
-  const [openNewHabit, setOpenNewHabit] = useState(false);
-  const [carroussel, setCarroussel] = useState(true);
 
-  console.log(habits);
+  //const history = useHistory();
+  const [habits, setHabits] = useState([]);
+  const [openNewHabit, setOpenNewHabit] = useState(false);
+  const [carousel, setCarousel] = useState(true);
 
   const schema = yup.object().shape({
     habit: yup.string().required("Campo obrigatório"),
@@ -75,13 +74,16 @@ const Dashboard = () => {
         }
       )
       .then((response) => {
+        console.log("response", response);
         loadHabits();
         reset();
       });
 
     setOpenNewHabit(false);
-    setCarroussel(true);
+    setCarousel(true);
   };
+
+  console.log("habit", habits);
 
   const handleDelete = ({ id }) => {
     api.delete(`/habits/${id}/`, {
@@ -92,8 +94,6 @@ const Dashboard = () => {
   };
 
   const handleUpdate = ({ id }) => {
-    console.log(id);
-    console.log(token);
     api.patch(
       `/habits/${id}/`,
       {
@@ -103,22 +103,20 @@ const Dashboard = () => {
       },
       {
         achieved: false,
-        how_much_achieved: 0 + 10,
+        how_much_achieved: 10,
       }
     );
   };
 
   return (
     <>
-      {/* <HeaderDash />
-      <HeaderDashMobile /> */}
       <HeaderDashboard />
       <PContainer>
-        Em progresso{" "}
+        Em progresso
         <Button
           onClick={() => {
             setOpenNewHabit(true);
-            setCarroussel(false);
+            setCarousel(false);
           }}
         >
           + Novo Hábito
@@ -162,19 +160,21 @@ const Dashboard = () => {
           </CardNewHabit>
         </Popup>
       )}
-      {carroussel && (
+      {carousel && (
         <CarouselContainer>
-          {habits.map((habit) => (
-            <CardHabit key={habit.id}>
-              <p>{habit.title}</p>
-              <p>{habit.how_much_achieved}</p>
-              <p>Período</p>
-              <button onClick={() => handleUpdate(habit)}>Atualizar</button>
-              <button onClick={() => handleDelete(habit)}>Remover</button>
-            </CardHabit>
-          ))}
-          {/* <Carousel infinite dots showArrows showIndicator slidesToShow={1}>
-          </Carousel> */}
+          <Carousel center showArrows showIndicator slidesToShow={3}>
+            {habits.map((habit) => (
+              <CardHabit>
+                <div key={habit.id}>
+                  <p>{habit.title}</p>
+                  <p>{habit.how_much_achieved}</p>
+                  <p>Período</p>
+                  <button onClick={() => handleUpdate(habit)}>Atualizar</button>
+                  <button onClick={() => handleDelete(habit)}>Remover</button>
+                </div>
+              </CardHabit>
+            ))}
+          </Carousel>
         </CarouselContainer>
       )}
 
