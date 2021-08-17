@@ -151,13 +151,20 @@ const Dashboard = () => {
                   <div class="habit-container" key={habit.id}>
                       <div class="habit-title">{habit.title}</div>
                       <hr />
+                      <div class="habit-difficulty">
+                          <p>Fácil</p>
+                      </div>
                       <div class="habit-progression">
-                          <h1>1</h1> <h1>/</h1> <h1>3</h1> 
+                          <h3>1 / 3</h3>
                       </div>
-                      <div class="habit-description">
-                          <p>Descrição/Período</p>
+                      <div class="progress-bar"></div>
+                      <div class="habit-category">
+                          <p>Categoria</p>
                       </div>
-                      <button class="habit-button" onClick={() => handleDelete(habit)}>Adicionar progresso</button>
+                      <div class="container-button">
+                        <button class="habit-button-giveup" onClick={() => handleDelete(habit)}>Desistir</button>
+                        <button class="habit-button" onClick={() => handleDelete(habit)}>Progredir</button>
+                      </div>
                   </div>
               </CardHabit>
             ))}
