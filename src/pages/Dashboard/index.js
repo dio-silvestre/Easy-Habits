@@ -13,6 +13,7 @@ import Popup from "../../components/Modal";
 //import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import FooterDash from "../../components/FooterDashboard";
 
 const Dashboard = () => {
   const [habits, setHabits] = useState([]);
@@ -170,6 +171,7 @@ const Dashboard = () => {
         Sair
       </button>
       <Link to="/groups">Grupos</Link> */}
+      <FooterDash />
     </>
   );
 };

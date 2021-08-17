@@ -11,7 +11,7 @@ export const PContainer = styled.div`
 
         button {
             margin-left: 20px;
-            width: 150px;
+            width: 130px;
             height: 40px;
             font-size: 1rem;
         }
