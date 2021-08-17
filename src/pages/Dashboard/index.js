@@ -1,59 +1,3 @@
-// import { useForm } from "react-hook-form";
-// import { Link } from "react-router-dom";
-// import { useHabits } from "../../Providers/Habits";
-
-// const Dashboard = () => {
-//   const { habits, addNewHabit, handleDelete } = useHabits();
-//   const { register, handleSubmit } = useForm();
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit(addNewHabit)}>
-//         <section>
-//           <input
-//             placeholder="Novo hábito"
-//             {...register("habit")}
-//             name="habit"
-//           />
-//           <input
-//             placeholder="Categoria"
-//             {...register("category")}
-//             name="category"
-//             value="Esporte"
-//           />
-//           <input
-//             placeholder="Dificuldade"
-//             {...register("difficulty")}
-//             name="difficulty"
-//             value="Fácil"
-//           />
-//           <input
-//             placeholder="Frequência"
-//             {...register("frequency")}
-//             name="frequency"
-//             value="Diária"
-//           />
-//           <button type="submit">Adicionar</button>
-//         </section>
-//       </form>
-//       <div>
-//         {habits.map((habit, index) => (
-//           <div key={index}>
-//             <p>{habit.title}</p>
-//             <button onClick={() => handleDelete(habit)}>Remover</button>
-//           </div>
-//         ))}
-//       </div>
-//       <Link to="/groups">Grupos</Link>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
-
-
-
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
@@ -66,19 +10,32 @@ import { Link, useHistory } from "react-router-dom";
 import HeaderDashboard from "../../components/HeaderDashboard";
 import { PContainer, CarouselContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
-import Carousel from 'styled-components-carousel';
-
+//import Carousel from "styled-components-carousel";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const Dashboard = () => {
   const [habits, setHabits] = useState([]);
   const [token] = useState(
     JSON.parse(localStorage.getItem("Habits:token")) || ""
   );
-  const { decodedUser } = useAuth();
-  const { register, handleSubmit, reset } = useForm();
+  const { userId } = useAuth();
   const history = useHistory();
   const [openNewHabit, setOpenNewHabit] = useState(false);
-  const [carroussel, setCarroussel] = useState(true)
+  const [carroussel, setCarroussel] = useState(true);
+
+  console.log(habits);
+
+  const schema = yup.object().shape({
+    habit: yup.string().required("Campo obrigatório"),
+    category: yup.string().required("Campo obrigatório"),
+    difficulty: yup.string().required("Campo obrigatório"),
+    frequency: yup.string().required("Campo obrigatório"),
+  });
+
+  const { register, handleSubmit, reset } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const loadHabits = () => {
     api
@@ -95,10 +52,10 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadHabits();
-  }, []);
+  });
 
   const addNewHabit = ({ habit, category, difficulty, frequency }) => {
-    console.log(decodedUser)
+    console.log(habit, category, difficulty, frequency);
     api
       .post(
         "/habits/",
@@ -107,9 +64,9 @@ const Dashboard = () => {
           category: category,
           difficulty: difficulty,
           frequency: frequency,
-          achieved: "false",
+          achieved: false,
           how_much_achieved: 0,
-          user: decodedUser,
+          user: userId,
         },
         {
           headers: {
@@ -118,8 +75,12 @@ const Dashboard = () => {
         }
       )
       .then((response) => {
+        loadHabits();
         reset();
       });
+
+    setOpenNewHabit(false);
+    setCarroussel(true);
   };
 
   const handleDelete = ({ id }) => {
@@ -132,74 +93,74 @@ const Dashboard = () => {
 
   return (
     <>
-    {/* <HeaderDash />
-    <HeaderDashMobile /> */}
-    <HeaderDashboard />
-    <PContainer>
-    Em progresso <Button onClick={() => {
-      setOpenNewHabit(true)
-      setCarroussel(false)
-      }}>+ Novo Hábito</Button>
-    </PContainer>
-    {openNewHabit && 
-      <Popup>
-      <CardNewHabit>
-        <form onSubmit={handleSubmit(addNewHabit)}>
-          <section>
-            <input
-              placeholder="Novo hábito"
-              {...register("habit")}
-              name="habit"
-            />
-            <input
-              placeholder="Categoria"
-              {...register("category")}
-              name="category"
-              value="Esporte"
-            />
-            <input
-              placeholder="Dificuldade"
-              {...register("difficulty")}
-              name="difficulty"
-              value="Fácil"
-            />
-            <input
-              placeholder="Frequência"
-              {...register("frequency")}
-              name="frequency"
-              value="Diária"
-            />
-            <Button type="submit" onClick={() => {
-              setOpenNewHabit(false)
-              setCarroussel(true)
-              }}>Adicionar</Button>
-            </section>
-          </form>
+      {/* <HeaderDash />
+      <HeaderDashMobile /> */}
+      <HeaderDashboard />
+      <PContainer>
+        Em progresso{" "}
+        <Button
+          onClick={() => {
+            setOpenNewHabit(true);
+            setCarroussel(false);
+          }}
+        >
+          + Novo Hábito
+        </Button>
+      </PContainer>
+      {openNewHabit && (
+        <Popup>
+          <CardNewHabit>
+            <form onSubmit={handleSubmit(addNewHabit)}>
+              <section>
+                <input
+                  placeholder="Novo hábito"
+                  {...register("habit")}
+                  name="habit"
+                  //error={!!errors.habit}
+                />
+                <input
+                  placeholder="Categoria"
+                  {...register("category")}
+                  name="category"
+                  value="Esporte"
+                  //error={!!errors.category}
+                />
+                <input
+                  placeholder="Dificuldade"
+                  {...register("difficulty")}
+                  name="difficulty"
+                  value="Fácil"
+                  //error={!!errors.difficulty}
+                />
+                <input
+                  placeholder="Frequência"
+                  {...register("frequency")}
+                  name="frequency"
+                  value="Diária"
+                  //error={!!errors.frequency}
+                />
+                <Button type="submit">Adicionar</Button>
+              </section>
+            </form>
           </CardNewHabit>
-          </Popup>}
-          {carroussel && 
-          <CarouselContainer>
-          <Carousel slidesToShow={3} infinite dots>
-            {/* <Carousel
-                
-                infinite
-                showArrows
-                showIndicator
-                slidesToShow={5}
-            > */}
-              {habits.map((habit) => (
-                <CardHabit><div>
-                  <p>{habit.title}</p>
-                  <p>Período</p>
-                  <button onClick={() => handleDelete(habit)}>Remover</button>
-                </div></CardHabit>
-              ))}
-            </Carousel>
-          </CarouselContainer>}
+        </Popup>
+      )}
+      {carroussel && (
+        <CarouselContainer>
+          {habits.map((habit) => (
+            <CardHabit>
+              <div key={habit.id}>
+                <p>{habit.title}</p>
+                <p>Período</p>
+                <button onClick={() => handleDelete(habit)}>Remover</button>
+              </div>
+            </CardHabit>
+          ))}
+          {/* <Carousel infinite dots showArrows showIndicator slidesToShow={1}>
+          </Carousel> */}
+        </CarouselContainer>
+      )}
 
-        
-          
-        
       {/* <button
         onClick={() => {
           localStorage.clear();
@@ -214,5 +175,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-

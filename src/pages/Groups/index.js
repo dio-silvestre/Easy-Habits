@@ -30,7 +30,7 @@ const Groups = () => {
       <div>
         <h1>Grupos Abertos</h1>
         {groups.map((group) => (
-          <div>
+          <div key={group.id}>
             <p>{group.name}</p>
             <p>{group.description}</p>
             <p>{group.category}</p>
@@ -40,7 +40,7 @@ const Groups = () => {
       <div>
         <h1>Inscrições</h1>
         {subscriptions.map((group) => (
-          <div>
+          <div key={group.id}>
             <p>{group.name}</p>
             <p>{group.description}</p>
             <p>{group.category}</p>
