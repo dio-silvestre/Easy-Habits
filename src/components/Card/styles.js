@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-export const CardHabit = styled.div`
-    width: 100px;
-    background: rgba( 255, 255, 255, 0.80 );
-
-    border-radius: 10px;
+export const CardContainer = styled.div`
+  width: 10vw;
+  background: var(--violetLight);
+  border-radius: 4px;
 `;

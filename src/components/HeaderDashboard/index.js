@@ -15,7 +15,7 @@ const HeaderDashboard = () => {
         </Link>
       </Logo>
       <MenuDesktop>
-          <Link className="icone-grupos" to="#">
+          <Link className="icone-grupos" to="/groups">
             Grupos <FiUsers />
           </Link>
           <Button onClick={() => {
