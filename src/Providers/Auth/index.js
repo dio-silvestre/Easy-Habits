@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const userId = localStorage.getItem("Habits:userId") || "";
   const history = useHistory();
 
-  const logIn = (data) => {
+  const logIn = (data, setError) => {
     api
       .post("/sessions/", data)
       .then((response) => {
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         toast.success("Sucesso ao fazer login");
         return history.push("/dashboard");
       })
-      .catch((_) => toast.error("Nome de usuário ou senha inválidos"));
+      .catch((_) => setError(true));
   };
 
   const logOut = () => {

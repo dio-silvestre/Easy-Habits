@@ -13,8 +13,10 @@ import {
   Button,
   HeaderContainer,
 } from "./styles";
+import { useState } from "react";
 
 const Login = () => {
+  const [error, setError] = useState(false);
   const { logIn } = useAuth();
 
   const schema = yup.object().shape({
@@ -29,7 +31,7 @@ const Login = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmitFunction = (data) => {
-    logIn(data);
+    logIn(data, setError);
   };
 
   return (
