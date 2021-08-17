@@ -24,9 +24,9 @@ const HeaderDash = () => {
             Contato
           </Link>
           <Button onClick={() => {
-          localStorage.clear();
-          return history.push("/");
-        }}>Logout</Button>
+            localStorage.clear();
+            return history.push("/");
+          }}>Logout</Button>
         </HeaderNav>
       </HeaderContainer>
     </>
