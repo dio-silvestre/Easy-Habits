@@ -1,7 +1,7 @@
-import { CardContainer } from "./styles";
+import { CardHabit } from "./styles";
 
 const Card = ({ children, ...rest }) => {
-  return <CardContainer {...rest}>{children}</CardContainer>;
+  return <CardHabit {...rest}>{children}</CardHabit>;
 };
 
 export default Card;
