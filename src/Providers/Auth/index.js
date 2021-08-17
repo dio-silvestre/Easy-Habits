@@ -9,11 +9,10 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const token = localStorage.getItem("Habits:token") || "";
   const [auth, setAuth] = useState(token);
-  //const [decodedUser, setDecodedUser] = useState(token);
   const userId = localStorage.getItem("Habits:userId") || "";
   const history = useHistory();
 
-  const logIn = (data) => {
+  const logIn = (data, setError) => {
     api
       .post("/sessions/", data)
       .then((response) => {
@@ -22,7 +21,6 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("Habits:token", JSON.stringify(token));
         setAuth(token);
         const decodingUserId = jwt_decode(token);
-        //setDecodedUser(decodingUserId.user_id);
         localStorage.setItem(
           "Habits:userId",
           JSON.stringify(decodingUserId.user_id)
@@ -30,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         toast.success("Sucesso ao fazer login");
         return history.push("/dashboard");
       })
-      .catch((_) => toast.error("Nome de usuário ou senha inválidos"));
+      .catch((err) => setError(true));
   };
 
   const logOut = () => {
