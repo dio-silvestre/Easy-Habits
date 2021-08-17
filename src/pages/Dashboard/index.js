@@ -22,8 +22,6 @@ const Dashboard = () => {
   const [openNewHabit, setOpenNewHabit] = useState(false);
   const [carroussel, setCarroussel] = useState(true);
 
-  console.log(habits);
-
   const schema = yup.object().shape({
     habit: yup.string().required("Campo obrigatório"),
     category: yup.string().required("Campo obrigatório"),

@@ -17,10 +17,10 @@ const HeaderDashMobile = () => {
           <div className="closeMenu" onClick={() => setMenuDisplay("hidden")}>
             X
           </div>
-          <Link className="link-nav" to="#">
+          <Link className="link-nav" to="/groups">
             Grupos
           </Link>
-          <Link className="link-nav" to="#">
+          <Link className="link-nav" to="/groups">
             Logout
           </Link>
         </HeaderNav>
