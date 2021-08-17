@@ -26,7 +26,6 @@ export const CarouselContainer = styled.div`
     margin-right: 30px;
 `;
 
-
 export const CardNewHabit = styled.div`
   section { 
     display: flex;
@@ -55,4 +54,10 @@ export const CardNewHabit = styled.div`
     }
   }
 
+`
+
+export const CardContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

@@ -4,11 +4,9 @@ import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
-import { Link, useHistory } from "react-router-dom";
-// import HeaderDash from "../../components/HeaderDash";
-// import HeaderDashMobile from "../../components/HeaderDashMobile";
+import { useHistory } from "react-router-dom";
 import HeaderDashboard from "../../components/HeaderDashboard";
-import { PContainer, CarouselContainer, CardNewHabit } from "./styles";
+import { PContainer, CardContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
 // import Carousel from "styled-components-carousel";
 import * as yup from "yup";
@@ -147,62 +145,24 @@ const Dashboard = () => {
           </CardNewHabit>
         </Popup>
       )}
-
+      <CardContainer>
           {habits.map((habit) => (
               <CardHabit>
-                  <div class="habit-container">
-                      <h3>Título</h3>
+                  <div class="habit-container" key={habit.id}>
+                      <div class="habit-title">{habit.title}</div>
                       <hr />
-                      <div class="price-tag">
-                          <h2>1</h2> <h2>/</h2> <h1>3</h1> 
+                      <div class="habit-progression">
+                          <h1>1</h1> <h1>/</h1> <h1>3</h1> 
                       </div>
-                      <div class="messages">
-                          <p><i class="fas fa-star"></i> No setup, monthly, or hidden fees</p>
-                          <p><i class="fas fa-arrow-down"></i> Pay only for what you use</p>
-                          <p><i class="fas fa-clock"></i> Real-time</p>
+                      <div class="habit-description">
+                          <p>Descrição/Período</p>
                       </div>
-                      <a href="https://www.w3schools.com" class='cta'>Create Account </a>
+                      <button class="habit-button">Adicionar progresso</button>
                   </div>
               </CardHabit>
             ))}
-
-
-          {habits.map((habit) => (
-              <CardHabit>
-                <div key={habit.id}>
-                  <p>{habit.title}</p>
-                  <p>Período</p>
-                  <button onClick={() => handleDelete(habit)}>Remover</button>
-                </div>
-              </CardHabit>
-            ))}
+          </CardContainer>
       
-      
-      {/* {carroussel && (
-        <CarouselContainer>
-          <Carousel center showArrows showIndicator slidesToShow={3}>
-            {habits.map((habit) => (
-              <CardHabit>
-                <div key={habit.id}>
-                  <p>{habit.title}</p>
-                  <p>Período</p>
-                  <button onClick={() => handleDelete(habit)}>Remover</button>
-                </div>
-              </CardHabit>
-            ))}
-          </Carousel>
-        </CarouselContainer>
-      )} */}
-
-      {/* <button
-        onClick={() => {
-          localStorage.clear();
-          return history.push("/");
-        }}
-      >
-        Sair
-      </button>
-      <Link to="/groups">Grupos</Link> */}
       {/* <FooterDash /> */}
     </>
   );

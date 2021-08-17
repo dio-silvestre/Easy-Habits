@@ -15,7 +15,7 @@ export const CardHabit = styled.div`
   h3 {
     text-transform: uppercase;
     text-align: center;
-    color: var(--violetCore);
+    color: var(--darkBlue);
     font-size: 1.2rem;
     padding: 10px;
   }
@@ -25,71 +25,60 @@ export const CardHabit = styled.div`
     color: var(--darkBlue);
   }
 
+  .habit-title {
+    background-color: var(--violetLight);
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--darkBlue);
+    font-size: 1.2rem;
+    padding: 10px;
+  }
+
 }
 
-.price-tag {
+.habit-progression {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   h1 {
     font-size: 4em;
     line-height: 60px;
-    color: $darker-blue;
-  }
-
-  span {
-    align-self: center;
-    color: $off-gray;
-    font-size: 30px;
-    padding: 5px;
+    color: var(--violetCore);
   }
   p {
+    margin-top: 10px;
     align-self: center;
     font-size: 18px;
   }
-  p:last-child {
-    color: $off-gray;
-    flex-basis: 100%;
-    margin-top: -20px;
-    text-align: center;
-    margin-bottom: 60px;
-  }
 }
-.messages {
+.habit-description {
   display: flex;
   flex-direction: column;
-  padding: 0px 50px;
-  svg {
-    color: $torquise;
-  }
+  padding: 20px 0 20px 30px;
   i {
     transform: rotate(10deg);
   }
   p {
-    color: $light-gray;
     font-size: 20px;
     margin-top: 8px;
   }
 }
 
-a {
+.habit-button {
+  padding: 15px 0 15px 0; 
+  width: 100%;
   background: #f6f9fc;
   border: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   cursor: pointer;
-  color: #32325d;
+  color: var(--violetCore);
   display: block;
   font-weight: 600;
-  font-size: 17px;
-  line-height: 26px;
-  letter-spacing: .025em;
-  text-transform: uppercase;
+  font-size: 15px;
   text-align: center;
-  padding: 25px;
   transition: background .15s ease;
   &:hover {
-    background: #cfd7df;
+    color: white;
+    background: var(--violetCore);
   }
 }
 
