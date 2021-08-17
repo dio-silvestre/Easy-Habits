@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
 export const CardHabit = styled.div`
-    width: 350px;
+    width: 200;
     display: flex;
 
 .habit-container {
-    width: 300px;
-    align-items: baseline;
-    justify-content: baseline;
+    width: 250px;
+    align-items: center;
+    justify-content: center;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  margin: 0 auto;
+  margin-bottom: 25px;
+  margin-left: 25px;
   h3 {
     text-transform: uppercase;
     text-align: center;

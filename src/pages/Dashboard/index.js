@@ -4,15 +4,15 @@ import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import HeaderDashboard from "../../components/HeaderDashboard";
 import { PContainer, CardContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
 // import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FooterDash from "../../components/FooterDashboard";
-import { CardHabits } from "../../components/CardHabit/style";
+// import FooterDash from "../../components/FooterDashboard";
+// import { CardHabits } from "../../components/CardHabit/style";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -157,7 +157,7 @@ const Dashboard = () => {
                       <div class="habit-description">
                           <p>Descrição/Período</p>
                       </div>
-                      <button class="habit-button">Adicionar progresso</button>
+                      <button class="habit-button" onClick={() => handleDelete(habit)}>Adicionar progresso</button>
                   </div>
               </CardHabit>
             ))}

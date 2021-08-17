@@ -57,7 +57,9 @@ export const CardNewHabit = styled.div`
 `
 
 export const CardContainer = styled.div`
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 `
