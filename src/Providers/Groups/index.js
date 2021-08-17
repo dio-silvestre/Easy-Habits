@@ -13,35 +13,35 @@ export const GroupsProvider = ({ children }) => {
 
   useEffect(() => {
     //get dos grupos
-    api
-      .get("/groups/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const filteredGroups = response.data.results.filter(
-          (group) => group.category === "CORINGA"
-        );
-        setGroups(filteredGroups);
-      })
-      .catch((err) => console.log(err));
+    if (token !== "") {
+      api
+        .get("/groups/?category=CORINGA", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const allGroups = response.data.results;
+          setGroups(allGroups);
+        })
+        .catch((err) => console.log(err));
 
-    //get das inscrições api
-    api
-      .get("/groups/subscriptions/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const filteredGroups = response.data.filter(
-          (group) => group.category === "CORINGA"
-        );
-        setSubscriptions(filteredGroups);
-      })
-      .catch((err) => console.log(err));
-  });
+      //get das inscrições api
+      api
+        .get("/groups/subscriptions/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const filteredGroups = response.data.filter(
+            (group) => group.category === "CORINGA"
+          );
+          setSubscriptions(filteredGroups);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [token]);
 
   const addNewGroup = ({ name, description, category }) => {
     api.post(
