@@ -59,7 +59,6 @@ const Login = () => {
                 {...register("password")}
               />
               <div className="error"> {errors.password?.message}</div>
-
               <Button type="submit"> ENTRAR </Button>
               <p>
                 Não tem uma conta ? Faça seu <Link to="/signup">Cadastro</Link>

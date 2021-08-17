@@ -1,7 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { HeaderContainer, HeaderNav } from "./styles";
 import Button from "../Button";
-import { FiUsers } from "react-icons/fi"
+import { FiUsers } from "react-icons/fi";
 
 const HeaderDash = () => {
   const history = useHistory();
@@ -17,16 +17,20 @@ const HeaderDash = () => {
           <div className="easyHabits">EasyHabits</div>
         </Link>
         <HeaderNav>
-          <Link className="link-nav" to="#">
+          <Link className="link-nav" to="/groups">
             Grupos <FiUsers />
           </Link>
-          <Link className="link-nav" to="#">
+          <Link className="link-nav" to="/groups">
             Contato
           </Link>
-          <Button onClick={() => {
-            localStorage.clear();
-            return history.push("/");
-          }}>Logout</Button>
+          <Button
+            onClick={() => {
+              localStorage.clear();
+              return history.push("/");
+            }}
+          >
+            Logout
+          </Button>
         </HeaderNav>
       </HeaderContainer>
     </>
