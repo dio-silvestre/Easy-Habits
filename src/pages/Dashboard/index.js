@@ -10,10 +10,11 @@ import { Link, useHistory } from "react-router-dom";
 import HeaderDashboard from "../../components/HeaderDashboard";
 import { PContainer, CarouselContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
-import Carousel from "styled-components-carousel";
+// import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FooterDash from "../../components/FooterDashboard";
+import { CardHabits } from "../../components/CardHabit/style";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -146,7 +147,38 @@ const Dashboard = () => {
           </CardNewHabit>
         </Popup>
       )}
-      {carroussel && (
+
+          {habits.map((habit) => (
+              <CardHabit>
+                  <div class="habit-container">
+                      <h3>Título</h3>
+                      <hr />
+                      <div class="price-tag">
+                          <h2>1</h2> <h2>/</h2> <h1>3</h1> 
+                      </div>
+                      <div class="messages">
+                          <p><i class="fas fa-star"></i> No setup, monthly, or hidden fees</p>
+                          <p><i class="fas fa-arrow-down"></i> Pay only for what you use</p>
+                          <p><i class="fas fa-clock"></i> Real-time</p>
+                      </div>
+                      <a href="https://www.w3schools.com" class='cta'>Create Account </a>
+                  </div>
+              </CardHabit>
+            ))}
+
+
+          {habits.map((habit) => (
+              <CardHabit>
+                <div key={habit.id}>
+                  <p>{habit.title}</p>
+                  <p>Período</p>
+                  <button onClick={() => handleDelete(habit)}>Remover</button>
+                </div>
+              </CardHabit>
+            ))}
+      
+      
+      {/* {carroussel && (
         <CarouselContainer>
           <Carousel center showArrows showIndicator slidesToShow={3}>
             {habits.map((habit) => (
@@ -160,7 +192,7 @@ const Dashboard = () => {
             ))}
           </Carousel>
         </CarouselContainer>
-      )}
+      )} */}
 
       {/* <button
         onClick={() => {
@@ -171,7 +203,7 @@ const Dashboard = () => {
         Sair
       </button>
       <Link to="/groups">Grupos</Link> */}
-      <FooterDash />
+      {/* <FooterDash /> */}
     </>
   );
 };
