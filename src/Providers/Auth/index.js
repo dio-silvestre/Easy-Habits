@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         toast.success("Sucesso ao fazer login");
         return history.push("/dashboard");
       })
-      .catch((_) => setError(true));
+      .catch((err) => setError(true));
   };
 
   const logOut = () => {
