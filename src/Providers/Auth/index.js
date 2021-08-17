@@ -33,10 +33,13 @@ export const AuthProvider = ({ children }) => {
       .catch((_) => toast.error("Nome de usuário ou senha inválidos"));
   };
 
-  //console.log(decodedUser);
+  const logOut = () => {
+    setAuth('')
+    localStorage.clear();
+  }
 
   return (
-    <AuthContext.Provider value={{ token: auth, setAuth, logIn, userId }}>
+    <AuthContext.Provider value={{ token: auth, setAuth, logIn, decodedUser, logOut }}>
       {children}
     </AuthContext.Provider>
   );
