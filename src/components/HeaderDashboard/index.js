@@ -34,7 +34,7 @@ const HeaderDashboard = () => {
           </Button>
         </MenuDesktop>
         <MenuMobile>
-          <Link className="icone-grupos" to="#">
+          <Link className="icone-grupos" to="/groups">
             <FiUsers />
           </Link>
           <Button
