@@ -91,6 +91,23 @@ const Dashboard = () => {
     });
   };
 
+  const handleUpdate = ({ id }) => {
+    console.log(id);
+    console.log(token);
+    api.patch(
+      `/habits/${id}/`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      {
+        achieved: false,
+        how_much_achieved: 0 + 10,
+      }
+    );
+  };
+
   return (
     <>
       {/* <HeaderDash />
@@ -148,12 +165,12 @@ const Dashboard = () => {
       {carroussel && (
         <CarouselContainer>
           {habits.map((habit) => (
-            <CardHabit>
-              <div key={habit.id}>
-                <p>{habit.title}</p>
-                <p>Período</p>
-                <button onClick={() => handleDelete(habit)}>Remover</button>
-              </div>
+            <CardHabit key={habit.id}>
+              <p>{habit.title}</p>
+              <p>{habit.how_much_achieved}</p>
+              <p>Período</p>
+              <button onClick={() => handleUpdate(habit)}>Atualizar</button>
+              <button onClick={() => handleDelete(habit)}>Remover</button>
             </CardHabit>
           ))}
           {/* <Carousel infinite dots showArrows showIndicator slidesToShow={1}>
