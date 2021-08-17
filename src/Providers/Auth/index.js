@@ -9,7 +9,6 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const token = localStorage.getItem("Habits:token") || "";
   const [auth, setAuth] = useState(token);
-  //const [decodedUser, setDecodedUser] = useState(token);
   const userId = localStorage.getItem("Habits:userId") || "";
   const history = useHistory();
 
@@ -22,7 +21,6 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("Habits:token", JSON.stringify(token));
         setAuth(token);
         const decodingUserId = jwt_decode(token);
-        //setDecodedUser(decodingUserId.user_id);
         localStorage.setItem(
           "Habits:userId",
           JSON.stringify(decodingUserId.user_id)
@@ -34,12 +32,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    setAuth('')
+    setAuth("");
     localStorage.clear();
-  }
+  };
 
   return (
-    <AuthContext.Provider value={{ token: auth, setAuth, logIn, decodedUser, logOut }}>
+    <AuthContext.Provider value={{ token: auth, setAuth, logIn, logOut }}>
       {children}
     </AuthContext.Provider>
   );
