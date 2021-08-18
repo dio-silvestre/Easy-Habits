@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const userId = localStorage.getItem("Habits:userId");
-  console.log(userId);
 
   return (
     <AuthContext.Provider

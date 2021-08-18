@@ -4,15 +4,11 @@ import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
-// import { useHistory } from "react-router-dom";
 import HeaderDashboard from "../../components/HeaderDashboard";
 import { PContainer, CardContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
-// import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import FooterDash from "../../components/FooterDashboard";
-// import { CardHabits } from "../../components/CardHabit/style";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -20,10 +16,8 @@ const Dashboard = () => {
   );
   const { userId } = useAuth();
 
-  //const history = useHistory();
   const [habits, setHabits] = useState([]);
   const [openNewHabit, setOpenNewHabit] = useState(false);
-  const [carousel, setCarousel] = useState(true);
 
   const schema = yup.object().shape({
     habit: yup.string().required("Campo obrigatório"),
@@ -54,7 +48,6 @@ const Dashboard = () => {
   });
 
   const addNewHabit = ({ habit, category, difficulty, frequency }) => {
-    console.log(habit, category, difficulty, frequency);
     api
       .post(
         "/habits/",
@@ -79,7 +72,6 @@ const Dashboard = () => {
       });
 
     setOpenNewHabit(false);
-    setCarousel(true);
   };
 
   const handleDelete = ({ id }) => {
@@ -93,16 +85,12 @@ const Dashboard = () => {
   const handleUpdate = ({ id, frequency, how_much_achieved }) => {
     let achieved = how_much_achieved;
 
-    //   achieved + 3.6 >= 100
-    //   achieved + 8.3 >= 100
-    //   achieved + 5.0 >= 100
-
-    if (frequency === "7") {
+    if (achieved + 9 >= 100 || achieved + 5 >= 100 || achieved + 13 >= 100) {
       api.patch(
         `/habits/${id}/`,
         {
-          achieved: false,
-          how_much_achieved: (achieved += 100 / 28).toFixed(1),
+          achieved: true,
+          how_much_achieved: 100,
         },
         {
           headers: {
@@ -115,7 +103,20 @@ const Dashboard = () => {
         `/habits/${id}/`,
         {
           achieved: false,
-          how_much_achieved: (achieved += 100 / 20).toFixed(1),
+          how_much_achieved: (achieved += 100 / 20),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } else if (frequency === "3") {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: false,
+          how_much_achieved: Math.ceil((achieved += 100 / 12)),
         },
         {
           headers: {
@@ -128,7 +129,7 @@ const Dashboard = () => {
         `/habits/${id}/`,
         {
           achieved: false,
-          how_much_achieved: (achieved += 100 / 12).toFixed(1),
+          how_much_achieved: Math.ceil((achieved += 100 / 8)),
         },
         {
           headers: {
@@ -147,7 +148,6 @@ const Dashboard = () => {
         <Button
           onClick={() => {
             setOpenNewHabit(true);
-            setCarousel(false);
           }}
         >
           + Novo Hábito
@@ -192,8 +192,8 @@ const Dashboard = () => {
       )}
       <CardContainer>
         {habits.map((habit) => (
-          <CardHabit>
-            <div class="habit-container" key={habit.id}>
+          <CardHabit key={habit.id}>
+            <div class="habit-container">
               <div class="habit-title">{habit.title}</div>
               <hr />
               <div class="habit-difficulty">
@@ -224,8 +224,6 @@ const Dashboard = () => {
           </CardHabit>
         ))}
       </CardContainer>
-
-      {/* <FooterDash /> */}
     </>
   );
 };
