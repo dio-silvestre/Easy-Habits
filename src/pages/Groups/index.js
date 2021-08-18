@@ -37,8 +37,8 @@ const Groups = () => {
   const [openGroups, setOpenGroups] = useState(true);
   const history = useHistory();
 
-  const handleForm = () => {
-    //addNewGroup();
+  const handleForm = (name, description, category) => {
+    addNewGroup(name, description, category);
     setOpenForm(false);
     setOpenGroups(true);
   };
