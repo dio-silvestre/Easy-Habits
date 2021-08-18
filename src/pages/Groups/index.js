@@ -9,10 +9,11 @@ import {
 } from "./styles";
 import Button from "../../components/Button";
 import TextField from "@material-ui/core/TextField";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Groups = () => {
   const { register, handleSubmit } = useForm();
-  const { groups, subscriptions, addNewGroup } = useGroups();
+  const { groups, subscriptions, addNewGroup, loadingGroups, loadingSubs } = useGroups();
 
   return (
     <PageContainer>
@@ -42,23 +43,29 @@ const Groups = () => {
       </FormContainer>
       <OpenGroups>
         <h1>Grupos Abertos</h1>
-        {groups.map((group) => (
-          <div key={group.id}>
-            <p>{group.name}</p>
-            <p>{group.description}</p>
-            <p>{group.category}</p>
-          </div>
-        ))}
+        {loadingGroups ?
+          (<CircularProgress size={50} />)
+          : (
+            groups.map((group) => (
+              <div key={group.id}>
+                <p>{group.name}</p>
+                <p>{group.description}</p>
+                <p>{group.category}</p>
+              </div>
+            )))}
       </OpenGroups>
       <SubscribedGroups>
         <h1>Inscrições</h1>
-        {subscriptions.map((group) => (
-          <div key={group.id}>
-            <p>{group.name}</p>
-            <p>{group.description}</p>
-            <p>{group.category}</p>
-          </div>
-        ))}
+        {loadingSubs ?
+          (<CircularProgress size={50} />)
+          : (
+            subscriptions.map((group) => (
+              <div key={group.id}>
+                <p>{group.name}</p>
+                <p>{group.description}</p>
+                <p>{group.category}</p>
+              </div>
+            )))}
       </SubscribedGroups>
       {/* <Link to="/dashboard">Hábitos</Link> */}
     </PageContainer>

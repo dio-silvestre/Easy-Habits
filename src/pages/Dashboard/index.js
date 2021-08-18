@@ -11,6 +11,7 @@ import Popup from "../../components/Modal";
 import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -23,6 +24,7 @@ const Dashboard = () => {
   const [finishedHabits, setFinishedHabits] = useState([])
   const [openNewHabit, setOpenNewHabit] = useState(false);
   const [carroussel, setCarroussel] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const schema = yup.object().shape({
     habit: yup.string().required("Campo obrigatório"),
@@ -47,6 +49,7 @@ const Dashboard = () => {
           habit.achieved === false));
         setFinishedHabits(response.data.filter((habit) =>
           habit.achieved === true));
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -153,15 +156,18 @@ const Dashboard = () => {
             <h1>Em progresso</h1>
             <CarouselContainer>
               <Carousel center showArrows showIndicator slidesToShow={3}>
-                {habits.map((habit) => (
-                  <CardHabit>
-                    <div key={habit.id}>
-                      <p>{habit.title}</p>
-                      <p>Período</p>
-                      <button onClick={() => handleDelete(habit)}>Remover</button>
-                    </div>
-                  </CardHabit>
-                ))}
+                {loading ? (
+                  <CircularProgress size={50} />
+                ) : (
+                  habits.map((habit) => (
+                    <CardHabit>
+                      <div key={habit.id}>
+                        <p>{habit.title}</p>
+                        <p>Período</p>
+                        <button onClick={() => handleDelete(habit)}>Remover</button>
+                      </div>
+                    </CardHabit>
+                  )))}
               </Carousel>
             </CarouselContainer>
           </div>
@@ -169,15 +175,18 @@ const Dashboard = () => {
             <h1>Concluidos</h1>
             <CarouselContainer>
               <Carousel center showArrows showIndicator slidesToShow={3}>
-                {finishedHabits.map((habit) => (
-                  <CardHabit>
-                    <div key={habit.id}>
-                      <p>{habit.title}</p>
-                      <p>Período</p>
-                      <button onClick={() => handleDelete(habit)}>Remover</button>
-                    </div>
-                  </CardHabit>
-                ))}
+                {loading ? (
+                  <CircularProgress size={50} />
+                ) : (
+                  finishedHabits.map((habit) => (
+                    <CardHabit>
+                      <div key={habit.id}>
+                        <p>{habit.title}</p>
+                        <p>Período</p>
+                        <button onClick={() => handleDelete(habit)}>Remover</button>
+                      </div>
+                    </CardHabit>
+                  )))}
               </Carousel>
             </CarouselContainer>
           </div>
