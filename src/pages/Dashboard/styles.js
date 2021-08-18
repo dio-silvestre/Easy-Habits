@@ -11,7 +11,7 @@ export const PContainer = styled.div`
 
         button {
             margin-left: 20px;
-            width: 150px;
+            width: 130px;
             height: 40px;
             font-size: 1rem;
         }
@@ -25,7 +25,6 @@ export const CarouselContainer = styled.div`
     margin-left: 30px;
     margin-right: 30px;
 `;
-
 
 export const CardNewHabit = styled.div`
   section { 
@@ -55,4 +54,12 @@ export const CardNewHabit = styled.div`
     }
   }
 
+`
+
+export const CardContainer = styled.div`
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 `

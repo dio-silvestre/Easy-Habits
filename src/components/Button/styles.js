@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledButton = styled.button`
   font-family: "Raleway", sans-serif;
   background-color: ${(props) =>
-    props.colorSchema ? "var(--brown)" : "var(--violetCore)"};
+    props.colorSchema ? "var(--darkBlue)" : "var(--violetCore)"};
   color: var(--white);
   border: none;
   padding: 10px;
