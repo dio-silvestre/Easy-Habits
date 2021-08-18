@@ -31,6 +31,7 @@ const Groups = () => {
     addNewGroup,
     loadingGroups,
     loadingSubs,
+    subscribeToAGropup
   } = useGroups();
   const { logOut } = useAuth();
   const [openForm, setOpenForm] = useState(false);
@@ -104,7 +105,7 @@ const Groups = () => {
               {loadingGroups ? (
                 <CircularProgress size={50} />
               ) : (
-                groups.map((group) => (
+                subscriptions.map((group) => (
                   <>
                     <div className="my-groups" key={group.id}>
                       <p className="iconText">
@@ -131,12 +132,12 @@ const Groups = () => {
               {loadingSubs ? (
                 <CircularProgress size={50} />
               ) : (
-                subscriptions.map((group) => (
+                groups.map((group) => (
                   <>
                     <div className="my-groups" key={group.id}>
                       <p className="subscribe">
                         {group.name}
-                        <PersonAddIcon titleAccess="Inscrever-me neste grupo" />
+                        <PersonAddIcon titleAccess="Inscrever-me neste grupo" onClick={() => subscribeToAGropup(group.id)} />
                       </p>
                     </div>
                     <div className="groupDescription">

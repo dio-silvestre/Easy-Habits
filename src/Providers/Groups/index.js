@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import api from "../../services/api";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const GroupsContext = createContext();
 
@@ -60,9 +61,22 @@ export const GroupsProvider = ({ children }) => {
     );
   };
 
+  const subscribeToAGropup = (group_id) => {
+    api
+      .post(`/groups/${group_id}/subscribe/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      .then((_) => toast.success('Parabéns! Você faz parte de um novo grupo'))
+      .catch((e) => console.log(token))
+  };
+
   return (
     <GroupsContext.Provider
-      value={{ groups, subscriptions, addNewGroup, loadingGroups, loadingSubs }}
+      value={{ groups, subscriptions, addNewGroup, loadingGroups, loadingSubs, subscribeToAGropup }}
     >
       {children}
     </GroupsContext.Provider>
