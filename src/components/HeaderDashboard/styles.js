@@ -19,7 +19,7 @@ export const MenuDesktop = styled.div`
   color: var(--violetCore);
   font-size: 1.2rem;
 
-      &:hover {
+      .icone-grupos:hover {
         font-weight: 600;
         text-decoration: underline;
       }
