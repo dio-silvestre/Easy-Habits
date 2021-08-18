@@ -172,6 +172,13 @@ export const FormContainer = styled.div`
     width: 50%;
     gap: 25px;
     margin-top: 20px;
+
+    .error {
+      text-align: left;
+      color: #c1292e;
+      font-size: 12px;
+      margin-top: 5px;
+    }
   }
 
   button {
