@@ -9,6 +9,7 @@ import { PContainer, CardContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -17,7 +18,9 @@ const Dashboard = () => {
   const { userId } = useAuth();
 
   const [habits, setHabits] = useState([]);
+  const [finishedHabits, setFinishedHabits] = useState([]);
   const [openNewHabit, setOpenNewHabit] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const schema = yup.object().shape({
     habit: yup.string().required("Campo obrigatório"),
@@ -38,7 +41,11 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        setHabits(response.data);
+        setHabits(response.data.filter((habit) => habit.achieved === false));
+        setFinishedHabits(
+          response.data.filter((habit) => habit.achieved === true)
+        );
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -191,38 +198,68 @@ const Dashboard = () => {
         </Popup>
       )}
       <CardContainer>
-        {habits.map((habit) => (
-          <CardHabit key={habit.id}>
-            <div class="habit-container">
-              <div class="habit-title">{habit.title}</div>
-              <hr />
-              <div class="habit-difficulty">
-                <p>Fácil</p>
+        <h2>Em progresso</h2>
+        {loading ? (
+          <CircularProgress size={50} />
+        ) : (
+          habits.map((habit) => (
+            <CardHabit key={habit.id}>
+              <div class="habit-container">
+                <div class="habit-title">{habit.title}</div>
+                <hr />
+                <div class="habit-difficulty">
+                  <p>Fácil</p>
+                </div>
+                <div class="habit-progression">
+                  <h3>{habit.how_much_achieved}</h3>
+                </div>
+                <div class="progress-bar"></div>
+                <div class="habit-category">
+                  <p>Categoria</p>
+                </div>
+                <div class="container-button">
+                  <button
+                    class="habit-button-giveup"
+                    onClick={() => handleDelete(habit)}
+                  >
+                    Desistir
+                  </button>
+                  <button
+                    class="habit-button"
+                    onClick={() => handleUpdate(habit)}
+                  >
+                    Progredir
+                  </button>
+                </div>
               </div>
-              <div class="habit-progression">
-                <h3>{habit.how_much_achieved}%</h3>
+            </CardHabit>
+          ))
+        )}
+      </CardContainer>
+      <CardContainer>
+        <h2>Concluidos</h2>
+        {loading ? (
+          <CircularProgress size={50} />
+        ) : (
+          finishedHabits.map((habit) => (
+            <CardHabit key={habit.id}>
+              <div class="habit-container">
+                <div class="habit-title">{habit.title}</div>
+                <hr />
+                <div class="habit-difficulty">
+                  <p>Fácil</p>
+                </div>
+                <div class="habit-progression">
+                  <h3>{habit.how_much_achieved}%</h3>
+                </div>
+                <div class="progress-bar"></div>
+                <div class="habit-category">
+                  <p>Categoria</p>
+                </div>
               </div>
-              <div class="progress-bar"></div>
-              <div class="habit-category">
-                <p>Categoria</p>
-              </div>
-              <div class="container-button">
-                <button
-                  class="habit-button-giveup"
-                  onClick={() => handleDelete(habit)}
-                >
-                  Desistir
-                </button>
-                <button
-                  class="habit-button"
-                  onClick={() => handleUpdate(habit)}
-                >
-                  Progredir
-                </button>
-              </div>
-            </div>
-          </CardHabit>
-        ))}
+            </CardHabit>
+          ))
+        )}
       </CardContainer>
     </>
   );

@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import api from "../../services/api";
 import { useEffect } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export const GroupsContext = createContext();
 
@@ -10,6 +11,8 @@ export const GroupsProvider = ({ children }) => {
   const [token] = useState(
     JSON.parse(localStorage.getItem("Habits:token")) || ""
   );
+  const [loadingGroups, setLoadingGroups] = useState(true);
+  const [loadingSubs, setLoadingSubs] = useState(true);
 
   useEffect(() => {
     //get dos grupos
@@ -23,6 +26,7 @@ export const GroupsProvider = ({ children }) => {
         .then((response) => {
           const allGroups = response.data.results;
           setGroups(allGroups);
+          setLoadingGroups(false);
         })
         .catch((err) => console.log(err));
 
@@ -35,6 +39,7 @@ export const GroupsProvider = ({ children }) => {
         })
         .then((response) => {
           setSubscriptions(response.data);
+          setLoadingSubs(false);
         })
         .catch((err) => console.log(err));
     }
@@ -57,7 +62,9 @@ export const GroupsProvider = ({ children }) => {
   };
 
   return (
-    <GroupsContext.Provider value={{ groups, subscriptions, addNewGroup }}>
+    <GroupsContext.Provider
+      value={{ groups, subscriptions, addNewGroup, loadingGroups, loadingSubs }}
+    >
       {children}
     </GroupsContext.Provider>
   );
