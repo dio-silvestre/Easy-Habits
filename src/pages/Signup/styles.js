@@ -81,17 +81,14 @@ export const AnimationContainer = styled.div`
   h1 {
     margin-bottom: 25px;
     color: #5965e0;
-    font-size: 34px;
+    font-size: 64px;
     text-align: center;
   }
 
   h3 {
     color: var(--darkBlue);
-    font-size: 15px;
+    font-size: 24px;
     text-align: center;
-  }
-
-  span {
   }
 
   form {
@@ -108,19 +105,19 @@ export const AnimationContainer = styled.div`
     h1 {
       margin-bottom: 20px;
       color: #5965e0;
-      font-size: 34px;
+      font-size: 50px;
     }
 
     h3 {
       color: var(--darkBlue);
-      font-size: 15px;
+      font-size: 24px;
       margin-bottom: 15px;
     }
 
     p {
       margin: 5px auto;
       color: #2e384d;
-      font-size: 16px;
+      font-size: 20px;
     }
 
     a {
