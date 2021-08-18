@@ -21,10 +21,11 @@ import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
 import { useAuth } from "../../Providers/Auth";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { useState } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Groups = () => {
   const { register, handleSubmit } = useForm();
-  const { groups, subscriptions, addNewGroup } = useGroups();
+  const { groups, subscriptions, addNewGroup, loadingGroups, loadingSubs } = useGroups();
   const { logOut } = useAuth();
   const [openForm, setOpenForm] = useState(false);
   const [openGroups, setOpenGroups] = useState(true);
@@ -94,49 +95,57 @@ const Groups = () => {
           <div className="groupsWrapper">
             <OpenGroups>
               <h1>Meus Grupos</h1>
-              {groups.map((group) => (
-                <>
-                  <div className="my-groups" key={group.id}>
-                    <p className="iconText">
-                      {group.name}
-                      <DescriptionIcon titleAccess="Visitar o grupo" />
-                    </p>
-                  </div>
-                  <div className="groupInfo">
-                    <p>
-                      <strong>{group.name}</strong>
-                    </p>
-                    <p>
-                      Este grupo é da categoria{" "}
-                      <strong>{group.category}</strong> e seu objetivo é{" "}
-                      <strong>{group.description}</strong>
-                    </p>
-                  </div>
-                </>
-              ))}
+              {loadingGroups ? (
+                <CircularProgress size={50} />
+              ) : (
+                groups.map((group) => (
+                  <>
+                    <div className="my-groups" key={group.id}>
+                      <p className="iconText">
+                        {group.name}
+                        <DescriptionIcon titleAccess="Visitar o grupo" />
+                      </p>
+                    </div>
+                    <div className="groupInfo">
+                      <p>
+                        <strong>{group.name}</strong>
+                      </p>
+                      <p>
+                        Este grupo é da categoria{" "}
+                        <strong>{group.category}</strong> e seu objetivo é{" "}
+                        <strong>{group.description}</strong>
+                      </p>
+                    </div>
+                  </>
+                ))
+              )}
             </OpenGroups>
             <SubscribedGroups>
               <h1>Grupos abertos</h1>
-              {subscriptions.map((group) => (
-                <>
-                  <div className="my-groups" key={group.id}>
-                    <p className="subscribe">
-                      {group.name}
-                      <PersonAddIcon titleAccess="Inscrever-me neste grupo" />
-                    </p>
-                  </div>
-                  <div className="groupDescription">
-                    <p>
-                      <strong>{group.name}</strong>
-                    </p>
-                    <p>
-                      Este grupo é da categoria{" "}
-                      <strong>{group.category}</strong> e seu objetivo é{" "}
-                      <strong>{group.description}</strong>
-                    </p>
-                  </div>
-                </>
-              ))}
+              {loadingSubs ? (
+                <CircularProgress size={50} />
+              ) : (
+                subscriptions.map((group) => (
+                  <>
+                    <div className="my-groups" key={group.id}>
+                      <p className="subscribe">
+                        {group.name}
+                        <PersonAddIcon titleAccess="Inscrever-me neste grupo" />
+                      </p>
+                    </div>
+                    <div className="groupDescription">
+                      <p>
+                        <strong>{group.name}</strong>
+                      </p>
+                      <p>
+                        Este grupo é da categoria{" "}
+                        <strong>{group.category}</strong> e seu objetivo é{" "}
+                        <strong>{group.description}</strong>
+                      </p>
+                    </div>
+                  </>
+                ))
+              )}
             </SubscribedGroups>
           </div>
         </PageContainer>
