@@ -1,12 +1,11 @@
-import React from "react";
 import { Switch } from "react-router-dom";
+import Route from "./route";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Dashboard from "../pages/Dashboard";
 import Groups from "../pages/Groups";
 import Group from "../pages/Group";
-import Route from "./route";
 
 const Routes = () => {
   return (

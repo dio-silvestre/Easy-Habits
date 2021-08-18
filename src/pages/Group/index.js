@@ -1,25 +1,25 @@
 import { useParams } from "react-router-dom";
 import { useGroups } from "../../Providers/Groups";
+import { GroupContainer } from "./style";
 
 const Group = () => {
   const { groups } = useGroups();
   const { id } = useParams();
 
-  console.log(id); //36
-  console.log(groups);
-
   return (
-    <div>
-      {groups
-        .filter((group) => group.id === id)
-        .map((group, index) => (
-          <div key={index}>
-            {group.name}
-            {group.category}
-            {group.description}
-          </div>
-        ))}
-    </div>
+    <>
+      <GroupContainer>
+        {groups
+          .filter((group) => group.id === Number(id))
+          .map((group, index) => (
+            <div key={index}>
+              <div>{group.name}</div>
+              <div>{group.category}</div>
+              <div>{group.description}</div>
+            </div>
+          ))}
+      </GroupContainer>
+    </>
   );
 };
 
