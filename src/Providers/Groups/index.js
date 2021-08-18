@@ -18,7 +18,7 @@ export const GroupsProvider = ({ children }) => {
     //get dos grupos
     if (token !== "") {
       api
-        .get("/groups/?category=CORINGA", {
+        .get("/groups/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -61,22 +61,27 @@ export const GroupsProvider = ({ children }) => {
     );
   };
 
-  const subscribeToAGropup = (group_id) => {
+  const subscribeToAGroup = (group_id) => {
     api
-      .post(`/groups/${group_id}/subscribe/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .post(`/groups/${group_id}/subscribe/`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
-      .then((_) => toast.success('Parabéns! Você faz parte de um novo grupo'))
-      .catch((e) => console.log(token))
+      })
+      .then((_) => toast.success("Parabéns! Você faz parte de um novo grupo"))
+      .catch((err) => console.log(err));
   };
 
   return (
     <GroupsContext.Provider
-      value={{ groups, subscriptions, addNewGroup, loadingGroups, loadingSubs, subscribeToAGropup }}
+      value={{
+        groups,
+        subscriptions,
+        addNewGroup,
+        loadingGroups,
+        loadingSubs,
+        subscribeToAGroup,
+      }}
     >
       {children}
     </GroupsContext.Provider>
