@@ -34,10 +34,7 @@ export const GroupsProvider = ({ children }) => {
           },
         })
         .then((response) => {
-          const filteredGroups = response.data.filter(
-            (group) => group.category === "CORINGA"
-          );
-          setSubscriptions(filteredGroups);
+          setSubscriptions(response.data);
         })
         .catch((err) => console.log(err));
     }

@@ -72,7 +72,6 @@ const Dashboard = () => {
         }
       )
       .then((response) => {
-        console.log("response", response);
         loadHabits();
         reset();
       });
@@ -80,8 +79,6 @@ const Dashboard = () => {
     setOpenNewHabit(false);
     setCarousel(true);
   };
-
-  console.log("habit", habits);
 
   const handleDelete = ({ id }) => {
     api.delete(`/habits/${id}/`, {
@@ -91,19 +88,53 @@ const Dashboard = () => {
     });
   };
 
-  const handleUpdate = ({ id }) => {
-    api.patch(
-      `/habits/${id}/`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+  const handleUpdate = ({ id, frequency, how_much_achieved }) => {
+    let achieved = how_much_achieved;
+
+    //   achieved + 3.6 >= 100
+    //   achieved + 8.3 >= 100
+    //   achieved + 5.0 >= 100
+
+    if (frequency === "7") {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: false,
+          how_much_achieved: (achieved += 100 / 28).toFixed(1),
         },
-      },
-      {
-        achieved: false,
-        how_much_achieved: 10,
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } else if (frequency === "5") {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: false,
+          how_much_achieved: (achieved += 100 / 20).toFixed(1),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } else {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: false,
+          how_much_achieved: (achieved += 100 / 12).toFixed(1),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    }
   };
 
   return (
@@ -149,7 +180,6 @@ const Dashboard = () => {
                   placeholder="Frequência"
                   {...register("frequency")}
                   name="frequency"
-                  value="Diária"
                   //error={!!errors.frequency}
                 />
                 <Button type="submit">Adicionar</Button>
@@ -162,12 +192,19 @@ const Dashboard = () => {
         <CarouselContainer>
           <Carousel center showArrows showIndicator slidesToShow={3}>
             {habits.map((habit) => (
-              <CardHabit>
-                <div key={habit.id}>
+              <CardHabit key={habit.id}>
+                <div>
                   <p>{habit.title}</p>
-                  <p>{habit.how_much_achieved}</p>
+                  <p>{habit.how_much_achieved}%</p>
                   <p>Período</p>
-                  <button onClick={() => handleUpdate(habit)}>Atualizar</button>
+                  <button
+                    onClick={() => {
+                      console.log(habit);
+                      handleUpdate(habit);
+                    }}
+                  >
+                    Atualizar
+                  </button>
                   <button onClick={() => handleDelete(habit)}>Remover</button>
                 </div>
               </CardHabit>
