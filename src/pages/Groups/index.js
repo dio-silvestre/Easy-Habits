@@ -3,6 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import { useGroups } from "../../Providers/Groups";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import LottieAnimation from "../../components/Lotties";
+import Animation from "../../assets/groupInputAnimation.json";
+import DescriptionIcon from "@material-ui/icons/Description";
 import {
   PageContainer,
   FormContainer,
@@ -74,14 +77,12 @@ const Groups = () => {
       <FormModal>
         {openForm && (
           <FormContainer>
+            <LottieAnimation lotti={Animation} height={300} width={300} />
             <h1>Novo grupo</h1>
             <h3>Juntos você pode mais!</h3>
             <form onSubmit={handleSubmit(handleForm)}>
               <TextField placeholder="Nome do Grupo" {...register("name")} />
-              <TextField
-                placeholder="O que o grupo faz?"
-                {...register("description")}
-              />
+              <TextField placeholder="Objetivo" {...register("description")} />
               <TextField placeholder="Categoria" {...register("category")} />
               <Button type="submit">Adicionar</Button>
             </form>
@@ -94,20 +95,47 @@ const Groups = () => {
             <OpenGroups>
               <h1>Meus Grupos</h1>
               {groups.map((group) => (
-                <div className="my-groups" key={group.id}>
-                  <p>{group.name}</p>
-                </div>
+                <>
+                  <div className="my-groups" key={group.id}>
+                    <p className="iconText">
+                      {group.name}
+                      <DescriptionIcon titleAccess="Visitar o grupo" />
+                    </p>
+                  </div>
+                  <div className="groupInfo">
+                    <p>
+                      <strong>{group.name}</strong>
+                    </p>
+                    <p>
+                      Este grupo é da categoria{" "}
+                      <strong>{group.category}</strong> e seu objetivo é{" "}
+                      <strong>{group.description}</strong>
+                    </p>
+                  </div>
+                </>
               ))}
             </OpenGroups>
             <SubscribedGroups>
               <h1>Grupos abertos</h1>
               {subscriptions.map((group) => (
-                <div className="my-groups" key={group.id}>
-                  <p className="subscribe" title="Quero participar">
-                    {group.name}
-                    <PersonAddIcon />
-                  </p>
-                </div>
+                <>
+                  <div className="my-groups" key={group.id}>
+                    <p className="subscribe">
+                      {group.name}
+                      <PersonAddIcon titleAccess="Inscrever-me neste grupo" />
+                    </p>
+                  </div>
+                  <div className="groupDescription">
+                    <p>
+                      <strong>{group.name}</strong>
+                    </p>
+                    <p>
+                      Este grupo é da categoria{" "}
+                      <strong>{group.category}</strong> e seu objetivo é{" "}
+                      <strong>{group.description}</strong>
+                    </p>
+                  </div>
+                </>
               ))}
             </SubscribedGroups>
           </div>

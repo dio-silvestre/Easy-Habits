@@ -17,6 +17,27 @@ export const PageContainer = styled.div`
   align-items: flex-start;
   margin-top: 20px;
 
+  .iconText {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+
+  svg {
+    background-color: var(--whiteText);
+    color: var(--violetCore);
+    position: absolute;
+    font-size: 2.5rem;
+    right: 0;
+    cursor: pointer;
+
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+
   .groupsWrapper {
     display: flex;
     width: 100%;
@@ -148,7 +169,7 @@ export const FormContainer = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    width: 55%;
+    width: 50%;
     gap: 25px;
     margin-top: 20px;
   }
@@ -170,6 +191,7 @@ export const OpenGroups = styled(FormContainer)`
   border-radius: unset;
   width: 100%;
   box-shadow: none;
+  position: relative;
 
   h1 {
     color: var(--whiteText);
@@ -187,6 +209,34 @@ export const OpenGroups = styled(FormContainer)`
     gap: 10px;
     width: 100%;
     font-size: 1.5rem;
+    cursor: pointer;
+
+    &:hover + .groupInfo {
+      display: block;
+    }
+  }
+
+  .groupInfo {
+    width: 50%;
+    text-align: center;
+    background-color: var(--bkgdColor);
+    padding: 20px;
+    position: absolute;
+    border-radius: 4px;
+    line-height: 30px;
+    left: 1;
+    top: 1;
+    font-weight: 600;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    display: none;
+
+    p:first-child {
+      text-transform: uppercase;
+    }
+
+    strong {
+      color: var(--violetCore);
+    }
   }
 `;
 
@@ -201,6 +251,33 @@ export const SubscribedGroups = styled(OpenGroups)`
   .my-groups {
     position: relative;
     background-color: var(--darkBlue);
+
+    &:hover + .groupDescription {
+      display: block;
+    }
+  }
+
+  .groupDescription {
+    width: 50%;
+    text-align: center;
+    background-color: var(--bkgdColor);
+    padding: 20px;
+    position: absolute;
+    border-radius: 4px;
+    line-height: 30px;
+    left: 1;
+    top: 1;
+    font-weight: 600;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    display: none;
+
+    p:first-child {
+      text-transform: uppercase;
+    }
+
+    strong {
+      color: var(--violetCore);
+    }
   }
 
   .subscribe {
