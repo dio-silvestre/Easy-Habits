@@ -10,6 +10,8 @@ import Popup from "../../components/Modal";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -29,7 +31,12 @@ const Dashboard = () => {
     frequency: yup.string().required("Campo obrigatório"),
   });
 
-  const { register, handleSubmit, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -165,32 +172,35 @@ const Dashboard = () => {
           <CardNewHabit>
             <form onSubmit={handleSubmit(addNewHabit)}>
               <section>
-                <input
-                  placeholder="Novo hábito"
+                <TextField
+                  id="standard-basic"
+                  label="Novo Hábito"
                   {...register("habit")}
                   name="habit"
-                  //error={!!errors.habit}
                 />
-                <input
-                  placeholder="Categoria"
+
+                <div className="error"> {errors.habit?.message}</div>
+                <TextField
+                  id="standard-basic"
+                  label="Categoria"
                   {...register("category")}
                   name="category"
-                  value="Esporte"
-                  //error={!!errors.category}
                 />
-                <input
-                  placeholder="Dificuldade"
+                <div className="error"> {errors.category?.message}</div>
+                <TextField
+                  id="standard-basic"
+                  label="Dificuldade"
                   {...register("difficulty")}
                   name="difficulty"
-                  value="Fácil"
-                  //error={!!errors.difficulty}
                 />
-                <input
+                <div className="error"> {errors.difficulty?.message}</div>
+                <TextField
                   placeholder="Frequência"
                   {...register("frequency")}
                   name="frequency"
-                  //error={!!errors.frequency}
                 />
+                <div className="error"> {errors.frequency?.message}</div>
+
                 <Button type="submit">Adicionar</Button>
               </section>
             </form>
