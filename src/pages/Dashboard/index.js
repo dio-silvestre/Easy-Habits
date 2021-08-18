@@ -5,13 +5,19 @@ import { useAuth } from "../../Providers/Auth";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
 import HeaderDashboard from "../../components/HeaderDashboard";
-import { PContainer, CardContainer, CardNewHabit } from "./styles";
+import {
+  PContainer,
+  CardContainer,
+  CardNewHabit,
+  FormContainer,
+} from "./styles";
 import Popup from "../../components/Modal";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -170,40 +176,51 @@ const Dashboard = () => {
       {openNewHabit && (
         <Popup>
           <CardNewHabit>
-            <form onSubmit={handleSubmit(addNewHabit)}>
-              <section>
-                <TextField
-                  id="standard-basic"
-                  label="Novo Hábito"
-                  {...register("habit")}
-                  name="habit"
-                />
+            <FormContainer>
+              <form onSubmit={handleSubmit(addNewHabit)}>
+                <section>
+                  <h1> Cadastre seu mais novo hábito ! </h1>
 
-                <div className="error"> {errors.habit?.message}</div>
-                <TextField
-                  id="standard-basic"
-                  label="Categoria"
-                  {...register("category")}
-                  name="category"
-                />
-                <div className="error"> {errors.category?.message}</div>
-                <TextField
-                  id="standard-basic"
-                  label="Dificuldade"
-                  {...register("difficulty")}
-                  name="difficulty"
-                />
-                <div className="error"> {errors.difficulty?.message}</div>
-                <TextField
-                  placeholder="Frequência"
-                  {...register("frequency")}
-                  name="frequency"
-                />
-                <div className="error"> {errors.frequency?.message}</div>
+                  <TextField
+                    id="standard-basic"
+                    label="Novo Hábito"
+                    {...register("habit")}
+                    name="habit"
+                  />
+                  <div className="error"> {errors.habit?.message}</div>
+                  <TextField
+                    id="standard-basic"
+                    label="Categoria"
+                    {...register("category")}
+                    name="category"
+                  />
+                  <div className="error"> {errors.category?.message}</div>
+                  <TextField
+                    id="standard-basic"
+                    label="Dificuldade"
+                    {...register("difficulty")}
+                    name="difficulty"
+                  />
+                  <div className="error"> {errors.difficulty?.message}</div>
+                  <TextField
+                    id="standard-basic"
+                    label="Frequência"
+                    {...register("frequency")}
+                    name="frequency"
+                  />
 
-                <Button type="submit">Adicionar</Button>
-              </section>
-            </form>
+                  <div className="error"> {errors.frequency?.message}</div>
+
+                  <Button type="submit">Adicionar</Button>
+
+                  <p>
+                    <Link to="/">
+                      <ArrowBackIcon />
+                    </Link>
+                  </p>
+                </section>
+              </form>
+            </FormContainer>
           </CardNewHabit>
         </Popup>
       )}

@@ -14,7 +14,6 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  // div pai
   height: 100vh;
   display: flex;
   align-items: center;
@@ -26,7 +25,6 @@ export const Container = styled.div`
 `;
 
 export const Background = styled.div`
-  // div 1 com imagem
   @media (min-width: 1100px) {
     flex: 1;
     background-color: var(--bkgdColor);
