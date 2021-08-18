@@ -11,6 +11,7 @@ import Popup from "../../components/Modal";
 // import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // import FooterDash from "../../components/FooterDashboard";
 // import { CardHabits } from "../../components/CardHabit/style";
 
@@ -22,8 +23,10 @@ const Dashboard = () => {
 
   //const history = useHistory();
   const [habits, setHabits] = useState([]);
+  const [finishedHabits, setFinishedHabits] = useState([])
   const [openNewHabit, setOpenNewHabit] = useState(false);
   const [carroussel, setCarroussel] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const schema = yup.object().shape({
     habit: yup.string().required("Campo obrigatório"),
@@ -44,7 +47,11 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        setHabits(response.data);
+        setHabits(response.data.filter((habit) =>
+          habit.achieved === false));
+        setFinishedHabits(response.data.filter((habit) =>
+          habit.achieved === true));
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -83,7 +90,7 @@ const Dashboard = () => {
     setCarroussel(true);
   };
 
-  console.log("habit", habits);
+  //console.log("habit", habits);
 
   const handleDelete = ({ id }) => {
     api.delete(`/habits/${id}/`, {
@@ -116,28 +123,28 @@ const Dashboard = () => {
                   placeholder="Novo hábito"
                   {...register("habit")}
                   name="habit"
-                  //error={!!errors.habit}
+                //error={!!errors.habit}
                 />
                 <input
                   placeholder="Categoria"
                   {...register("category")}
                   name="category"
                   value="Esporte"
-                  //error={!!errors.category}
+                //error={!!errors.category}
                 />
                 <input
                   placeholder="Dificuldade"
                   {...register("difficulty")}
                   name="difficulty"
                   value="Fácil"
-                  //error={!!errors.difficulty}
+                //error={!!errors.difficulty}
                 />
                 <input
                   placeholder="Frequência"
                   {...register("frequency")}
                   name="frequency"
                   value="Diária"
-                  //error={!!errors.frequency}
+                //error={!!errors.frequency}
                 />
                 <Button type="submit">Adicionar</Button>
               </section>
@@ -146,30 +153,61 @@ const Dashboard = () => {
         </Popup>
       )}
       <CardContainer>
-          {habits.map((habit) => (
-              <CardHabit>
-                  <div class="habit-container" key={habit.id}>
-                      <div class="habit-title">{habit.title}</div>
-                      <hr />
-                      <div class="habit-difficulty">
-                          <p>Fácil</p>
-                      </div>
-                      <div class="habit-progression">
-                          <h3>1 / 3</h3>
-                      </div>
-                      <div class="progress-bar"></div>
-                      <div class="habit-category">
-                          <p>Categoria</p>
-                      </div>
-                      <div class="container-button">
-                        <button class="habit-button-giveup" onClick={() => handleDelete(habit)}>Desistir</button>
-                        <button class="habit-button" onClick={() => handleDelete(habit)}>Progredir</button>
-                      </div>
-                  </div>
-              </CardHabit>
-            ))}
-          </CardContainer>
-      
+        <h2>Em progresso</h2>
+        {loading ? (
+          <CircularProgress size={50} />
+        ) : (
+          habits.map((habit) => (
+            <CardHabit>
+              <div class="habit-container" key={habit.id}>
+                <div class="habit-title">{habit.title}</div>
+                <hr />
+                <div class="habit-difficulty">
+                  <p>Fácil</p>
+                </div>
+                <div class="habit-progression">
+                  <h3>1 / 3</h3>
+                </div>
+                <div class="progress-bar"></div>
+                <div class="habit-category">
+                  <p>Categoria</p>
+                </div>
+                <div class="container-button">
+                  <button class="habit-button-giveup" onClick={() => handleDelete(habit)}>Desistir</button>
+                  <button class="habit-button" onClick={() => handleDelete(habit)}>Progredir</button>
+                </div>
+              </div>
+            </CardHabit>
+          ))
+        )}
+
+      </CardContainer>
+      <CardContainer>
+        <h2>Concluidos</h2>
+        {loading ? (
+          <CircularProgress size={50} />
+        ) : (
+          finishedHabits.map((habit) => (
+            <CardHabit>
+              <div class="habit-container" key={habit.id}>
+                <div class="habit-title">{habit.title}</div>
+                <hr />
+                <div class="habit-difficulty">
+                  <p>Fácil</p>
+                </div>
+                <div class="habit-progression">
+                  <h3>1 / 3</h3>
+                </div>
+                <div class="progress-bar"></div>
+                <div class="habit-category">
+                  <p>Categoria</p>
+                </div>
+              </div>
+            </CardHabit>
+          ))
+        )}
+
+      </CardContainer>
       {/* <FooterDash /> */}
     </>
   );
