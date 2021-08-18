@@ -198,7 +198,6 @@ const Dashboard = () => {
         </Popup>
       )}
       <CardContainer>
-        <h2>Em progresso</h2>
         {loading ? (
           <CircularProgress size={50} />
         ) : (
@@ -236,8 +235,10 @@ const Dashboard = () => {
           ))
         )}
       </CardContainer>
+      <PContainer>
+        Concluídos
+      </PContainer>
       <CardContainer>
-        <h2>Concluidos</h2>
         {loading ? (
           <CircularProgress size={50} />
         ) : (

@@ -1,9 +1,7 @@
 import styled from 'styled-components'
 
 export const PContainer = styled.div`
-    margin-top: 20px;
-    margin-left: 30px;
-    margin-bottom: 30px;
+    margin: 30px;
     display: flex;
     color: var(--violetCore);
     font-size: 1.2rem;

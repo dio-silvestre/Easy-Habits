@@ -11,8 +11,7 @@ export const CardHabit = styled.div`
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  margin-bottom: 25px;
-  margin-left: 40px;
+  margin: 20px;
   h3 {
     padding: 20px 0 10px 0;
   float: right;
