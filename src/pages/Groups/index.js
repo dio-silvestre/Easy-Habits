@@ -38,7 +38,7 @@ const Groups = () => {
   const history = useHistory();
 
   const handleForm = () => {
-    //addNewGroup();
+    addNewGroup();
     setOpenForm(false);
     setOpenGroups(true);
   };
@@ -47,6 +47,12 @@ const Groups = () => {
     logOut();
     history.push("/");
   };
+
+  const visitGroup = (id) => {
+    history.push(`/groups/${id}`);
+  };
+
+  const subscribeToGroup = () => {};
 
   return (
     <>
@@ -109,7 +115,10 @@ const Groups = () => {
                     <div className="my-groups" key={group.id}>
                       <p className="iconText">
                         {group.name}
-                        <DescriptionIcon titleAccess="Visitar o grupo" />
+                        <DescriptionIcon
+                          onClick={() => visitGroup(group.id)}
+                          titleAccess="Visitar o grupo"
+                        />
                       </p>
                     </div>
                     <div className="groupInfo">
