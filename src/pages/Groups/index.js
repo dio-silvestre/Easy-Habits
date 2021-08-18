@@ -25,7 +25,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Groups = () => {
   const { register, handleSubmit } = useForm();
-  const { groups, subscriptions, addNewGroup, loadingGroups, loadingSubs } = useGroups();
+  const {
+    groups,
+    subscriptions,
+    addNewGroup,
+    loadingGroups,
+    loadingSubs,
+  } = useGroups();
   const { logOut } = useAuth();
   const [openForm, setOpenForm] = useState(false);
   const [openGroups, setOpenGroups] = useState(true);

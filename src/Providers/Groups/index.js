@@ -26,7 +26,7 @@ export const GroupsProvider = ({ children }) => {
         .then((response) => {
           const allGroups = response.data.results;
           setGroups(allGroups);
-          setLoadingGroups(false)
+          setLoadingGroups(false);
         })
         .catch((err) => console.log(err));
 
@@ -38,16 +38,12 @@ export const GroupsProvider = ({ children }) => {
           },
         })
         .then((response) => {
-          const filteredGroups = response.data.filter(
-            (group) => group.category === "CORINGA"
-          );
-          setSubscriptions(filteredGroups);
-          setLoadingSubs(false)
+          setSubscriptions(response.data);
+          setLoadingSubs(false);
         })
         .catch((err) => console.log(err));
     }
   }, [token]);
-
 
   const addNewGroup = ({ name, description, category }) => {
     api.post(
@@ -66,7 +62,9 @@ export const GroupsProvider = ({ children }) => {
   };
 
   return (
-    <GroupsContext.Provider value={{ groups, subscriptions, addNewGroup, loadingGroups, loadingSubs }}>
+    <GroupsContext.Provider
+      value={{ groups, subscriptions, addNewGroup, loadingGroups, loadingSubs }}
+    >
       {children}
     </GroupsContext.Provider>
   );

@@ -4,16 +4,12 @@ import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
-// import { useHistory } from "react-router-dom";
 import HeaderDashboard from "../../components/HeaderDashboard";
 import { PContainer, CardContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
-// import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
-// import FooterDash from "../../components/FooterDashboard";
-// import { CardHabits } from "../../components/CardHabit/style";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -21,11 +17,9 @@ const Dashboard = () => {
   );
   const { userId } = useAuth();
 
-  //const history = useHistory();
   const [habits, setHabits] = useState([]);
-  const [finishedHabits, setFinishedHabits] = useState([])
+  const [finishedHabits, setFinishedHabits] = useState([]);
   const [openNewHabit, setOpenNewHabit] = useState(false);
-  const [carroussel, setCarroussel] = useState(true);
   const [loading, setLoading] = useState(true);
 
   const schema = yup.object().shape({
@@ -47,10 +41,10 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        setHabits(response.data.filter((habit) =>
-          habit.achieved === false));
-        setFinishedHabits(response.data.filter((habit) =>
-          habit.achieved === true));
+        setHabits(response.data.filter((habit) => habit.achieved === false));
+        setFinishedHabits(
+          response.data.filter((habit) => habit.achieved === true)
+        );
         setLoading(false);
       })
       .catch((err) => console.log(err));
@@ -61,7 +55,6 @@ const Dashboard = () => {
   });
 
   const addNewHabit = ({ habit, category, difficulty, frequency }) => {
-    console.log(habit, category, difficulty, frequency);
     api
       .post(
         "/habits/",
@@ -81,16 +74,12 @@ const Dashboard = () => {
         }
       )
       .then((response) => {
-        console.log("response", response);
         loadHabits();
         reset();
       });
 
     setOpenNewHabit(false);
-    setCarroussel(true);
   };
-
-  //console.log("habit", habits);
 
   const handleDelete = ({ id }) => {
     api.delete(`/habits/${id}/`, {
@@ -98,6 +87,64 @@ const Dashboard = () => {
         Authorization: `Bearer ${token}`,
       },
     });
+  };
+
+  const handleUpdate = ({ id, frequency, how_much_achieved }) => {
+    let achieved = how_much_achieved;
+
+    if (achieved + 9 >= 100 || achieved + 5 >= 100 || achieved + 13 >= 100) {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: true,
+          how_much_achieved: 100,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } else if (frequency === "5") {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: false,
+          how_much_achieved: (achieved += 100 / 20),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } else if (frequency === "3") {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: false,
+          how_much_achieved: Math.ceil((achieved += 100 / 12)),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } else {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: false,
+          how_much_achieved: Math.ceil((achieved += 100 / 8)),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    }
   };
 
   return (
@@ -108,7 +155,6 @@ const Dashboard = () => {
         <Button
           onClick={() => {
             setOpenNewHabit(true);
-            setCarroussel(false);
           }}
         >
           + Novo Hábito
@@ -123,28 +169,27 @@ const Dashboard = () => {
                   placeholder="Novo hábito"
                   {...register("habit")}
                   name="habit"
-                //error={!!errors.habit}
+                  //error={!!errors.habit}
                 />
                 <input
                   placeholder="Categoria"
                   {...register("category")}
                   name="category"
                   value="Esporte"
-                //error={!!errors.category}
+                  //error={!!errors.category}
                 />
                 <input
                   placeholder="Dificuldade"
                   {...register("difficulty")}
                   name="difficulty"
                   value="Fácil"
-                //error={!!errors.difficulty}
+                  //error={!!errors.difficulty}
                 />
                 <input
                   placeholder="Frequência"
                   {...register("frequency")}
                   name="frequency"
-                  value="Diária"
-                //error={!!errors.frequency}
+                  //error={!!errors.frequency}
                 />
                 <Button type="submit">Adicionar</Button>
               </section>
@@ -158,29 +203,38 @@ const Dashboard = () => {
           <CircularProgress size={50} />
         ) : (
           habits.map((habit) => (
-            <CardHabit>
-              <div class="habit-container" key={habit.id}>
+            <CardHabit key={habit.id}>
+              <div class="habit-container">
                 <div class="habit-title">{habit.title}</div>
                 <hr />
                 <div class="habit-difficulty">
                   <p>Fácil</p>
                 </div>
                 <div class="habit-progression">
-                  <h3>1 / 3</h3>
+                  <h3>{habit.how_much_achieved}</h3>
                 </div>
                 <div class="progress-bar"></div>
                 <div class="habit-category">
                   <p>Categoria</p>
                 </div>
                 <div class="container-button">
-                  <button class="habit-button-giveup" onClick={() => handleDelete(habit)}>Desistir</button>
-                  <button class="habit-button" onClick={() => handleDelete(habit)}>Progredir</button>
+                  <button
+                    class="habit-button-giveup"
+                    onClick={() => handleDelete(habit)}
+                  >
+                    Desistir
+                  </button>
+                  <button
+                    class="habit-button"
+                    onClick={() => handleUpdate(habit)}
+                  >
+                    Progredir
+                  </button>
                 </div>
               </div>
             </CardHabit>
           ))
         )}
-
       </CardContainer>
       <CardContainer>
         <h2>Concluidos</h2>
@@ -188,15 +242,15 @@ const Dashboard = () => {
           <CircularProgress size={50} />
         ) : (
           finishedHabits.map((habit) => (
-            <CardHabit>
-              <div class="habit-container" key={habit.id}>
+            <CardHabit key={habit.id}>
+              <div class="habit-container">
                 <div class="habit-title">{habit.title}</div>
                 <hr />
                 <div class="habit-difficulty">
                   <p>Fácil</p>
                 </div>
                 <div class="habit-progression">
-                  <h3>1 / 3</h3>
+                  <h3>{habit.how_much_achieved}%</h3>
                 </div>
                 <div class="progress-bar"></div>
                 <div class="habit-category">
@@ -206,9 +260,7 @@ const Dashboard = () => {
             </CardHabit>
           ))
         )}
-
       </CardContainer>
-      {/* <FooterDash /> */}
     </>
   );
 };
