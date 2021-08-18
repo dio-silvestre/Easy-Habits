@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import api from "../../services/api";
 import { useEffect } from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 export const GroupsContext = createContext();
 
