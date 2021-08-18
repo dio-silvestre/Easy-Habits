@@ -49,7 +49,7 @@ const Groups = () => {
   };
 
   const visitGroup = (id) => {
-    history.push(`/groups/${id}`);
+    history.push(`/groups/${id}/`);
   };
 
   //const subscribeToGroup = () => {};
