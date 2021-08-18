@@ -48,6 +48,12 @@ const Groups = () => {
     history.push("/");
   };
 
+  const visitGroup = (id) => {
+    history.push(`/groups/${id}`);
+  };
+
+  //const subscribeToGroup = () => {};
+
   return (
     <>
       <HeaderContainer>
@@ -104,15 +110,18 @@ const Groups = () => {
               {loadingGroups ? (
                 <CircularProgress size={50} />
               ) : (
-                groups.map((group) => (
+                groups.map((group, index) => (
                   <>
-                    <div className="my-groups" key={group.id}>
-                      <p className="iconText">
+                    <div className="my-groups">
+                      <p className="iconText" key={index}>
                         {group.name}
-                        <DescriptionIcon titleAccess="Visitar o grupo" />
+                        <DescriptionIcon
+                          onClick={() => visitGroup(group.id)}
+                          titleAccess="Visitar o grupo"
+                        />
                       </p>
                     </div>
-                    <div className="groupInfo">
+                    {/* <div className="groupInfo">
                       <p>
                         <strong>{group.name}</strong>
                       </p>
@@ -121,7 +130,7 @@ const Groups = () => {
                         <strong>{group.category}</strong> e seu objetivo é{" "}
                         <strong>{group.description}</strong>
                       </p>
-                    </div>
+                    </div> */}
                   </>
                 ))
               )}
@@ -131,15 +140,15 @@ const Groups = () => {
               {loadingSubs ? (
                 <CircularProgress size={50} />
               ) : (
-                subscriptions.map((group) => (
+                subscriptions.map((group, index) => (
                   <>
-                    <div className="my-groups" key={group.id}>
-                      <p className="subscribe">
+                    <div className="my-groups">
+                      <p className="subscribe" key={index}>
                         {group.name}
                         <PersonAddIcon titleAccess="Inscrever-me neste grupo" />
                       </p>
                     </div>
-                    <div className="groupDescription">
+                    {/* <div className="groupDescription">
                       <p>
                         <strong>{group.name}</strong>
                       </p>
@@ -148,7 +157,7 @@ const Groups = () => {
                         <strong>{group.category}</strong> e seu objetivo é{" "}
                         <strong>{group.description}</strong>
                       </p>
-                    </div>
+                    </div> */}
                   </>
                 ))
               )}

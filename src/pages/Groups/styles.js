@@ -209,7 +209,6 @@ export const OpenGroups = styled(FormContainer)`
     gap: 10px;
     width: 100%;
     font-size: 1.5rem;
-    cursor: pointer;
 
     &:hover + .groupInfo {
       display: block;

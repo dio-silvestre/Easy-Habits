@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Dashboard from "../pages/Dashboard";
 import Groups from "../pages/Groups";
+import Group from "../pages/Group";
 import Route from "./route";
 
 const Routes = () => {
@@ -14,7 +15,8 @@ const Routes = () => {
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/dashboard" component={Dashboard} isPrivate />
-      <Route path="/groups" component={Groups} isPrivate />
+      <Route exact path="/groups" component={Groups} isPrivate />
+      <Route exact path="/groups/:id" component={Group} isPrivate />
     </Switch>
   );
 };
