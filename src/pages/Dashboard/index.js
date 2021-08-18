@@ -4,15 +4,11 @@ import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
-// import { useHistory } from "react-router-dom";
 import HeaderDashboard from "../../components/HeaderDashboard";
 import { PContainer, CardContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
-// import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import FooterDash from "../../components/FooterDashboard";
-// import { CardHabits } from "../../components/CardHabit/style";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -20,10 +16,8 @@ const Dashboard = () => {
   );
   const { userId } = useAuth();
 
-  //const history = useHistory();
   const [habits, setHabits] = useState([]);
   const [openNewHabit, setOpenNewHabit] = useState(false);
-  const [carroussel, setCarroussel] = useState(true);
 
   const schema = yup.object().shape({
     habit: yup.string().required("Campo obrigatório"),
@@ -80,10 +74,7 @@ const Dashboard = () => {
       });
 
     setOpenNewHabit(false);
-    setCarroussel(true);
   };
-
-  console.log("habit", habits);
 
   const handleDelete = ({ id }) => {
     api.delete(`/habits/${id}/`, {
@@ -101,7 +92,6 @@ const Dashboard = () => {
         <Button
           onClick={() => {
             setOpenNewHabit(true);
-            setCarroussel(false);
           }}
         >
           + Novo Hábito
@@ -146,31 +136,39 @@ const Dashboard = () => {
         </Popup>
       )}
       <CardContainer>
-          {habits.map((habit) => (
-              <CardHabit>
-                  <div class="habit-container" key={habit.id}>
-                      <div class="habit-title">{habit.title}</div>
-                      <hr />
-                      <div class="habit-difficulty">
-                          <p>Fácil</p>
-                      </div>
-                      <div class="habit-progression">
-                          <h3>1 / 3</h3>
-                      </div>
-                      <div class="progress-bar"></div>
-                      <div class="habit-category">
-                          <p>Categoria</p>
-                      </div>
-                      <div class="container-button">
-                        <button class="habit-button-giveup" onClick={() => handleDelete(habit)}>Desistir</button>
-                        <button class="habit-button" onClick={() => handleDelete(habit)}>Progredir</button>
-                      </div>
-                  </div>
-              </CardHabit>
-            ))}
-          </CardContainer>
-      
-      {/* <FooterDash /> */}
+        {habits.map((habit) => (
+          <CardHabit>
+            <div class="habit-container" key={habit.id}>
+              <div class="habit-title">{habit.title}</div>
+              <hr />
+              <div class="habit-difficulty">
+                <p>Fácil</p>
+              </div>
+              <div class="habit-progression">
+                <h3>1 / 3</h3>
+              </div>
+              <div class="progress-bar"></div>
+              <div class="habit-category">
+                <p>Categoria</p>
+              </div>
+              <div class="container-button">
+                <button
+                  class="habit-button-giveup"
+                  onClick={() => handleDelete(habit)}
+                >
+                  Desistir
+                </button>
+                <button
+                  class="habit-button"
+                  onClick={() => handleDelete(habit)}
+                >
+                  Progredir
+                </button>
+              </div>
+            </div>
+          </CardHabit>
+        ))}
+      </CardContainer>
     </>
   );
 };
