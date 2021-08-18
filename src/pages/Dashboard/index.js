@@ -4,13 +4,15 @@ import api from "../../services/api";
 import { useAuth } from "../../Providers/Auth";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import HeaderDashboard from "../../components/HeaderDashboard";
-import { PContainer, CarouselContainer, CardNewHabit } from "./styles";
+import { PContainer, CardContainer, CardNewHabit } from "./styles";
 import Popup from "../../components/Modal";
-import Carousel from "styled-components-carousel";
+// import Carousel from "styled-components-carousel";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+// import FooterDash from "../../components/FooterDashboard";
+// import { CardHabits } from "../../components/CardHabit/style";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -143,31 +145,32 @@ const Dashboard = () => {
           </CardNewHabit>
         </Popup>
       )}
-      {carroussel && (
-        <CarouselContainer>
-          <Carousel center showArrows showIndicator slidesToShow={3}>
-            {habits.map((habit) => (
+      <CardContainer>
+          {habits.map((habit) => (
               <CardHabit>
-                <div key={habit.id}>
-                  <p>{habit.title}</p>
-                  <p>Período</p>
-                  <button onClick={() => handleDelete(habit)}>Remover</button>
-                </div>
+                  <div class="habit-container" key={habit.id}>
+                      <div class="habit-title">{habit.title}</div>
+                      <hr />
+                      <div class="habit-difficulty">
+                          <p>Fácil</p>
+                      </div>
+                      <div class="habit-progression">
+                          <h3>1 / 3</h3>
+                      </div>
+                      <div class="progress-bar"></div>
+                      <div class="habit-category">
+                          <p>Categoria</p>
+                      </div>
+                      <div class="container-button">
+                        <button class="habit-button-giveup" onClick={() => handleDelete(habit)}>Desistir</button>
+                        <button class="habit-button" onClick={() => handleDelete(habit)}>Progredir</button>
+                      </div>
+                  </div>
               </CardHabit>
             ))}
-          </Carousel>
-        </CarouselContainer>
-      )}
-
-      {/* <button
-        onClick={() => {
-          localStorage.clear();
-          return history.push("/");
-        }}
-      >
-        Sair
-      </button>
-      <Link to="/groups">Grupos</Link> */}
+          </CardContainer>
+      
+      {/* <FooterDash /> */}
     </>
   );
 };
