@@ -15,6 +15,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useHabits } from "../../Providers/Habits";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 
 const Dashboard = () => {
   const {
@@ -118,11 +120,11 @@ const Dashboard = () => {
                 <div className="habit-title">Hábito: {habit.title}</div>
                 <hr />
                 <div className="habit-difficulty">
-                  <p>Dificuldade: </p>
+                  <p>Dificuldade: {habit.difficulty}</p>
                 </div>
                 <hr />
                 <div className="habit-category">
-                  <p>Categoria: </p>
+                  <p>Categoria: {habit.category}</p>
                 </div>
                 <hr />
                 <div className="habit-progression">
@@ -134,13 +136,13 @@ const Dashboard = () => {
                     className="habit-button-giveup"
                     onClick={() => handleDelete(habit)}
                   >
-                    Desistir
+                    <DeleteForeverIcon />
                   </button>
                   <button
                     className="habit-button"
                     onClick={() => handleUpdate(habit)}
                   >
-                    Progredir
+                    <DoubleArrowIcon />
                   </button>
                 </div>
               </div>
@@ -148,9 +150,7 @@ const Dashboard = () => {
           ))
         )}
       </CardContainer>
-      <PContainer>
-        Concluídos
-      </PContainer>
+      <PContainer>Concluídos</PContainer>
       <CardContainer>
         {loading ? (
           <CircularProgress size={50} />
@@ -161,18 +161,17 @@ const Dashboard = () => {
                 <div className="habit-title">Hábito: {habit.title}</div>
                 <hr />
                 <div className="habit-difficulty">
-                  <p>Dificuldade: </p>
+                  <p>Dificuldade: {habit.difficulty}</p>
                 </div>
                 <hr />
                 <div className="habit-category">
-                  <p>Categoria:</p>
+                  <p>Categoria: {habit.category}</p>
                 </div>
                 <hr />
                 <div className="habit-progression">
                   <p>Progresso: {habit.how_much_achieved}%</p>
                 </div>
                 <div className="progress-bar-blue"></div>
-
               </div>
             </CardHabit>
           ))
