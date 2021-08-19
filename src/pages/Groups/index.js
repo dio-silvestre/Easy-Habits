@@ -120,7 +120,10 @@ const Groups = () => {
               <Button type="submit">Adicionar</Button>
             </form>
             <p>
-              <ArrowBackIcon onClick={() => document.location.reload(true)} />
+              <ArrowBackIcon
+                cursor="pointer"
+                onClick={() => document.location.reload(true)}
+              />
             </p>
           </FormContainer>
         )}
@@ -144,16 +147,6 @@ const Groups = () => {
                         />
                       </p>
                     </div>
-                    {/* <div className="groupInfo">
-                      <p>
-                        <strong>{group.name}</strong>
-                      </p>
-                      <p>
-                        Este grupo é da categoria{" "}
-                        <strong>{group.category}</strong> e seu objetivo é{" "}
-                        <strong>{group.description}</strong>
-                      </p>
-                    </div> */}
                   </>
                 ))
               )}
