@@ -13,10 +13,50 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useHabits } from "../../Providers/Habits";
+import { useState } from "react";
+import React from "react";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 
 const Dashboard = () => {
+  const currencies = [
+    {
+      value: 1,
+      label: "1 vez por semana",
+    },
+    {
+      value: 2,
+      label: "2 vezes por semana",
+    },
+    {
+      value: 3,
+      label: "3 vezes por semana",
+    },
+    {
+      value: 4,
+      label: "4 vezes por semana",
+    },
+    {
+      value: 5,
+      label: "5 vezes por semana",
+    },
+  ];
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& .MuiTextField-root": {
+        margin: theme.spacing(1),
+        width: "25ch",
+        fontsize: "60px",
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   const {
     habits,
     addNewHabit,
@@ -31,7 +71,13 @@ const Dashboard = () => {
   const schema = yup.object().shape({
     habit: yup.string().required("Campo obrigatório"),
     category: yup.string().required("Campo obrigatório"),
-    difficulty: yup.string().required("Campo obrigatório"),
+    difficulty: yup
+      .string()
+      .required("Campo obrigatório")
+      .matches(
+        "Fácil" || "Intermediária" || "Difícil",
+        "Selecione entre Fácil,Média ou Difícil"
+      ),
     frequency: yup.string().required("Campo obrigatório"),
   });
 
@@ -42,6 +88,12 @@ const Dashboard = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const [currency, setCurrency] = React.useState(1);
+
+  const handleChange = (event) => {
+    setCurrency(Number(event.target.value));
+  };
 
   return (
     <>
@@ -60,7 +112,12 @@ const Dashboard = () => {
         <Popup>
           <CardNewHabit>
             <FormContainer>
-              <form onSubmit={handleSubmit(addNewHabit)}>
+              <form
+                onSubmit={handleSubmit(addNewHabit)}
+                className={classes.root}
+                noValidate
+                autoComplete="off"
+              >
                 <section>
                   <h1> Cadastre seu mais novo hábito ! </h1>
 
@@ -83,16 +140,28 @@ const Dashboard = () => {
                     label="Dificuldade"
                     {...register("difficulty")}
                     name="difficulty"
+                    helperText="Selecione entre Fácil,Média ou Difícil"
                   />
                   <div className="error"> {errors.difficulty?.message}</div>
+
                   <TextField
-                    id="standard-basic"
+                    id="standard-select-currency"
+                    select
                     label="Frequência"
+                    helperText="Selecione a frequência"
                     {...register("frequency")}
                     name="frequency"
-                  />
-
-                  <div className="error"> {errors.frequency?.message}</div>
+                  >
+                    {currencies.map((option) => (
+                      <MenuItem
+                        key={option.value}
+                        value={option.value}
+                        onChange={handleChange}
+                      >
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
 
                   <Button type="submit">Adicionar</Button>
 
@@ -109,37 +178,38 @@ const Dashboard = () => {
         </Popup>
       )}
       <CardContainer>
-        <h2>Em progresso</h2>
         {loading ? (
           <CircularProgress size={50} />
         ) : (
           habits.map((habit) => (
             <CardHabit key={habit.id}>
               <div className="habit-container">
-                <div className="habit-title">{habit.title}</div>
+                <div className="habit-title">Hábito: {habit.title}</div>
                 <hr />
                 <div className="habit-difficulty">
-                  <p>Fácil</p>
+                  <p>Dificuldade: {habit.difficulty}</p>
                 </div>
+                <hr />
+                <div className="habit-category">
+                  <p>Categoria: {habit.category}</p>
+                </div>
+                <hr />
                 <div className="habit-progression">
-                  <h3>{habit.how_much_achieved}</h3>
+                  <p>Progresso: {habit.how_much_achieved}%</p>
                 </div>
                 <div className="progress-bar"></div>
-                <div className="habit-category">
-                  <p>Categoria</p>
-                </div>
                 <div className="container-button">
                   <button
                     className="habit-button-giveup"
                     onClick={() => handleDelete(habit)}
                   >
-                    Desistir
+                    <DeleteForeverIcon />
                   </button>
                   <button
                     className="habit-button"
                     onClick={() => handleUpdate(habit)}
                   >
-                    Progredir
+                    <DoubleArrowIcon />
                   </button>
                 </div>
               </div>
@@ -147,26 +217,28 @@ const Dashboard = () => {
           ))
         )}
       </CardContainer>
+      <PContainer>Concluídos</PContainer>
       <CardContainer>
-        <h2>Concluidos</h2>
         {loading ? (
           <CircularProgress size={50} />
         ) : (
           finishedHabits.map((habit) => (
             <CardHabit key={habit.id}>
-              <div class="habit-container">
-                <div class="habit-title">{habit.title}</div>
+              <div className="habit-container">
+                <div className="habit-title">Hábito: {habit.title}</div>
                 <hr />
-                <div class="habit-difficulty">
-                  <p>Fácil</p>
+                <div className="habit-difficulty">
+                  <p>Dificuldade: {habit.difficulty}</p>
                 </div>
-                <div class="habit-progression">
-                  <h3>{habit.how_much_achieved}%</h3>
+                <hr />
+                <div className="habit-category">
+                  <p>Categoria: {habit.category}</p>
                 </div>
-                <div class="progress-bar"></div>
-                <div class="habit-category">
-                  <p>Categoria</p>
+                <hr />
+                <div className="habit-progression">
+                  <p>Progresso: {habit.how_much_achieved}%</p>
                 </div>
+                <div className="progress-bar-blue"></div>
               </div>
             </CardHabit>
           ))
