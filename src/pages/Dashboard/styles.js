@@ -24,7 +24,6 @@ export const CardNewHabit = styled.div`
       font-size: 12px;
       margin-top: 5px;
     }
-  }
 `;
 
 export const CardContainer = styled.div`
@@ -82,6 +81,8 @@ export const FormContainer = styled.div`
       width: 220px;
       height: 30px;
 
+    }
+
       button:hover {
         transition: all 250ms linear;
         opacity: 0.6;
@@ -96,5 +97,6 @@ export const FormContainer = styled.div`
         margin-top: 30px;
         height: 34px;
         width: 210px;
-      }      
+      }    
+    }
 `;
