@@ -21,7 +21,7 @@ export const GoalsProvider = ({ children }) => {
   const getGroupGoals = (group_id) => {
     api
       .get(`/goals/?group=${group_id}`)
-      .then((res) => setGroupGoals([res.data.results]))
+      .then((res) => setGroupGoals(res.data.results))
       .catch((e) => console.log(e));
   };
 

@@ -75,7 +75,7 @@ export const GroupContainer = styled.div`
 
 export const InfoContainer = styled.div`
   width: 55vw;
-  height: 45vh;
+  height: 40vh;
   background-color: var(--violetLight);
   border-top-right-radius: 50px;
   border-top-left-radius: 50px;
@@ -107,13 +107,65 @@ export const InfoContainer = styled.div`
 `;
 
 export const BottomContainer = styled(InfoContainer)`
-  height: 40vh;
+  height: 45vh;
   border-top-right-radius: unset;
   border-top-left-radius: unset;
   border-bottom-right-radius: 50px;
   border-bottom-left-radius: 50px;
   background-color: var(--violetCore);
   display: flex;
+  justify-content: space-around;
 `;
 
-export const GoalsCard = styled.div``;
+export const GoalsCard = styled.div`
+  background-color: var(--violetLight);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 90%;
+  padding: 16px;
+  border: 2px solid var(--darkBlue);
+  color: var(--darkBlue);
+  font-size: 1.2rem;
+  overflow: -moz-hidden-unscrollable;
+
+  h2 {
+    text-align: center;
+    background-color: var(--darkBlue);
+    width: 100%;
+    color: var(--whiteText);
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+
+  .goalsWrapper {
+    ul {
+      background-color: var(--violetLight);
+      width: 100%;
+    }
+
+    li {
+      border-bottom: 1px dotted var(--darkBlue);
+      padding: 3px;
+      display: flex;
+      justify-content: space-between;
+
+      .iconsWrapper {
+        display: flex;
+
+        .done {
+          svg {
+            color: var(--darkBlue);
+          }
+        }
+
+        .delete {
+          svg {
+            color: var(--whiteText);
+          }
+        }
+      }
+    }
+  }
+`;
