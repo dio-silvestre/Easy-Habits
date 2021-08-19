@@ -5,6 +5,7 @@ export const PContainer = styled.div`
   margin-left: 30px;
   margin-bottom: 30px;
   display: flex;
+  flex-wrap: wrap;
   color: var(--violetCore);
   font-size: 1.2rem;
   align-items: center;
@@ -37,9 +38,11 @@ export const CardContainer = styled.div`
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
-  width: 30%;
+  align-items: center;
+  width: 50%;
+  height: 70vh;
   background-color: white;
   margin: 5% auto;
   gap: 20px;
@@ -48,10 +51,11 @@ export const FormContainer = styled.div`
   padding: 20px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19); 
 
-  @media (max-width: 1100px) {
-    width: 85%;
-    height: 85vh;
+  @media screen and (max-width: 768px) {
+    width: 250px;
+    height: 80vh;
   }
+
 
   h1 {
     color: var(--violetCore);
@@ -92,12 +96,6 @@ export const FormContainer = styled.div`
         transition: all 150ms linear;
         opacity: 0.75;
       }
-
-      @media (max-width: 1100px) {
-        margin-top: 30px;
-        height: 34px;
-        width: 210px;
-      }    
     }
 `;
 

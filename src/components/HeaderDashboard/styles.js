@@ -86,7 +86,7 @@ export const HeaderContainer = styled.div`
     }
   }
 
-  @media only screen and (min-width: 320px) and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     flex-direction: column;
     gap: 20px;
     text-align: center;
@@ -140,7 +140,7 @@ export const HeaderNav = styled.nav`
     color: var(--violetCore);
   }
 
-  @media only screen and (min-width: 320px) and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     flex-direction: column;
     width: 100%;
     text-align: center;
