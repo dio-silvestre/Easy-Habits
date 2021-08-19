@@ -4,19 +4,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import TextField from "@material-ui/core/TextField";
 import { useParams } from "react-router-dom";
 import { useGroups } from "../../Providers/Groups";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   GroupContainer,
   InfoContainer,
   BottomContainer,
   FormModal,
   FormContainer,
+  GoalsCard,
 } from "./style";
 import LottieAnimation from "../../components/Lotties";
 import Animation from "../../assets/AnimationGroup.json";
 import Button from "../../components/Button";
 import { useGoals } from "../../Providers/Goals";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DoneIcon from "@material-ui/icons/Done";
 
 const Group = () => {
   const { groups } = useGroups();
@@ -31,6 +34,8 @@ const Group = () => {
     updateGroupGoal,
     deleteGroupGoal,
   } = useGoals();
+
+  console.log(groupGoals);
 
   const [openForm, setOpenForm] = useState(false);
   const [openGroup, setOpenGroup] = useState(true);
@@ -54,7 +59,13 @@ const Group = () => {
     addNewGroupGoal(data, idNum);
     setOpenForm(false);
     setOpenGroup(true);
+    getGroupGoals(idNum);
   };
+
+  useEffect(() => {
+    getGroupGoals(idNum);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
@@ -114,7 +125,26 @@ const Group = () => {
               </div>
             ))}
           <BottomContainer>
-            <h1>Metas</h1>
+            <GoalsCard>
+              <h2>Metas</h2>
+              <div className="goalsWrapper">
+                {groupGoals.map((goal, index) => (
+                  <ul key={index}>
+                    <li>
+                      {goal.title}
+                      <div className="iconsWrapper">
+                        <div className="done">
+                          <DoneIcon />
+                        </div>
+                        <div className="delete">
+                          <DeleteForeverIcon />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                ))}
+              </div>
+            </GoalsCard>
           </BottomContainer>
         </GroupContainer>
       )}
