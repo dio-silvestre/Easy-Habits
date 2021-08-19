@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useHistory } from "react-router-dom";
 import { useGroups } from "../../Providers/Groups";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -22,20 +24,35 @@ import { useAuth } from "../../Providers/Auth";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import { useState } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const Groups = () => {
-  const { register, handleSubmit } = useForm();
   const {
     groups,
     subscriptions,
     addNewGroup,
     loadingGroups,
     loadingSubs,
+    subscribeToAGroup,
   } = useGroups();
   const { logOut } = useAuth();
   const [openForm, setOpenForm] = useState(false);
   const [openGroups, setOpenGroups] = useState(true);
   const history = useHistory();
+
+  const schema = yup.object().shape({
+    name: yup.string().required("Campo obrigatório"),
+    description: yup.string().required("Campo obrigatório"),
+    category: yup.string().required("Campo obrigatório"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const handleForm = (name, description, category) => {
     addNewGroup(name, description, category);
@@ -48,13 +65,19 @@ const Groups = () => {
     history.push("/");
   };
 
+  const visitGroup = (id) => {
+    history.push(`/groups/${id}/`);
+  };
+
+  //const subscribeToGroup = () => {};
+
   return (
     <>
       <HeaderContainer>
         <div className="easyHabits">
           <div className="arrowBack">
             <Link to="/dashboard">
-              <ArrowBackIosIcon title="Meus Hábitos" />
+              <ArrowBackIosIcon />
               <ExitToAppIcon onClick={handleLogOut} title="Logout" />
             </Link>
           </div>
@@ -89,10 +112,19 @@ const Groups = () => {
             <h3>Juntos você pode mais!</h3>
             <form onSubmit={handleSubmit(handleForm)}>
               <TextField placeholder="Nome do Grupo" {...register("name")} />
+              <div className="error"> {errors.name?.message}</div>
               <TextField placeholder="Objetivo" {...register("description")} />
+              <div className="error"> {errors.description?.message}</div>
               <TextField placeholder="Categoria" {...register("category")} />
+              <div className="error"> {errors.category?.message}</div>
               <Button type="submit">Adicionar</Button>
             </form>
+            <p>
+              <ArrowBackIcon
+                cursor="pointer"
+                onClick={() => document.location.reload()}
+              />
+            </p>
           </FormContainer>
         )}
       </FormModal>
@@ -104,25 +136,16 @@ const Groups = () => {
               {loadingGroups ? (
                 <CircularProgress size={50} />
               ) : (
-                groups.map((group) => (
-                  <>
-                    <div className="my-groups" key={group.id}>
-                      <p className="iconText">
-                        {group.name}
-                        <DescriptionIcon titleAccess="Visitar o grupo" />
-                      </p>
-                    </div>
-                    <div className="groupInfo">
-                      <p>
-                        <strong>{group.name}</strong>
-                      </p>
-                      <p>
-                        Este grupo é da categoria{" "}
-                        <strong>{group.category}</strong> e seu objetivo é{" "}
-                        <strong>{group.description}</strong>
-                      </p>
-                    </div>
-                  </>
+                subscriptions.map((group, index) => (
+                  <div className="my-groups">
+                    <p className="iconText" key={index}>
+                      {group.name}
+                      <DescriptionIcon
+                        onClick={() => visitGroup(group.id)}
+                        titleAccess="Visitar o grupo"
+                      />
+                    </p>
+                  </div>
                 ))
               )}
             </OpenGroups>
@@ -131,25 +154,16 @@ const Groups = () => {
               {loadingSubs ? (
                 <CircularProgress size={50} />
               ) : (
-                subscriptions.map((group) => (
-                  <>
-                    <div className="my-groups" key={group.id}>
-                      <p className="subscribe">
-                        {group.name}
-                        <PersonAddIcon titleAccess="Inscrever-me neste grupo" />
-                      </p>
-                    </div>
-                    <div className="groupDescription">
-                      <p>
-                        <strong>{group.name}</strong>
-                      </p>
-                      <p>
-                        Este grupo é da categoria{" "}
-                        <strong>{group.category}</strong> e seu objetivo é{" "}
-                        <strong>{group.description}</strong>
-                      </p>
-                    </div>
-                  </>
+                groups.map((group, index) => (
+                  <div className="my-groups">
+                    <p className="subscribe" key={index}>
+                      {group.name}
+                      <PersonAddIcon
+                        titleAccess="Inscrever-me neste grupo"
+                        onClick={() => subscribeToAGroup(group.id)}
+                      />
+                    </p>
+                  </div>
                 ))
               )}
             </SubscribedGroups>

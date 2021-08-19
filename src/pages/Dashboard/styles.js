@@ -60,14 +60,13 @@ export const FormContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  width: 50%;
-  height: 75vh;
+  width: 30%;
   background-color: white;
   margin: 5% auto;
   gap: 20px;
   border: 5px solid var(--violetLight);
   border-radius: 4px;
-  padding: 10px;
+  padding: 20px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19); 
 
   @media (max-width: 1100px) {
@@ -98,6 +97,7 @@ export const FormContainer = styled.div`
       box-sizing: border-box;
       
       margin: 10px;
+      margin-bottom: 15px;
       padding: 5px;
       width: 220px;
       height: 30px;
