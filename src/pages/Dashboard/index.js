@@ -13,10 +13,49 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useHabits } from "../../Providers/Habits";
+import { useState } from "react";
+import React from "react";
+
+const currencies = [
+  {
+    value: 1,
+    label: "1 vez por semana",
+  },
+  {
+    value: 2,
+    label: "2 vezes por semana",
+  },
+  {
+    value: 3,
+    label: "3 vezes por semana",
+  },
+  {
+    value: 4,
+    label: "4 vezes por semana",
+  },
+  {
+    value: 5,
+    label: "5 vezes por semana",
+  },
+];
 
 const Dashboard = () => {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& .MuiTextField-root": {
+        margin: theme.spacing(1),
+        width: "25ch",
+        fontsize: "60px",
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   const {
     habits,
     addNewHabit,
@@ -43,6 +82,12 @@ const Dashboard = () => {
     resolver: yupResolver(schema),
   });
 
+  const [currency, setCurrency] = React.useState(1);
+
+  const handleChange = (event) => {
+    setCurrency(Number(event.target.value));
+  };
+
   return (
     <>
       <HeaderDashboard />
@@ -60,7 +105,12 @@ const Dashboard = () => {
         <Popup>
           <CardNewHabit>
             <FormContainer>
-              <form onSubmit={handleSubmit(addNewHabit)}>
+              <form
+                onSubmit={handleSubmit(addNewHabit)}
+                className={classes.root}
+                noValidate
+                autoComplete="off"
+              >
                 <section>
                   <h1> Cadastre seu mais novo hábito ! </h1>
 
@@ -85,14 +135,23 @@ const Dashboard = () => {
                     name="difficulty"
                   />
                   <div className="error"> {errors.difficulty?.message}</div>
+
                   <TextField
-                    id="standard-basic"
+                    id="standard-select-currency"
+                    select
                     label="Frequência"
+                    //value={currency}
+                    onChange={handleChange}
+                    helperText="Selecione a frequência"
                     {...register("frequency")}
                     name="frequency"
-                  />
-
-                  <div className="error"> {errors.frequency?.message}</div>
+                  >
+                    {currencies.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
 
                   <Button type="submit">Adicionar</Button>
 
