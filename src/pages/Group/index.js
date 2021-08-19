@@ -1,6 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useGroups } from "../../Providers/Groups";
-import { GroupContainer } from "./style";
+import { GroupContainer, InfoContainer, BottomContainer } from "./style";
+import LottieAnimation from "../../components/Lotties";
+import Animation from "../../assets/AnimationGroup.json";
+import Button from "../../components/Button";
 
 const Group = () => {
   const { groups } = useGroups();
@@ -12,12 +15,22 @@ const Group = () => {
         {groups
           .filter((group) => group.id === Number(id))
           .map((group, index) => (
-            <div key={index}>
-              <div>{group.name}</div>
-              <div>{group.category}</div>
-              <div>{group.description}</div>
+            <div className="infoWrapper" key={index}>
+              <div className="groupName">{group.name}</div>
+              <InfoContainer>
+                <LottieAnimation lotti={Animation} height={500} width={400} />
+                <div>
+                  <div className="groupDescription">
+                    {" "}
+                    Este grupo é da categoria
+                    <strong> {group.category}</strong> e seu objetivo é{" "}
+                    <strong> {group.description}</strong>
+                  </div>
+                </div>
+              </InfoContainer>
             </div>
           ))}
+        <BottomContainer></BottomContainer>
       </GroupContainer>
     </>
   );

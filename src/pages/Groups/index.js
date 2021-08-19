@@ -60,7 +60,7 @@ const Groups = () => {
         <div className="easyHabits">
           <div className="arrowBack">
             <Link to="/dashboard">
-              <ArrowBackIosIcon title="Meus Hábitos" />
+              <ArrowBackIosIcon />
               <ExitToAppIcon onClick={handleLogOut} title="Logout" />
             </Link>
           </div>
