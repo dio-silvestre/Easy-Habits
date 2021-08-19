@@ -32,6 +32,13 @@ export const InfoContainer = styled.div`
   justify-content: center;
   align-items: center;
 
+  div {
+    button {
+      margin-top: 10px;
+      width: 80%;
+    }
+  }
+
   .groupDescription {
     max-width: 90%;
     min-height: 5vh;

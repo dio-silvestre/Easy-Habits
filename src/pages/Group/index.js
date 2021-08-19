@@ -3,6 +3,7 @@ import { useGroups } from "../../Providers/Groups";
 import { GroupContainer, InfoContainer, BottomContainer } from "./style";
 import LottieAnimation from "../../components/Lotties";
 import Animation from "../../assets/AnimationGroup.json";
+import Button from "../../components/Button";
 
 const Group = () => {
   const { groups } = useGroups();
@@ -24,6 +25,11 @@ const Group = () => {
                     Este grupo é da categoria
                     <strong> {group.category}</strong> e seu objetivo é{" "}
                     <strong> {group.description}</strong>
+                  </div>
+                  <Button> + Definir Meta</Button>
+                  <div>
+                    <div></div>
+                    <div></div>
                   </div>
                 </div>
               </InfoContainer>
