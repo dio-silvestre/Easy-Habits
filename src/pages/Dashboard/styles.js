@@ -28,6 +28,7 @@ export const CardNewHabit = styled.div`
 `;
 
 export const CardContainer = styled.div`
+    background-color: rgba(178, 185, 255, 0.25);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
