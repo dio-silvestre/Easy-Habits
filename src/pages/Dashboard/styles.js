@@ -18,21 +18,12 @@ export const PContainer = styled.div`
 `;
 
 export const CardNewHabit = styled.div`
-<<<<<<< HEAD
-  .error {
-    text-align: left;
-    color: #c1292e;
-    font-size: 12px;
-    margin-top: 5px;
-  }
-=======
     .error {
       text-align: left;
       color: #c1292e;
       font-size: 12px;
       margin-top: 5px;
     }
->>>>>>> develop
 `;
 
 export const CardContainer = styled.div`
@@ -55,8 +46,7 @@ export const FormContainer = styled.div`
   border: 5px solid var(--violetLight);
   border-radius: 4px;
   padding: 20px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-  box-sizing: border-box;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19); 
 
   @media (max-width: 1100px) {
     width: 85%;
@@ -67,7 +57,7 @@ export const FormContainer = styled.div`
     color: var(--violetCore);
     text-align: center;
     margin-bottom: 30px;
-  }
+  } 
 
   section {
     display: flex;
@@ -76,7 +66,7 @@ export const FormContainer = styled.div`
     width: 100%;
     height: 350px;
     margin-bottom: 0.5em;
-
+  
     button {
       cursor: pointer;
       background-color: #5965e0;
@@ -84,6 +74,7 @@ export const FormContainer = styled.div`
       border: none;
       border-radius: 15px;
       box-sizing: border-box;
+      
       margin: 10px;
       margin-bottom: 15px;
       padding: 5px;
@@ -106,12 +97,15 @@ export const FormContainer = styled.div`
         margin-top: 30px;
         height: 34px;
         width: 210px;
-<<<<<<< HEAD
-      }
-    }
-  }
-=======
       }    
     }
->>>>>>> develop
+`;
+
+
+export const PageContainer = styled.div`
+  max-width: 1240px;
+  margin: auto;
+  margin-top: 20px;
+
+
 `;
