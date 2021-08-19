@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import api from "../../services/api";
 import { useEffect } from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { toast } from "react-toastify";
 
 export const GroupsContext = createContext();
 
@@ -18,7 +18,7 @@ export const GroupsProvider = ({ children }) => {
     //get dos grupos
     if (token !== "") {
       api
-        .get("/groups/?category=CORINGA", {
+        .get("/groups/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -61,9 +61,27 @@ export const GroupsProvider = ({ children }) => {
     );
   };
 
+  const subscribeToAGroup = (group_id) => {
+    api
+      .post(`/groups/${group_id}/subscribe/`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => toast.success("Parabéns! Você faz parte de um novo grupo"))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <GroupsContext.Provider
-      value={{ groups, subscriptions, addNewGroup, loadingGroups, loadingSubs }}
+      value={{
+        groups,
+        subscriptions,
+        addNewGroup,
+        loadingGroups,
+        loadingSubs,
+        subscribeToAGroup,
+      }}
     >
       {children}
     </GroupsContext.Provider>

@@ -5,11 +5,18 @@ import { useAuth } from "../../Providers/Auth";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
 import HeaderDashboard from "../../components/HeaderDashboard";
-import { PContainer, CardContainer, CardNewHabit } from "./styles";
+import {
+  PContainer,
+  CardContainer,
+  CardNewHabit,
+  FormContainer,
+} from "./styles";
 import Popup from "../../components/Modal";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import TextField from "@material-ui/core/TextField";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -29,7 +36,12 @@ const Dashboard = () => {
     frequency: yup.string().required("Campo obrigatório"),
   });
 
-  const { register, handleSubmit, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -163,37 +175,51 @@ const Dashboard = () => {
       {openNewHabit && (
         <Popup>
           <CardNewHabit>
-            <form onSubmit={handleSubmit(addNewHabit)}>
-              <section>
-                <input
-                  placeholder="Novo hábito"
-                  {...register("habit")}
-                  name="habit"
-                  //error={!!errors.habit}
-                />
-                <input
-                  placeholder="Categoria"
-                  {...register("category")}
-                  name="category"
-                  value="Esporte"
-                  //error={!!errors.category}
-                />
-                <input
-                  placeholder="Dificuldade"
-                  {...register("difficulty")}
-                  name="difficulty"
-                  value="Fácil"
-                  //error={!!errors.difficulty}
-                />
-                <input
-                  placeholder="Frequência"
-                  {...register("frequency")}
-                  name="frequency"
-                  //error={!!errors.frequency}
-                />
-                <Button type="submit">Adicionar</Button>
-              </section>
-            </form>
+            <FormContainer>
+              <form onSubmit={handleSubmit(addNewHabit)}>
+                <section>
+                  <h1> Cadastre seu mais novo hábito ! </h1>
+
+                  <TextField
+                    id="standard-basic"
+                    label="Novo Hábito"
+                    {...register("habit")}
+                    name="habit"
+                  />
+                  <div className="error"> {errors.habit?.message}</div>
+                  <TextField
+                    id="standard-basic"
+                    label="Categoria"
+                    {...register("category")}
+                    name="category"
+                  />
+                  <div className="error"> {errors.category?.message}</div>
+                  <TextField
+                    id="standard-basic"
+                    label="Dificuldade"
+                    {...register("difficulty")}
+                    name="difficulty"
+                  />
+                  <div className="error"> {errors.difficulty?.message}</div>
+                  <TextField
+                    id="standard-basic"
+                    label="Frequência"
+                    {...register("frequency")}
+                    name="frequency"
+                  />
+
+                  <div className="error"> {errors.frequency?.message}</div>
+
+                  <Button type="submit">Adicionar</Button>
+
+                  <p>
+                    <ArrowBackIcon
+                      onClick={() => document.location.reload(true)}
+                    />
+                  </p>
+                </section>
+              </form>
+            </FormContainer>
           </CardNewHabit>
         </Popup>
       )}
