@@ -18,12 +18,21 @@ export const PContainer = styled.div`
 `;
 
 export const CardNewHabit = styled.div`
+<<<<<<< HEAD
   .error {
     text-align: left;
     color: #c1292e;
     font-size: 12px;
     margin-top: 5px;
   }
+=======
+    .error {
+      text-align: left;
+      color: #c1292e;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+>>>>>>> develop
 `;
 
 export const CardContainer = styled.div`
@@ -81,6 +90,8 @@ export const FormContainer = styled.div`
       width: 220px;
       height: 30px;
 
+    }
+
       button:hover {
         transition: all 250ms linear;
         opacity: 0.6;
@@ -95,7 +106,12 @@ export const FormContainer = styled.div`
         margin-top: 30px;
         height: 34px;
         width: 210px;
+<<<<<<< HEAD
       }
     }
   }
+=======
+      }    
+    }
+>>>>>>> develop
 `;
