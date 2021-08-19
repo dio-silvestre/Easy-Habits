@@ -11,7 +11,7 @@ export const Logo = styled.div`
     font-size: 1.75rem;
     transition: 1s;
   }
-`
+`;
 
 export const MenuDesktop = styled.div`
   padding: 20px 30px 10px 0;
@@ -19,20 +19,20 @@ export const MenuDesktop = styled.div`
   color: var(--violetCore);
   font-size: 1.2rem;
 
-      .icone-grupos:hover {
-        font-weight: 600;
-        text-decoration: underline;
-      }
+  .icone-grupos:hover {
+    font-weight: 600;
+    text-decoration: underline;
+  }
 
   button {
     width: 100px;
     margin-left: 50px;
   }
 
-      @media only screen and (max-width: 500px) {
-          display: none;
-      }
-`
+  @media only screen and (max-width: 500px) {
+    display: none;
+  }
+`;
 
 export const MenuMobile = styled.div`
   padding: 20px 30px 10px 0;
@@ -45,10 +45,10 @@ export const MenuMobile = styled.div`
     margin-left: 20px;
   }
 
-      @media only screen  and (min-width: 500px) {
-          display: none;
-      }
-`
+  @media only screen and (min-width: 500px) {
+    display: none;
+  }
+`;
 
 export const HContainer = styled.div`
   display: flex;
@@ -69,7 +69,6 @@ export const HeaderContainer = styled.div`
     font-size: 2rem;
     font-weight: 600;
     display: flex;
-    
 
     .arrowBack {
       margin: 0;
@@ -102,7 +101,7 @@ export const HeaderContainer = styled.div`
         svg {
           font-size: 1.6rem;
           margin-left: 50px;
-          
+
           cursor: pointer;
         }
       }
@@ -146,10 +145,6 @@ export const HeaderNav = styled.nav`
     text-align: center;
 
     button {
-      display: none;
-    }
-
-    .habits-logo {
       display: none;
     }
   }
