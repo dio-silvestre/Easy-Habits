@@ -120,9 +120,7 @@ const Groups = () => {
               <Button type="submit">Adicionar</Button>
             </form>
             <p>
-              <Link to="/">
-                <ArrowBackIcon />
-              </Link>
+              <ArrowBackIcon onClick={() => document.location.reload(true)} />
             </p>
           </FormContainer>
         )}
