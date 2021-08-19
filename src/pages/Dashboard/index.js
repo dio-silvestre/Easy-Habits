@@ -115,18 +115,20 @@ const Dashboard = () => {
           habits.map((habit) => (
             <CardHabit key={habit.id}>
               <div className="habit-container">
-                <div className="habit-title">{habit.title}</div>
+                <div className="habit-title">Hábito: {habit.title}</div>
                 <hr />
                 <div className="habit-difficulty">
-                  <p>Fácil</p>
+                  <p>Dificuldade: </p>
                 </div>
+                <hr />
+                <div className="habit-category">
+                  <p>Categoria: </p>
+                </div>
+                <hr />
                 <div className="habit-progression">
-                  <h3>{habit.how_much_achieved}</h3>
+                  <p>Progresso: {habit.how_much_achieved}%</p>
                 </div>
                 <div className="progress-bar"></div>
-                <div className="habit-category">
-                  <p>Categoria</p>
-                </div>
                 <div className="container-button">
                   <button
                     className="habit-button-giveup"
@@ -155,19 +157,22 @@ const Dashboard = () => {
         ) : (
           finishedHabits.map((habit) => (
             <CardHabit key={habit.id}>
-              <div class="habit-container">
-                <div class="habit-title">{habit.title}</div>
+              <div className="habit-container">
+                <div className="habit-title">Hábito: {habit.title}</div>
                 <hr />
-                <div class="habit-difficulty">
-                  <p>Fácil</p>
+                <div className="habit-difficulty">
+                  <p>Dificuldade: </p>
                 </div>
-                <div class="habit-progression">
-                  <h3>{habit.how_much_achieved}%</h3>
+                <hr />
+                <div className="habit-category">
+                  <p>Categoria:</p>
                 </div>
-                <div class="progress-bar"></div>
-                <div class="habit-category">
-                  <p>Categoria</p>
+                <hr />
+                <div className="habit-progression">
+                  <p>Progresso: {habit.how_much_achieved}%</p>
                 </div>
+                <div className="progress-bar-blue"></div>
+
               </div>
             </CardHabit>
           ))

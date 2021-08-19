@@ -1,25 +1,6 @@
 import styled from "styled-components";
 
 export const PContainer = styled.div`
-<<<<<<< HEAD
-    margin: 30px;
-    display: flex;
-    color: var(--violetCore);
-    font-size: 1.2rem;
-    align-items: center;
-
-        button {
-            margin-left: 20px;
-            width: 130px;
-            height: 40px;
-            font-size: 1rem;
-        }
-
-        @media only screen and (min-width: 320px) {
-
-        }
-`;
-=======
   margin-top: 20px;
   margin-left: 30px;
   margin-bottom: 30px;
@@ -27,7 +8,6 @@ export const PContainer = styled.div`
   color: var(--violetCore);
   font-size: 1.2rem;
   align-items: center;
->>>>>>> origin
 
   button {
     margin-left: 20px;
@@ -44,7 +24,6 @@ export const CardNewHabit = styled.div`
       font-size: 12px;
       margin-top: 5px;
     }
-  }
 `;
 
 export const CardContainer = styled.div`
@@ -102,6 +81,8 @@ export const FormContainer = styled.div`
       width: 220px;
       height: 30px;
 
+    }
+
       button:hover {
         transition: all 250ms linear;
         opacity: 0.6;
@@ -116,5 +97,6 @@ export const FormContainer = styled.div`
         margin-top: 30px;
         height: 34px;
         width: 210px;
-      }      
+      }    
+    }
 `;
