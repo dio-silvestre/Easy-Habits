@@ -17,7 +17,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [token] = useState(
@@ -214,9 +213,9 @@ const Dashboard = () => {
                   <Button type="submit">Adicionar</Button>
 
                   <p>
-                    <Link to="/">
-                      <ArrowBackIcon />
-                    </Link>
+                    <ArrowBackIcon
+                      onClick={() => document.location.reload(true)}
+                    />
                   </p>
                 </section>
               </form>
