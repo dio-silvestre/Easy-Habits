@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
   const logOut = () => {
     setAuth("");
     localStorage.clear();
+    toast.success("Até breve!");
   };
 
   const userId = localStorage.getItem("Habits:userId");

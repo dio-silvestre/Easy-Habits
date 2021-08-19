@@ -100,3 +100,12 @@ export const FormContainer = styled.div`
       }    
     }
 `;
+
+
+export const PageContainer = styled.div`
+  max-width: 1240px;
+  margin: auto;
+  margin-top: 20px;
+
+
+`;

@@ -55,3 +55,102 @@ export const HContainer = styled.div`
   justify-content: space-between;
 `;
 
+export const HeaderContainer = styled.div`
+  max-width: 1240px;
+  margin: auto;
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0px;
+
+  .easyHabits {
+    color: var(--violetCore);
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    
+
+    .arrowBack {
+      margin: 0;
+      visibility: hidden;
+
+      svg {
+        color: var(--violetCore);
+      }
+    }
+
+    button {
+      width: 50%;
+      margin-top: 20px;
+    }
+  }
+
+  @media only screen and (min-width: 320px) and (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    width: 95%;
+
+    .easyHabits {
+      .arrowBack {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        visibility: visible;
+
+        svg {
+          font-size: 1.6rem;
+          margin-left: 50px;
+          
+          cursor: pointer;
+        }
+      }
+    }
+  }
+`;
+
+export const HeaderNav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 35%;
+
+  .habits-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .link-nav {
+    color: var(--violetCore);
+    font-size: 1.2rem;
+    border-bottom: 4px solid transparent;
+    line-height: 100%;
+    font-weight: 600;
+
+    &:hover {
+      border-bottom: 4px solid var(--violetCore);
+    }
+  }
+
+  svg {
+    font-size: 2.5rem;
+    color: var(--violetCore);
+  }
+
+  @media only screen and (min-width: 320px) and (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+
+    button {
+      display: none;
+    }
+
+    .habits-logo {
+      display: none;
+    }
+  }
+`;

@@ -5,83 +5,88 @@ import { toast } from "react-toastify";
 export const GoalsContext = createContext();
 
 export const GoalsProvider = ({ children }) => {
+  const [groupGoals, setGroupGoals] = useState([]);
+  const [specificGoal, setSpecificGoal] = useState([]);
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("Habits:token")) || ""
+  );
 
-    const [groupGoals, setGroupGoals] = useState([]);
-    const [specificGoal, setSpecificGoal] = useState([])
-    const [token] = useState(
-        JSON.parse(localStorage.getItem("Habits:token")) || ""
-    );
+  const getOneGoal = ({ id }) => {
+    api
+      .get(`/goals/${id}/`)
+      .then((res) => setSpecificGoal(res))
+      .catch((e) => console.log(e));
+  };
 
+  const getGroupGoals = ({ group_id }) => {
+    api
+      .get(`/goals/?group=${group_id}`)
+      .then((res) => setGroupGoals(res))
+      .catch((e) => console.log(e));
+  };
 
-    const getOneGoal = ({ id }) => {
-        api.get(
-            `/goals/${id}/`
-        )
-            .then((res) => setSpecificGoal(res))
-            .catch((e) => console.log(e))
-    }
+  const addNewGroupGoal = (data, group_id) => {
+    const { title, difficulty } = data;
+    api
+      .post(
+        "/goals/",
+        {
+          title: title,
+          difficulty: difficulty,
+          how_much_achieved: 0,
+          group: group_id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((_) => toast.success("Meta criada com sucesso"));
+  };
 
-    const getGroupGoals = ({ group_id }) => {
-        api.get(
-            `/goals/?group=${group_id}`
-        )
-            .then((res) => setGroupGoals(res))
-            .catch((e) => console.log(e))
-    }
+  const updateGroupGoal = ({ goal_id, how_much_achieved, achieved }) => {
+    api
+      .patch(
+        `/goals/${goal_id}/`,
+        {
+          how_much_achieved: how_much_achieved,
+          achieved: achieved,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((_) => toast.success("Objetivo atualizado"));
+  };
 
-    const addNewGroupGoal = ({ title, difficulty, group_id }) => {
-        api.post(
-            "/groups/",
-            {
-                title: title,
-                difficulty: difficulty,
-                how_much_achieved: 0,
-                group: group_id
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        )
-            .then((_) => toast.success('Novo Objetivo criado'))
-    };
+  const deleteGroupGoal = ({ goal_id }) => {
+    api
+      .delete(`/goals/${goal_id}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => toast.success("Objetivo deletado"));
+  };
 
-    const updateGroupGoal = ({ goal_id, how_much_achieved, achieved }) => {
-        api.patch(
-            `/goals/${goal_id}/`,
-            {
-                how_much_achieved: how_much_achieved,
-                achieved: achieved
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        )
-            .then((_) => toast.success('Objetivo atualizado'))
-    };
-
-    const deleteGroupGoal = ({ goal_id }) => {
-        api.delete(
-            `/goals/${goal_id}/`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        )
-            .then((_) => toast.success('Objetivo deletado'))
-    };
-
-    return (
-        <GoalsContext.Provider
-            value={{ groupGoals, specificGoal, addNewGroupGoal, getOneGoal, getGroupGoals, updateGroupGoal, deleteGroupGoal }}
-        >
-            {children}
-        </GoalsContext.Provider>
-    );
+  return (
+    <GoalsContext.Provider
+      value={{
+        groupGoals,
+        specificGoal,
+        addNewGroupGoal,
+        getOneGoal,
+        getGroupGoals,
+        updateGroupGoal,
+        deleteGroupGoal,
+      }}
+    >
+      {children}
+    </GoalsContext.Provider>
+  );
 };
 
 export const useGoals = () => useContext(GoalsContext);

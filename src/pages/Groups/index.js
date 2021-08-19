@@ -69,8 +69,6 @@ const Groups = () => {
     history.push(`/groups/${id}/`);
   };
 
-  //const subscribeToGroup = () => {};
-
   return (
     <>
       <HeaderContainer>
@@ -89,7 +87,7 @@ const Groups = () => {
               setOpenGroups(false);
             }}
           >
-            + Criar Grupo
+            + Criar Hábito
           </Button>
         </div>
         <HeaderNav>
