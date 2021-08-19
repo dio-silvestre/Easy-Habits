@@ -7,6 +7,7 @@ import {
   CardContainer,
   CardNewHabit,
   FormContainer,
+  PageContainer,
 } from "./styles";
 import Popup from "../../components/Modal";
 import * as yup from "yup";
@@ -48,135 +49,137 @@ const Dashboard = () => {
   return (
     <>
       <HeaderDashboard />
-      <PContainer>
-        Em progresso
-        <Button
-          onClick={() => {
-            setOpenNewHabit(true);
-          }}
-        >
-          + Novo Hábito
-        </Button>
-      </PContainer>
-      {openNewHabit && (
-        <Popup>
-          <CardNewHabit>
-            <FormContainer>
-              <form onSubmit={handleSubmit(addNewHabit)}>
-                <section>
-                  <h1> Cadastre seu mais novo hábito ! </h1>
+      <PageContainer>
+        <PContainer>
+          Em progresso
+          <Button
+            onClick={() => {
+              setOpenNewHabit(true);
+            }}
+          >
+            + Novo Hábito
+          </Button>
+        </PContainer>
+        {openNewHabit && (
+          <Popup>
+            <CardNewHabit>
+              <FormContainer>
+                <form onSubmit={handleSubmit(addNewHabit)}>
+                  <section>
+                    <h1> Cadastre seu mais novo hábito ! </h1>
 
-                  <TextField
-                    id="standard-basic"
-                    label="Novo Hábito"
-                    {...register("habit")}
-                    name="habit"
-                  />
-                  <div className="error"> {errors.habit?.message}</div>
-                  <TextField
-                    id="standard-basic"
-                    label="Categoria"
-                    {...register("category")}
-                    name="category"
-                  />
-                  <div className="error"> {errors.category?.message}</div>
-                  <TextField
-                    id="standard-basic"
-                    label="Dificuldade"
-                    {...register("difficulty")}
-                    name="difficulty"
-                  />
-                  <div className="error"> {errors.difficulty?.message}</div>
-                  <TextField
-                    id="standard-basic"
-                    label="Frequência"
-                    {...register("frequency")}
-                    name="frequency"
-                  />
-
-                  <div className="error"> {errors.frequency?.message}</div>
-
-                  <Button type="submit">Adicionar</Button>
-
-                  <p>
-                    <ArrowBackIcon
-                      cursor="pointer"
-                      onClick={() => document.location.reload()}
+                    <TextField
+                      id="standard-basic"
+                      label="Novo Hábito"
+                      {...register("habit")}
+                      name="habit"
                     />
-                  </p>
-                </section>
-              </form>
-            </FormContainer>
-          </CardNewHabit>
-        </Popup>
-      )}
-      <CardContainer>
-        {loading ? (
-          <CircularProgress size={50} />
-        ) : (
-          habits.map((habit) => (
-            <CardHabit key={habit.id}>
-              <div className="habit-container">
-                <div className="habit-title">Hábito: {habit.title}</div>
-                <hr />
-                <div className="habit-difficulty">
-                  <p>Dificuldade: {habit.difficulty}</p>
-                </div>
-                <hr />
-                <div className="habit-category">
-                  <p>Categoria: {habit.category}</p>
-                </div>
-                <hr />
-                <div className="habit-progression">
-                  <p>Progresso: {habit.how_much_achieved}%</p>
-                </div>
-                <div className="progress-bar"></div>
-                <div className="container-button">
-                  <button
-                    className="habit-button-giveup"
-                    onClick={() => handleDelete(habit)}
-                  >
-                    <DeleteForeverIcon />
-                  </button>
-                  <button
-                    className="habit-button"
-                    onClick={() => handleUpdate(habit)}
-                  >
-                    <DoubleArrowIcon />
-                  </button>
-                </div>
-              </div>
-            </CardHabit>
-          ))
+                    <div className="error"> {errors.habit?.message}</div>
+                    <TextField
+                      id="standard-basic"
+                      label="Categoria"
+                      {...register("category")}
+                      name="category"
+                    />
+                    <div className="error"> {errors.category?.message}</div>
+                    <TextField
+                      id="standard-basic"
+                      label="Dificuldade"
+                      {...register("difficulty")}
+                      name="difficulty"
+                    />
+                    <div className="error"> {errors.difficulty?.message}</div>
+                    <TextField
+                      id="standard-basic"
+                      label="Frequência"
+                      {...register("frequency")}
+                      name="frequency"
+                    />
+
+                    <div className="error"> {errors.frequency?.message}</div>
+
+                    <Button type="submit">Adicionar</Button>
+
+                    <p>
+                      <ArrowBackIcon
+                        cursor="pointer"
+                        onClick={() => document.location.reload()}
+                      />
+                    </p>
+                  </section>
+                </form>
+              </FormContainer>
+            </CardNewHabit>
+          </Popup>
         )}
-      </CardContainer>
-      <PContainer>Concluídos</PContainer>
-      <CardContainer>
-        {loading ? (
-          <CircularProgress size={50} />
-        ) : (
-          finishedHabits.map((habit) => (
-            <CardHabit key={habit.id}>
-              <div className="habit-container">
-                <div className="habit-title">Hábito: {habit.title}</div>
-                <hr />
-                <div className="habit-difficulty">
-                  <p>Dificuldade: {habit.difficulty}</p>
+        <CardContainer>
+          {loading ? (
+            <CircularProgress size={50} />
+          ) : (
+            habits.map((habit) => (
+              <CardHabit key={habit.id}>
+                <div className="habit-container">
+                  <div className="habit-title">Hábito: {habit.title}</div>
+                  <hr />
+                  <div className="habit-difficulty">
+                    <p>Dificuldade: {habit.difficulty}</p>
+                  </div>
+                  <hr />
+                  <div className="habit-category">
+                    <p>Categoria: {habit.category}</p>
+                  </div>
+                  <hr />
+                  <div className="habit-progression">
+                    <p>Progresso: {habit.how_much_achieved}%</p>
+                  </div>
+                  <div className="progress-bar"></div>
+                  <div className="container-button">
+                    <button
+                      className="habit-button-giveup"
+                      onClick={() => handleDelete(habit)}
+                    >
+                      <DeleteForeverIcon />
+                    </button>
+                    <button
+                      className="habit-button"
+                      onClick={() => handleUpdate(habit)}
+                    >
+                      <DoubleArrowIcon />
+                    </button>
+                  </div>
                 </div>
-                <hr />
-                <div className="habit-category">
-                  <p>Categoria: {habit.category}</p>
+              </CardHabit>
+            ))
+          )}
+        </CardContainer>
+        <PContainer>Concluídos</PContainer>
+        <CardContainer>
+          {loading ? (
+            <CircularProgress size={50} />
+          ) : (
+            finishedHabits.map((habit) => (
+              <CardHabit key={habit.id}>
+                <div className="habit-container">
+                  <div className="habit-title">Hábito: {habit.title}</div>
+                  <hr />
+                  <div className="habit-difficulty">
+                    <p>Dificuldade: {habit.difficulty}</p>
+                  </div>
+                  <hr />
+                  <div className="habit-category">
+                    <p>Categoria: {habit.category}</p>
+                  </div>
+                  <hr />
+                  <div className="habit-progression">
+                    <p>Progresso: {habit.how_much_achieved}%</p>
+                  </div>
+                  <div className="progress-bar-blue"></div>
                 </div>
-                <hr />
-                <div className="habit-progression">
-                  <p>Progresso: {habit.how_much_achieved}%</p>
-                </div>
-                <div className="progress-bar-blue"></div>
-              </div>
-            </CardHabit>
-          ))
-        )}
-      </CardContainer>
+              </CardHabit>
+            ))
+          )}
+        </CardContainer>
+        </PageContainer>
     </>
   );
 };

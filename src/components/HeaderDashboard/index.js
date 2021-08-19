@@ -1,8 +1,12 @@
 import { Link, useHistory } from "react-router-dom";
-import { HContainer, Logo, MenuDesktop, MenuMobile } from "./styles";
-import { FiUsers } from "react-icons/fi";
+import { 
+  HeaderContainer,
+  HeaderNav,
+} from "./styles";
 import Button from "../Button";
 import { useAuth } from "../../Providers/Auth";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import PeopleAlt from "@material-ui/icons/PeopleAlt";
 
 const HeaderDashboard = () => {
   const history = useHistory();
@@ -15,37 +19,27 @@ const HeaderDashboard = () => {
 
   return (
     <>
-      <HContainer>
-        <Logo>
-          <Link to="/">
-            <div className="easyHabits">EasyHabits</div>
-          </Link>
-        </Logo>
-        <MenuDesktop>
-          <Link className="icone-grupos" to="/groups">
-            Grupos <FiUsers />
-          </Link>
-          <Button
-            onClick={() => {
-              handleLogOut();
-            }}
-          >
-            Logout
-          </Button>
-        </MenuDesktop>
-        <MenuMobile>
-          <Link className="icone-grupos" to="/groups">
-            <FiUsers />
-          </Link>
-          <Button
-            onClick={() => {
-              handleLogOut();
-            }}
-          >
-            X
-          </Button>
-        </MenuMobile>
-      </HContainer>
+    <HeaderContainer>
+        <div className="easyHabits">
+        EasyHabits{" "}
+          <div className="arrowBack">
+            <Link to="/dashboard">
+              <ExitToAppIcon onClick={handleLogOut} title="Logout" />
+            </Link>
+          </div>
+        </div>
+        <HeaderNav>
+          <div className="habits-logo">
+            <Link className="link-nav" to="/groups">
+              Meus grupos
+            </Link>
+            <Link to="/groups">
+              <PeopleAlt />
+            </Link>
+          </div>
+          <Button onClick={handleLogOut}>Logout</Button>
+        </HeaderNav>
+      </HeaderContainer>
     </>
   );
 };
