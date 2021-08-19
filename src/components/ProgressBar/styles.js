@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Bar = styled.div`
     height: 20px;
     width: 210px;
-    background-color: #e0e0de;
+    background-color: var(--yellow);
     border-radius: 8px;
     margin: 0px 20px 10px;
     align-items: center;
@@ -12,7 +12,7 @@ export const Bar = styled.div`
     .BarInProgress{
     height: 100%;
     width: ${props => props.completed};
-    background-color: ${props => props.color === 'blue' ? "var(--violetCore)" : "var(--yellow)"};
+    background-color: ${props => props.color === 'blue' ? "var(--violetCore)" : "var(--green)"};
     text-align: right;
     border-radius: 8px;
     transition: width 1s ease-in-out;
@@ -20,7 +20,7 @@ export const Bar = styled.div`
 
     .Completed {
     padding: 5px;
-    color: ${props => props.completed === "100%" ? "var(--whiteText)" : "var(--darkBlue)"};
+    color: var(--darkBlue); 
     font-weight: bolder;
     }
 `
