@@ -1,9 +1,8 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGroups } from "../../Providers/Groups";
 import { GroupContainer, InfoContainer, BottomContainer } from "./style";
 import LottieAnimation from "../../components/Lotties";
 import Animation from "../../assets/AnimationGroup.json";
-import Button from "../../components/Button";
 
 const Group = () => {
   const { groups } = useGroups();

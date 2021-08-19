@@ -122,7 +122,7 @@ const Groups = () => {
             <p>
               <ArrowBackIcon
                 cursor="pointer"
-                onClick={() => document.location.reload(true)}
+                onClick={() => document.location.reload()}
               />
             </p>
           </FormContainer>

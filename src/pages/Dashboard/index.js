@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import { CardHabit } from "../../components/Card/styles";
@@ -18,8 +17,16 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useHabits } from "../../Providers/Habits";
 
 const Dashboard = () => {
-
-  const { habits, addNewHabit, handleDelete, finishedHabits, handleUpdate, loading, openNewHabit, setOpenNewHabit } = useHabits();
+  const {
+    habits,
+    addNewHabit,
+    handleDelete,
+    finishedHabits,
+    handleUpdate,
+    loading,
+    openNewHabit,
+    setOpenNewHabit,
+  } = useHabits();
 
   const schema = yup.object().shape({
     habit: yup.string().required("Campo obrigatório"),
@@ -31,12 +38,10 @@ const Dashboard = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-
 
   return (
     <>
@@ -93,7 +98,8 @@ const Dashboard = () => {
 
                   <p>
                     <ArrowBackIcon
-                      onClick={() => document.location.reload(true)}
+                      cursor="pointer"
+                      onClick={() => document.location.reload()}
                     />
                   </p>
                 </section>
