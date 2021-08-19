@@ -89,7 +89,7 @@ const Groups = () => {
               setOpenGroups(false);
             }}
           >
-            + Criar Grupo
+            + Criar Hábito
           </Button>
         </div>
         <HeaderNav>
