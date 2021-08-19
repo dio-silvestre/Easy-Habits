@@ -18,6 +18,8 @@ import Animation from "../../assets/AnimationGroup.json";
 import Button from "../../components/Button";
 import { useGoals } from "../../Providers/Goals";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import DoneIcon from "@material-ui/icons/Done";
 
 const Group = () => {
   const { groups } = useGroups();
@@ -124,12 +126,24 @@ const Group = () => {
             ))}
           <BottomContainer>
             <GoalsCard>
-              <h1>Metas</h1>
-              {groupGoals.map((goal, index) => (
-                <ul key={index}>
-                  <li>{goal.title}</li>
-                </ul>
-              ))}
+              <h2>Metas</h2>
+              <div className="goalsWrapper">
+                {groupGoals.map((goal, index) => (
+                  <ul key={index}>
+                    <li>
+                      {goal.title}
+                      <div className="iconsWrapper">
+                        <div className="done">
+                          <DoneIcon />
+                        </div>
+                        <div className="delete">
+                          <DeleteForeverIcon />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                ))}
+              </div>
             </GoalsCard>
           </BottomContainer>
         </GroupContainer>
