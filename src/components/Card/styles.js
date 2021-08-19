@@ -9,7 +9,8 @@ width: 250px;
 align-items: center;
 justify-content: center;
 background-color:rgba(178, 185, 255, 0.5);
-border-radius: 4px;
+box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+border-radius: 10px;
 margin: 20px;
 h3 {
 padding: 20px 0 10px 0;
@@ -77,6 +78,7 @@ hr {
 }
 
 .habit-button {
+  border-bottom-right-radius: 10px;
   width: 50%;
   background: var(--violetCore);
   border: none;
@@ -97,6 +99,7 @@ hr {
 }
 
 .habit-button-giveup {
+  border-bottom-left-radius: 10px;
   width: 50%;
   height: 30px;
   background: var(--violetLight);
