@@ -69,8 +69,6 @@ const Groups = () => {
     history.push(`/groups/${id}/`);
   };
 
-  //const subscribeToGroup = () => {};
-
   return (
     <>
       <HeaderContainer>
