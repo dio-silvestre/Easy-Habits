@@ -6,6 +6,7 @@ import Signup from "../pages/Signup";
 import Dashboard from "../pages/Dashboard";
 import Groups from "../pages/Groups";
 import Group from "../pages/Group";
+import PageNotFound from "../pages/PageNotFound";
 
 const Routes = () => {
   return (
@@ -16,6 +17,9 @@ const Routes = () => {
       <Route path="/dashboard/" component={Dashboard} isPrivate />
       <Route exact path="/groups/" component={Groups} isPrivate />
       <Route exact path="/groups/:id/" component={Group} isPrivate />
+      <Route>
+        <PageNotFound />
+      </Route>
     </Switch>
   );
 };
