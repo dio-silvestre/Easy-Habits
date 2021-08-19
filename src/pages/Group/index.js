@@ -57,8 +57,13 @@ const Group = () => {
     addNewGroupGoal(data, idNum);
     setOpenForm(false);
     setOpenGroup(true);
-    getGroupGoals();
+    getGroupGoals(idNum);
   };
+
+  useEffect(() => {
+    getGroupGoals(idNum);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
@@ -120,11 +125,11 @@ const Group = () => {
           <BottomContainer>
             <GoalsCard>
               <h1>Metas</h1>
-              {/* {groupGoals.results.map((goal, index) => (
+              {groupGoals.map((goal, index) => (
                 <ul key={index}>
-                  <li>{goal.data.results.title}</li>
+                  <li>{goal.title}</li>
                 </ul>
-              ))} */}
+              ))}
             </GoalsCard>
           </BottomContainer>
         </GroupContainer>

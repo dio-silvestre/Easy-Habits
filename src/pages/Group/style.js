@@ -113,6 +113,7 @@ export const BottomContainer = styled(InfoContainer)`
   border-bottom-right-radius: 50px;
   border-bottom-left-radius: 50px;
   background-color: var(--violetCore);
+  display: flex;
 `;
 
 export const GoalsCard = styled.div``;
