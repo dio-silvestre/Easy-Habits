@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
@@ -9,9 +8,8 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const token = localStorage.getItem("Habits:token") || "";
   const [auth, setAuth] = useState(token);
-  const history = useHistory();
 
-  const logIn = (data) => {
+  const logIn = (data, history) => {
     api
       .post("/sessions/", data)
       .then((response) => {
@@ -29,11 +27,10 @@ export const AuthProvider = ({ children }) => {
         );
 
         toast.success("Sucesso ao fazer login");
-        return history.push("/dashboard");
+        history.push("/dashboard");
       })
       .catch((err) => {
-        console.log(err);
-        toast.error("Usuário ou senha inválidos");
+        toast.error("Nome de usuário ou senha inválidos!");
       });
   };
 

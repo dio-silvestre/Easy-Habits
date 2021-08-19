@@ -32,7 +32,7 @@ const Dashboard = () => {
   } = useHabits();
 
   const schema = yup.object().shape({
-    habit: yup.string().required("Campo obrigatório"),
+    title: yup.string().required("Campo obrigatório"),
     category: yup.string().required("Campo obrigatório"),
     difficulty: yup.string().required("Campo obrigatório"),
     frequency: yup.string().required("Campo obrigatório"),
@@ -41,10 +41,16 @@ const Dashboard = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const onSubmitFunction = (data) => {
+    addNewHabit(data);
+    reset();
+  };
 
   return (
     <>
@@ -64,15 +70,15 @@ const Dashboard = () => {
           <Popup>
             <CardNewHabit>
               <FormContainer>
-                <form onSubmit={handleSubmit(addNewHabit)}>
+                <form onSubmit={handleSubmit(onSubmitFunction)}>
                   <section>
                     <h1> Cadastre seu mais novo hábito ! </h1>
 
                     <TextField
                       id="standard-basic"
                       label="Novo Hábito"
-                      {...register("habit")}
-                      name="habit"
+                      {...register("title")}
+                      name="title"
                     />
                     <div className="error"> {errors.habit?.message}</div>
                     <TextField
@@ -179,7 +185,7 @@ const Dashboard = () => {
             ))
           )}
         </CardContainer>
-        </PageContainer>
+      </PageContainer>
     </>
   );
 };

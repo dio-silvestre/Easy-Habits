@@ -35,12 +35,12 @@ export const HabitsProvider = ({ children }) => {
     loadHabits();
   });
 
-  const addNewHabit = ({ habit, category, difficulty, frequency }) => {
+  const addNewHabit = ({ title, category, difficulty, frequency }) => {
     api
       .post(
         "/habits/",
         {
-          title: habit,
+          title: title,
           category: category,
           difficulty: difficulty,
           frequency: frequency,
@@ -72,7 +72,13 @@ export const HabitsProvider = ({ children }) => {
   const handleUpdate = ({ id, frequency, how_much_achieved }) => {
     let achieved = how_much_achieved;
 
-    if (achieved + 9 >= 100 || achieved + 5 >= 100 || achieved + 13 >= 100) {
+    if (
+      achieved + 9 >= 100 ||
+      achieved + 5 >= 100 ||
+      achieved + 13 >= 100 ||
+      achieved + 6 === 96 ||
+      achieved + 25 === 100
+    ) {
       api.patch(
         `/habits/${id}/`,
         {
@@ -98,6 +104,19 @@ export const HabitsProvider = ({ children }) => {
           },
         }
       );
+    } else if (frequency === "4") {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: false,
+          how_much_achieved: Math.round((achieved += 100 / 16)),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } else if (frequency === "3") {
       api.patch(
         `/habits/${id}/`,
@@ -111,12 +130,25 @@ export const HabitsProvider = ({ children }) => {
           },
         }
       );
-    } else {
+    } else if (frequency === "2") {
       api.patch(
         `/habits/${id}/`,
         {
           achieved: false,
           how_much_achieved: Math.ceil((achieved += 100 / 8)),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } else {
+      api.patch(
+        `/habits/${id}/`,
+        {
+          achieved: false,
+          how_much_achieved: (achieved += 100 / 4),
         },
         {
           headers: {

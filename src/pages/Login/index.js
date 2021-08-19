@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../Providers/Auth";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import TextField from "@material-ui/core/TextField";
 import {
@@ -17,6 +17,8 @@ import {
 const Login = () => {
   const { logIn } = useAuth();
 
+  const history = useHistory();
+
   const schema = yup.object().shape({
     username: yup.string().required("Nome de usuário obrigatório"),
     password: yup.string().required("Senha obrigatória"),
@@ -25,11 +27,13 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmitFunction = (data) => {
-    logIn(data);
+    logIn(data, history);
+    reset();
   };
 
   return (
