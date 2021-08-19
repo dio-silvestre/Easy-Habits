@@ -66,7 +66,7 @@ const Groups = () => {
   };
 
   const visitGroup = (id) => {
-    history.push(`/groups/${id}`);
+    history.push(`/groups/${id}/`);
   };
 
   //const subscribeToGroup = () => {};
@@ -77,7 +77,7 @@ const Groups = () => {
         <div className="easyHabits">
           <div className="arrowBack">
             <Link to="/dashboard">
-              <ArrowBackIosIcon title="Meus Hábitos" />
+              <ArrowBackIosIcon />
               <ExitToAppIcon onClick={handleLogOut} title="Logout" />
             </Link>
           </div>
@@ -137,17 +137,15 @@ const Groups = () => {
                 <CircularProgress size={50} />
               ) : (
                 subscriptions.map((group, index) => (
-                  <>
-                    <div className="my-groups">
-                      <p className="iconText" key={index}>
-                        {group.name}
-                        <DescriptionIcon
-                          onClick={() => visitGroup(group.id)}
-                          titleAccess="Visitar o grupo"
-                        />
-                      </p>
-                    </div>
-                  </>
+                  <div className="my-groups">
+                    <p className="iconText" key={index}>
+                      {group.name}
+                      <DescriptionIcon
+                        onClick={() => visitGroup(group.id)}
+                        titleAccess="Visitar o grupo"
+                      />
+                    </p>
+                  </div>
                 ))
               )}
             </OpenGroups>
@@ -157,27 +155,15 @@ const Groups = () => {
                 <CircularProgress size={50} />
               ) : (
                 groups.map((group, index) => (
-                  <>
-                    <div className="my-groups">
-                      <p className="subscribe" key={index}>
-                        {group.name}
-                        <PersonAddIcon
-                          titleAccess="Inscrever-me neste grupo"
-                          onClick={() => subscribeToAGroup(group.id)}
-                        />
-                      </p>
-                    </div>
-                    {/* <div className="groupDescription">
-                      <p>
-                        <strong>{group.name}</strong>
-                      </p>
-                      <p>
-                        Este grupo é da categoria{" "}
-                        <strong>{group.category}</strong> e seu objetivo é{" "}
-                        <strong>{group.description}</strong>
-                      </p>
-                    </div> */}
-                  </>
+                  <div className="my-groups">
+                    <p className="subscribe" key={index}>
+                      {group.name}
+                      <PersonAddIcon
+                        titleAccess="Inscrever-me neste grupo"
+                        onClick={() => subscribeToAGroup(group.id)}
+                      />
+                    </p>
+                  </div>
                 ))
               )}
             </SubscribedGroups>

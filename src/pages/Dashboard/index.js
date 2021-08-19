@@ -230,28 +230,28 @@ const Dashboard = () => {
         ) : (
           habits.map((habit) => (
             <CardHabit key={habit.id}>
-              <div class="habit-container">
-                <div class="habit-title">{habit.title}</div>
+              <div className="habit-container">
+                <div className="habit-title">{habit.title}</div>
                 <hr />
-                <div class="habit-difficulty">
+                <div className="habit-difficulty">
                   <p>Fácil</p>
                 </div>
-                <div class="habit-progression">
+                <div className="habit-progression">
                   <h3>{habit.how_much_achieved}</h3>
                 </div>
-                <div class="progress-bar"></div>
-                <div class="habit-category">
+                <div className="progress-bar"></div>
+                <div className="habit-category">
                   <p>Categoria</p>
                 </div>
-                <div class="container-button">
+                <div className="container-button">
                   <button
-                    class="habit-button-giveup"
+                    className="habit-button-giveup"
                     onClick={() => handleDelete(habit)}
                   >
                     Desistir
                   </button>
                   <button
-                    class="habit-button"
+                    className="habit-button"
                     onClick={() => handleUpdate(habit)}
                   >
                     Progredir
