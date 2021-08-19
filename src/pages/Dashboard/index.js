@@ -18,6 +18,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useHabits } from "../../Providers/Habits";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import ProgressBar from "../../components/ProgressBar";
 
 const Dashboard = () => {
   const {
@@ -136,9 +137,9 @@ const Dashboard = () => {
                   </div>
                   <hr />
                   <div className="habit-progression">
-                    <p>Progresso: {habit.how_much_achieved}%</p>
+                    <p>Progresso:</p>
                   </div>
-                  <div className="progress-bar"></div>
+                  <ProgressBar color='yellow' completed={`${habit.how_much_achieved}%`} />
                   <div className="container-button">
                     <button
                       className="habit-button-giveup"
@@ -177,9 +178,9 @@ const Dashboard = () => {
                   </div>
                   <hr />
                   <div className="habit-progression">
-                    <p>Progresso: {habit.how_much_achieved}%</p>
+                    <p>Progresso:</p>
                   </div>
-                  <div className="progress-bar-blue"></div>
+                  <ProgressBar color='blue' completed={`${habit.how_much_achieved}%`} />
                 </div>
               </CardHabit>
             ))
@@ -187,6 +188,8 @@ const Dashboard = () => {
         </CardContainer>
       </PageContainer>
     </>
+
+
   );
 };
 
