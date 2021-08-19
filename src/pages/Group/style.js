@@ -114,3 +114,5 @@ export const BottomContainer = styled(InfoContainer)`
   border-bottom-left-radius: 50px;
   background-color: var(--violetCore);
 `;
+
+export const GoalsCard = styled.div``;

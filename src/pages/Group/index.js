@@ -4,13 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import TextField from "@material-ui/core/TextField";
 import { useParams } from "react-router-dom";
 import { useGroups } from "../../Providers/Groups";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   GroupContainer,
   InfoContainer,
   BottomContainer,
   FormModal,
   FormContainer,
+  GoalsCard,
 } from "./style";
 import LottieAnimation from "../../components/Lotties";
 import Animation from "../../assets/AnimationGroup.json";
@@ -31,6 +32,8 @@ const Group = () => {
     updateGroupGoal,
     deleteGroupGoal,
   } = useGoals();
+
+  console.log(groupGoals);
 
   const [openForm, setOpenForm] = useState(false);
   const [openGroup, setOpenGroup] = useState(true);
@@ -54,6 +57,7 @@ const Group = () => {
     addNewGroupGoal(data, idNum);
     setOpenForm(false);
     setOpenGroup(true);
+    getGroupGoals();
   };
 
   return (
@@ -114,7 +118,14 @@ const Group = () => {
               </div>
             ))}
           <BottomContainer>
-            <h1>Metas</h1>
+            <GoalsCard>
+              <h1>Metas</h1>
+              {/* {groupGoals.results.map((goal, index) => (
+                <ul key={index}>
+                  <li>{goal.data.results.title}</li>
+                </ul>
+              ))} */}
+            </GoalsCard>
           </BottomContainer>
         </GroupContainer>
       )}

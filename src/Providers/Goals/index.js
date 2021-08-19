@@ -14,14 +14,14 @@ export const GoalsProvider = ({ children }) => {
   const getOneGoal = ({ id }) => {
     api
       .get(`/goals/${id}/`)
-      .then((res) => setSpecificGoal(res))
+      .then((res) => setSpecificGoal(res.data))
       .catch((e) => console.log(e));
   };
 
-  const getGroupGoals = ({ group_id }) => {
+  const getGroupGoals = (group_id) => {
     api
       .get(`/goals/?group=${group_id}`)
-      .then((res) => setGroupGoals(res))
+      .then((res) => setGroupGoals(res.data))
       .catch((e) => console.log(e));
   };
 
