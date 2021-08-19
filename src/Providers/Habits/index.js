@@ -36,7 +36,6 @@ export const HabitsProvider = ({ children }) => {
   });
 
   const addNewHabit = ({ habit, category, difficulty, frequency }) => {
-    console.log("frequency", frequency);
     api
       .post(
         "/habits/",
