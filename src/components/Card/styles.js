@@ -30,7 +30,7 @@ hr {
 }
 
   .habit-title {
-    margin: 10px 0 10px 20px;
+    margin: 20px 0 10px 20px;
     font-size: 1.2rem;
   }
 
