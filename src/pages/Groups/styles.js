@@ -18,6 +18,17 @@ export const PageContainer = styled.div`
   align-items: flex-start;
   margin-top: 20px;
 
+  button {
+    width: 20%;
+    margin-top: -80px;
+    margin-bottom: 30px;
+
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+      width: 80%;
+      margin: auto;
+    }
+  }
+
   .iconText {
     display: flex;
     justify-content: space-around;
@@ -36,6 +47,10 @@ export const PageContainer = styled.div`
 
     @media only screen and (min-width: 320px) and (max-width: 768px) {
       font-size: 1.5rem;
+
+      .iconText {
+        font-size: 0.5rem;
+      }
     }
   }
 
@@ -43,6 +58,7 @@ export const PageContainer = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: flex-start;
 
     @media only screen and (min-width: 320px) and (max-width: 768px) {
       flex-direction: column;
@@ -86,15 +102,14 @@ export const HeaderContainer = styled.div`
 
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     flex-direction: column;
-    gap: 20px;
     text-align: center;
-    width: 95%;
+    width: 100%;
+    align-items: center;
 
     .easyHabits {
       .arrowBack {
-        display: flex;
-        justify-content: center;
         visibility: visible;
+        text-align: center;
 
         svg {
           font-size: 1.6rem;
@@ -194,15 +209,15 @@ export const FormContainer = styled.div`
 `;
 
 export const OpenGroups = styled(FormContainer)`
-  background-color: var(--darkBlue);
-  border: 5px solid transparent;
-  border-radius: unset;
+  background-color: var(--violetLight);
+  border: 1px dotted var(--darkBlue);
+  border-radius: 30px;
   width: 100%;
   box-shadow: none;
   position: relative;
 
   h1 {
-    color: var(--whiteText);
+    color: var(--darkBlue);
   }
 
   .my-groups {
@@ -217,74 +232,19 @@ export const OpenGroups = styled(FormContainer)`
     gap: 10px;
     width: 100%;
     font-size: 1.5rem;
-
-    &:hover + .groupInfo {
-      display: block;
-    }
-  }
-
-  .groupInfo {
-    width: 50%;
-    text-align: center;
-    background-color: var(--bkgdColor);
-    padding: 20px;
-    position: absolute;
-    border-radius: 4px;
-    line-height: 30px;
-    left: 1;
-    top: 1;
-    font-weight: 600;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-    display: none;
-
-    p:first-child {
-      text-transform: uppercase;
-    }
-
-    strong {
-      color: var(--violetCore);
-    }
   }
 `;
 
 export const SubscribedGroups = styled(OpenGroups)`
-  background-color: var(--violetCore);
-  border: 5px solid var(--darkBlue);
+  background-color: var(--violetLight);
 
   h1 {
-    color: var(--whiteText);
+    color: var(--darkBlue);
   }
 
   .my-groups {
     position: relative;
     background-color: var(--darkBlue);
-
-    &:hover + .groupDescription {
-      display: block;
-    }
-  }
-
-  .groupDescription {
-    width: 50%;
-    text-align: center;
-    background-color: var(--bkgdColor);
-    padding: 20px;
-    position: absolute;
-    border-radius: 4px;
-    line-height: 30px;
-    left: 1;
-    top: 1;
-    font-weight: 600;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-    display: none;
-
-    p:first-child {
-      text-transform: uppercase;
-    }
-
-    strong {
-      color: var(--violetCore);
-    }
   }
 
   .subscribe {
@@ -307,6 +267,9 @@ export const SubscribedGroups = styled(OpenGroups)`
 
     @media only screen and (min-width: 320px) and (max-width: 768px) {
       font-size: 1.5rem;
-    }
+
+      p {
+        font-size: 0.8rem;
+      }
   }
 `;

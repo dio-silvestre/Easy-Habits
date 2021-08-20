@@ -1,11 +1,22 @@
 import styled from "styled-components";
 
-export const FormModal = styled.div`
-  width: 100%;
-  margin-top: 100px;
+export const ActivitiesContainer = styled.div`
+  max-width: 1240px;
+  width: 95%;
+  min-height: 100vh;
+  margin: auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+
+  @media only screen and (min-width: 320px) and (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+      text-align: center;
+    }
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -47,98 +58,11 @@ export const FormContainer = styled.div`
 
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     flex-direction: column;
-    width: 95vw;
+    width: 90vw;
   }
 `;
 
-export const GroupContainer = styled.div`
-  max-width: 1240px;
-  width: 95%;
-  margin: auto;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .groupName {
-    text-align: center;
-    color: var(--violetCore);
-    font-size: 2rem;
-    font-style: italic;
-    font-weight: 600;
-    margin-top: -40px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-`;
-
-export const InfoContainer = styled.div`
-  width: 55vw;
-  height: 40vh;
-  background-color: var(--violetLight);
-  border-top-right-radius: 50px;
-  border-top-left-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  div {
-    button {
-      margin-top: 10px;
-      width: 80%;
-      font-size: 1rem;
-    }
-  }
-
-  .groupDescription {
-    max-width: 90%;
-    min-height: 5vh;
-    overflow: -moz-hidden-unscrollable;
-    width: 80%;
-    font-size: 1.2rem;
-    color: var(--darkBlue);
-    margin-bottom: 10px;
-
-    strong {
-      color: var(--violetCore);
-    }
-  }
-
-  @media only screen and (min-width: 320px) and (max-width: 768px) {
-    width: 100vw;
-    flex-direction: column;
-    background-color: var(--bkdgColor);
-
-    .animation {
-      display: none;
-    }
-
-    .groupInfoWrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-`;
-
-export const BottomContainer = styled(InfoContainer)`
-  height: 45vh;
-  border-top-right-radius: unset;
-  border-top-left-radius: unset;
-  border-bottom-right-radius: 50px;
-  border-bottom-left-radius: 50px;
-  background-color: var(--violetCore);
-  display: flex;
-  justify-content: space-around;
-
-  @media only screen and (min-width: 320px) and (max-width: 768px) {
-    background-color: var(--bkdgColor);
-  }
-`;
-
-export const GoalsCard = styled.div`
+export const ActivitiesCard = styled.div`
   background-color: var(--violetLight);
   border-radius: 5px;
   display: flex;
@@ -205,8 +129,7 @@ export const GoalsCard = styled.div`
 
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     margin-top: 50px;
-    width: 80%;
-    height: 100%;
+    width: 90vw;
     overflow: visible;
   }
 `;
