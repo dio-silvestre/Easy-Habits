@@ -51,6 +51,10 @@ export const Content = styled.div`
     height: 100vh;
   }
 
+  .MuiSvgIcon-root {
+    font-size: 2.5rem;
+  }
+
   @media (max-width: 1100px) {
     background-color: var(--bkgdColor);
     display: flex;
@@ -72,6 +76,10 @@ from {
 to{
   opacity: 1;
   transform: translateX(0px)
+} 
+
+.MuiSvgIcon-root{
+  font-size:2.5rem
 }
 `;
 
@@ -165,7 +173,7 @@ export const Button = styled.button`
   margin: 2em;
   padding: 5px;
   width: 220px;
-  height: 30px;
+  height: 40px;
 
   button:hover {
     transition: all 250ms linear;
