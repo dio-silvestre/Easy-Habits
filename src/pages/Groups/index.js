@@ -80,6 +80,16 @@ const Groups = () => {
               <ExitToAppIcon onClick={handleLogOut} title="Logout" />
             </Link>
           </div>
+          EasyHabits{" "}
+          <Button
+            colorSchema
+            onClick={() => {
+              setOpenForm(true);
+              setOpenGroups(false);
+            }}
+          >
+            + Criar Grupo
+          </Button>
         </div>
         <HeaderNav>
           <div className="habits-logo">
