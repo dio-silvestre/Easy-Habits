@@ -11,9 +11,9 @@ export const GoalsProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("Habits:token")) || ""
   );
 
-  const getOneGoal = ({ id }) => {
+  const getOneGoal = (goal_id) => {
     api
-      .get(`/goals/${id}/`)
+      .get(`/goals/${goal_id}/`)
       .then((res) => setSpecificGoal(res.data))
       .catch((e) => console.log(e));
   };

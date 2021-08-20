@@ -155,8 +155,8 @@ export const GoalsCard = styled.div`
           color: var(--darkBlue);
           font-size: 1.2rem;
           font-weight: 600;
-          text-decoration: ${(props) =>
-            props.goalUpdated ? "line-through" : "none"};
+          /* text-decoration: ${(props) =>
+            props.goalUpdated ? "line-through" : "none"}; */
         }
 
         .iconsWrapper {
