@@ -18,20 +18,21 @@ export const ActivitiesProvider = ({ children }) => {
       .catch((e) => console.log(e));
   };
 
-  const getGroupActivities = ({ group_id }) => {
+  const getGroupActivities = (group_id) => {
     api
       .get(`/activities/?group=${group_id}`)
-      .then((res) => setGroupActivities(res))
+      .then((res) => setGroupActivities(res.data.results))
       .catch((e) => console.log(e));
   };
 
-  const addNewGroupActivity = ({ title, realization_time, group_id }) => {
+  const addNewGroupActivity = (data, group_id) => {
+    const { title, date } = data;
     api
       .post(
         "/activities/",
         {
           title: title,
-          realization_time: realization_time,
+          realization_time: date,
           group: group_id,
         },
         {
@@ -43,12 +44,12 @@ export const ActivitiesProvider = ({ children }) => {
       .then((_) => toast.success("Nova atividade criada"));
   };
 
-  const updateGroupActivities = ({ activity_id, title }) => {
+  const updateGroupActivities = (title, activity_id) => {
     api
       .patch(
         `/activities/${activity_id}/`,
         {
-          title: title,
+          title: `${title} foi concluído em`,
         },
         {
           headers: {
@@ -56,10 +57,10 @@ export const ActivitiesProvider = ({ children }) => {
           },
         }
       )
-      .then((_) => toast.success("Atividade Atualizada"));
+      .then((_) => toast.success("Atividade concluída. Parabéns!"));
   };
 
-  const deleteGroupActivities = ({ activity_id }) => {
+  const deleteGroupActivities = (activity_id) => {
     api
       .delete(`/activities/${activity_id}/`, {
         headers: {

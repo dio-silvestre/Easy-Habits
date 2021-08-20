@@ -58,7 +58,7 @@ export const GoalsProvider = ({ children }) => {
           },
         }
       )
-      .then((_) => toast.success("Objetivo atualizado"));
+      .then((_) => toast.success("Meta concluída. Parabéns!!"));
   };
 
   const deleteGroupGoal = (goal_id) => {

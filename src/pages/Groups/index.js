@@ -80,16 +80,6 @@ const Groups = () => {
               <ExitToAppIcon onClick={handleLogOut} title="Logout" />
             </Link>
           </div>
-          EasyHabits{" "}
-          <Button
-            colorSchema
-            onClick={() => {
-              setOpenForm(true);
-              setOpenGroups(false);
-            }}
-          >
-            + Criar Grupo
-          </Button>
         </div>
         <HeaderNav>
           <div className="habits-logo">
@@ -100,7 +90,9 @@ const Groups = () => {
               <PlaylistAddCheckIcon />
             </Link>
           </div>
-          <Button onClick={handleLogOut}>Logout</Button>
+          <Button colorSchema onClick={handleLogOut}>
+            Logout
+          </Button>
         </HeaderNav>
       </HeaderContainer>
       <FormModal>
@@ -130,7 +122,6 @@ const Groups = () => {
       {openGroups && (
         <PageContainer>
           <Button
-            colorSchema
             onClick={() => {
               setOpenForm(true);
               setOpenGroups(false);
