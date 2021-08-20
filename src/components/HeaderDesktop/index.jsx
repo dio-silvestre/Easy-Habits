@@ -1,6 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { HeaderContainer, HeaderNav } from "./styles";
 import Button from "../Button";
+import { HashLink as Anchor } from "react-router-hash-link";
 
 const Header = () => {
   const history = useHistory();
@@ -16,14 +17,16 @@ const Header = () => {
           <div className="easyHabits">EasyHabits</div>
         </Link>
         <HeaderNav>
-          <Link className="link-nav" to="#">
+          <Anchor className="link-nav" to="/#infoApp">
             Como funciona
-          </Link>
-          <Link className="link-nav" to="#">
+          </Anchor>
+          <Anchor className="link-nav" to="/#infoApp">
             Contato
-          </Link>
+          </Anchor>
+          <Button colorSchema onClick={() => handleNavigation("/signup")}>
+            Cadastro
+          </Button>
           <Button onClick={() => handleNavigation("/login")}>Login</Button>
-          <Button onClick={() => handleNavigation("/signup")}>Cadastro</Button>
         </HeaderNav>
       </HeaderContainer>
     </>

@@ -1,17 +1,19 @@
+import api from "../../services/api";
+import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useHistory, Link } from "react-router-dom";
-import api from "../../services/api";
+import { Link, useHistory } from "react-router-dom";
+import HomeIcon from "@material-ui/icons/Home";
+import { toast } from "react-toastify";
+import TextField from "@material-ui/core/TextField";
 import {
   Container,
   Background,
   Content,
   AnimationContainer,
   Button,
+  HeaderContainer,
 } from "./styles";
-
-import TextField from "@material-ui/core/TextField";
 
 const Signup = () => {
   const history = useHistory();
@@ -35,37 +37,72 @@ const Signup = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const handleForm = ({ username, email, password }) => {
+  const onSubmitFunction = ({ username, email, password }) => {
     const newUser = { username, email, password };
-
     api
       .post("/users/", newUser)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+      .then((_) => {
+        toast.success("Sucesso ao criar conta");
+        return history.push("/login");
+      })
+      .catch((err) => toast.error("Erro ao criar conta"));
   };
 
   return (
-    <Container>
-      <Background>
-        <section></section>
-      </Background>
-      <Content>
-        <AnimationContainer>
-          <form>
-            <h1>Cadastre -se</h1>
-            <TextField id="standard-basic" label="Nome de usuario" />
-
-            <TextField id="standard-basic" label="Email" />
-            <TextField id="standard-basic" label="Senha" />
-            <TextField id="standard-basic" label="Confirme sua senha" />
-            <Button>Enviar</Button>
+    <HeaderContainer>
+      <Link to="/">
+        <div className="easyHabits">EasyHabits</div>
+      </Link>
+      <Container>
+        <Background>
+          <section></section>
+        </Background>
+        <Content>
+          <AnimationContainer>
+            <form onSubmit={handleSubmit(onSubmitFunction)}>
+              <h1>Cadastre-se</h1>
+              <h3> Primeiro, cadastre sua conta</h3>
+              <TextField
+                id="standard-basic"
+                label="Nome de usuário"
+                {...register("username")}
+              />
+              <div className="error"> {errors.username?.message}</div>
+              <TextField
+                id="standard-basic"
+                label="Email"
+                {...register("email")}
+              />
+              <div className="error"> {errors.email?.message}</div>
+              <TextField
+                id="standard-basic"
+                label="Senha"
+                type="password"
+                {...register("password")}
+              />
+              <div className="error"> {errors.password?.message}</div>
+              <TextField
+                id="standard-basic"
+                label="Confirme sua senha"
+                type="password"
+                {...register("passwordConfirm")}
+              />
+              <div className="error"> {errors.passwordConfirm?.message}</div>
+              <Button type="submit"> CADASTRAR </Button>
+              <p>
+                Já tem uma conta ? Faça o <Link to="/login">Login</Link>
+              </p>
+            </form>
+            <span>Página inicial </span>
             <p>
-              Já tem uma conta ? Faça o <Link to="/login">Login</Link>
+              <Link to="/dashboard">
+                <HomeIcon />
+              </Link>
             </p>
-          </form>
-        </AnimationContainer>
-      </Content>
-    </Container>
+          </AnimationContainer>
+        </Content>
+      </Container>
+    </HeaderContainer>
   );
 };
 

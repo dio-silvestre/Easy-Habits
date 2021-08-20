@@ -18,14 +18,17 @@ export default createGlobalStyle`
     --yellow: #F1D161;
     --violetLight: #B3B9FF;
     --white: #fff;
+    --brown: #3B3744;
 }
 
 body {
     background-color: var(--bkgdColor);
     font-family: 'Nunito', sans-serif;
     font-size: 1rem;
-    padding: 30px 100px;
-    -webkit-font-smoothing: antialiased !important
+    min-width: 90vw;
+    max-width: 100vw;
+    -webkit-font-smoothing: antialiased !important;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6, strong {
@@ -43,12 +46,6 @@ a {
 
 li {
     list-style-type: none;
-}
-
-@media only screen and (min-width: 320px) and (max-width: 768px) {
-    body {
-        padding: 20px;
-    }
 }
 
 `;

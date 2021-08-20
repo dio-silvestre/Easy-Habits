@@ -1,26 +1,25 @@
 import { Redirect, Route as ReactRout } from "react-router-dom";
-import { useContext } from "react";
-import { useAuth } from '../Providers/Auth'
+import { useAuth } from "../Providers/Auth";
 
-const Route = ({ isPrivate = false, component: Component }) => {
+const Route = ({ isPrivate = false, component: Component, ...rest }) => {
+  const { token } = useAuth();
 
-    const { token } = useAuth();
-
-    return (
-        <ReactRout
-            render={() => {
-                return isPrivate === !!token ? (
-                    <Component />)
-                    :
-                    (<Redirect
-                        to={{
-                            pathname: isPrivate ? "/" : "/dashboard",
-                        }}
-                    />
-                    );
+  return (
+    <ReactRout
+      {...rest}
+      render={() => {
+        return isPrivate === !!token ? (
+          <Component />
+        ) : (
+          <Redirect
+            to={{
+              pathname: isPrivate ? "/" : "/dashboard",
             }}
-        />
-    );
+          />
+        );
+      }}
+    />
+  );
 };
 
 export default Route;

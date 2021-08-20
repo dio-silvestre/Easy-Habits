@@ -1,11 +1,23 @@
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../Providers/Auth";
+import { Link, useHistory } from "react-router-dom";
+import HomeIcon from "@material-ui/icons/Home";
+import TextField from "@material-ui/core/TextField";
+import {
+  Container,
+  Background,
+  Content,
+  AnimationContainer,
+  Button,
+  HeaderContainer,
+} from "./styles";
 
 const Login = () => {
   const { logIn } = useAuth();
+
+  const history = useHistory();
 
   const schema = yup.object().shape({
     username: yup.string().required("Nome de usuário obrigatório"),
@@ -15,43 +27,58 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmitFunction = (data) => {
-    logIn(data);
+    logIn(data, history);
+    reset();
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <h3>Entre com seu usuário e senha</h3>
-      <form onSubmit={handleSubmit(onSubmitFunction)}>
-        <input
-          {...register("username")}
-          name="username"
-          placeholder="Nome de usuário"
-          error={errors.username?.message}
-        ></input>
-        <input
-          {...register("password")}
-          name="password"
-          placeholder="Senha"
-          type="password"
-          error={errors.password?.message}
-        ></input>
-        <button type="submit">Entrar</button>
-      </form>
-      <p>
-        Não tem uma conta? Faça o seu <Link to="/signup">cadastro</Link>
-      </p>
+    <HeaderContainer>
+      <Link to="/">
+        <div className="easyHabits">EasyHabits</div>
+      </Link>
+      <Container>
+        <Content>
+          <AnimationContainer>
+            <form onSubmit={handleSubmit(onSubmitFunction)}>
+              <h1>Entrar</h1>
+              <h3> Entre com seu usuário e senha</h3>
+              <TextField
+                id="standard-basic"
+                label="Nome de usuário"
+                {...register("username")}
+              />
+              <div className="error"> {errors.username?.message}</div>
 
-      <p>
-        <Link to="/">Página inicial</Link>
-      </p>
-    </div>
+              <TextField
+                id="standard-basic"
+                label="Senha"
+                type="password"
+                {...register("password")}
+              />
+              <div className="error"> {errors.password?.message}</div>
+              <Button type="submit"> ENTRAR </Button>
+              <p>
+                Não tem uma conta ? Faça seu <Link to="/signup">Cadastro</Link>
+              </p>
+            </form>
+            <span>Página inicial</span>
+            <p>
+              <Link to="/dashboard">
+                <HomeIcon />
+              </Link>
+            </p>
+          </AnimationContainer>
+        </Content>
+        <Background>
+          <section></section>
+        </Background>
+      </Container>
+    </HeaderContainer>
   );
 };
 
