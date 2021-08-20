@@ -81,7 +81,7 @@ const Dashboard = () => {
                       {...register("title")}
                       name="title"
                     />
-                    <div className="error"> {errors.habit?.message}</div>
+                    <div className="error"> {errors.title?.message}</div>
                     <TextField
                       id="standard-basic"
                       label="Categoria"
@@ -139,7 +139,10 @@ const Dashboard = () => {
                   <div className="habit-progression">
                     <p>Progresso:</p>
                   </div>
-                  <ProgressBar color='yellow' completed={`${habit.how_much_achieved}%`} />
+                  <ProgressBar
+                    color="yellow"
+                    completed={`${habit.how_much_achieved}%`}
+                  />
                   <div className="container-button">
                     <button
                       className="habit-button-giveup"
@@ -180,7 +183,10 @@ const Dashboard = () => {
                   <div className="habit-progression">
                     <p>Progresso:</p>
                   </div>
-                  <ProgressBar color='blue' completed={`${habit.how_much_achieved}%`} />
+                  <ProgressBar
+                    color="blue"
+                    completed={`${habit.how_much_achieved}%`}
+                  />
                 </div>
               </CardHabit>
             ))
@@ -188,8 +194,6 @@ const Dashboard = () => {
         </CardContainer>
       </PageContainer>
     </>
-
-
   );
 };
 

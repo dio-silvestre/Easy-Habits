@@ -134,9 +134,9 @@ export const AnimationContainer = styled.div`
     }
 
     .error {
-      text-align: justify;
+      text-align: center;
       color: #c1292e;
-      padding-left: 45px;
+      padding-right: 5px;
       font-size: 12px;
       margin-top: 5px;
     }
