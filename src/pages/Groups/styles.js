@@ -13,6 +13,7 @@ export const PageContainer = styled.div`
   width: 95%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 20px;
@@ -61,7 +62,7 @@ export const HeaderContainer = styled.div`
   width: 95%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 30px 0px;
 
   .easyHabits {

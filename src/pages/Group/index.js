@@ -25,15 +25,7 @@ const Group = () => {
   const { groups } = useGroups();
   const { id } = useParams();
   const idNum = Number(id);
-  const {
-    groupGoals,
-    specificGoal,
-    addNewGroupGoal,
-    getOneGoal,
-    getGroupGoals,
-    updateGroupGoal,
-    deleteGroupGoal,
-  } = useGoals();
+  const { groupGoals, addNewGroupGoal, getGroupGoals } = useGoals();
 
   console.log(groupGoals);
 
