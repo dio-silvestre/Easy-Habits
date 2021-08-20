@@ -19,6 +19,9 @@ import { useHabits } from "../../Providers/Habits";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import ProgressBar from "../../components/ProgressBar";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
+import { useState } from "react";
 
 const Dashboard = () => {
   const {
@@ -31,6 +34,56 @@ const Dashboard = () => {
     openNewHabit,
     setOpenNewHabit,
   } = useHabits();
+
+  const allFrequencies = [
+    {
+      value: 1,
+      label: "1 vez por semana",
+    },
+    {
+      value: 2,
+      label: "2 vezes por semana",
+    },
+    {
+      value: 3,
+      label: "3 vezes por semana",
+    },
+    {
+      value: 4,
+      label: "4 vezes por semana",
+    },
+    {
+      value: 5,
+      label: "5 vezes por semana",
+    },
+  ];
+
+  const allDifficulties = [
+    {
+      value: "Fácil",
+      label: "Fácil",
+    },
+    {
+      value: "Médio",
+      label: "Médio",
+    },
+    {
+      value: "Difícil",
+      label: "Difícil",
+    },
+  ];
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& .MuiTextField-root": {
+        margin: theme.spacing(1),
+        width: "25ch",
+        fontsize: "60px",
+      },
+    },
+  }));
+
+  const classes = useStyles();
 
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
@@ -47,6 +100,9 @@ const Dashboard = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const [frequencies, setFrequencies] = useState(1);
+  const [difficulties, setDifficulties] = useState("Fácil");
 
   const onSubmitFunction = (data) => {
     addNewHabit(data);
@@ -71,7 +127,12 @@ const Dashboard = () => {
           <Popup>
             <CardNewHabit>
               <FormContainer>
-                <form onSubmit={handleSubmit(onSubmitFunction)}>
+                <form
+                  onSubmit={handleSubmit(onSubmitFunction)}
+                  className={classes.root}
+                  noValidate
+                  autoComplete="off"
+                >
                   <section>
                     <h1> Cadastre seu mais novo hábito ! </h1>
 
@@ -81,7 +142,7 @@ const Dashboard = () => {
                       {...register("title")}
                       name="title"
                     />
-                    <div className="error"> {errors.habit?.message}</div>
+                    <div className="error"> {errors.title?.message}</div>
                     <TextField
                       id="standard-basic"
                       label="Categoria"
@@ -91,17 +152,35 @@ const Dashboard = () => {
                     <div className="error"> {errors.category?.message}</div>
                     <TextField
                       id="standard-basic"
+                      select
                       label="Dificuldade"
                       {...register("difficulty")}
                       name="difficulty"
-                    />
+                      value={difficulties}
+                      onChange={(event) => setDifficulties(event.target.value)}
+                    >
+                      {allDifficulties.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                     <div className="error"> {errors.difficulty?.message}</div>
                     <TextField
                       id="standard-basic"
+                      select
                       label="Frequência"
                       {...register("frequency")}
                       name="frequency"
-                    />
+                      value={frequencies}
+                      onChange={(event) => setFrequencies(event.target.value)}
+                    >
+                      {allFrequencies.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
 
                     <div className="error"> {errors.frequency?.message}</div>
 
@@ -119,9 +198,12 @@ const Dashboard = () => {
             </CardNewHabit>
           </Popup>
         )}
+
         <CardContainer>
           {loading ? (
             <CircularProgress size={50} />
+          ) : habits.length === 0 ? (
+            <span className="msgDsh">Comece já um novo hábito</span>
           ) : (
             habits.map((habit) => (
               <CardHabit key={habit.id}>
@@ -139,7 +221,10 @@ const Dashboard = () => {
                   <div className="habit-progression">
                     <p>Progresso:</p>
                   </div>
-                  <ProgressBar color='yellow' completed={`${habit.how_much_achieved}%`} />
+                  <ProgressBar
+                    color="yellow"
+                    completed={`${habit.how_much_achieved}%`}
+                  />
                   <div className="container-button">
                     <button
                       className="habit-button-giveup"
@@ -163,6 +248,10 @@ const Dashboard = () => {
         <CardContainer>
           {loading ? (
             <CircularProgress size={50} />
+          ) : finishedHabits.length === 0 ? (
+            <span className="msgDsh">
+              Não há hábitos concluídos, continue firme para concluir os atuais!
+            </span>
           ) : (
             finishedHabits.map((habit) => (
               <CardHabit key={habit.id}>
@@ -180,7 +269,10 @@ const Dashboard = () => {
                   <div className="habit-progression">
                     <p>Progresso:</p>
                   </div>
-                  <ProgressBar color='blue' completed={`${habit.how_much_achieved}%`} />
+                  <ProgressBar
+                    color="blue"
+                    completed={`${habit.how_much_achieved}%`}
+                  />
                 </div>
               </CardHabit>
             ))
@@ -188,8 +280,6 @@ const Dashboard = () => {
         </CardContainer>
       </PageContainer>
     </>
-
-
   );
 };
 

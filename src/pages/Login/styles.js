@@ -3,6 +3,7 @@ import LoginImage from "../../assets/Login.svg";
 
 export const HeaderContainer = styled.div`
   padding: 40px 50px 0px;
+  height: 2vh;
 
   .easyHabits {
     color: var(--violetCore);
@@ -14,7 +15,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: stretch;
@@ -47,6 +48,11 @@ export const Content = styled.div`
     justify-content: center;
     width: 100%;
     max-width: 720px;
+    height: 100vh;
+  }
+
+  .MuiSvgIcon-root {
+    font-size: 2.5rem;
   }
 
   @media (max-width: 1100px) {
@@ -70,6 +76,10 @@ from {
 to{
   opacity: 1;
   transform: translateX(0px)
+} 
+
+.MuiSvgIcon-root{
+  font-size:2.5rem
 }
 `;
 
@@ -107,21 +117,22 @@ export const AnimationContainer = styled.div`
     }
 
     h1 {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       color: #5965e0;
-      font-size: 50px;
+      font-size: 40px;
     }
 
     h3 {
       color: var(--darkBlue);
-      font-size: 24px;
-      margin-bottom: 20px;
+      font-size: 20px;
+      margin-bottom: 30px;
+      text-align: center;
     }
 
     p {
       margin: 5px auto;
       color: #2e384d;
-      font-size: 16px;
+      font-size: 20px;
     }
 
     a {
@@ -131,9 +142,9 @@ export const AnimationContainer = styled.div`
     }
 
     .error {
-      text-align: justify;
+      text-align: center;
       color: #c1292e;
-      padding-left: 45px;
+      padding-right: 5px;
       font-size: 12px;
       margin-top: 5px;
     }
@@ -141,12 +152,13 @@ export const AnimationContainer = styled.div`
 
   @media (max-width: 1100px) {
     form {
-      margin: 10px 0;
       text-align: center;
       height: 100%;
-
-      .MuiInputBase-input {
-      }
+    }
+    h1 {
+      margin-bottom: 10px;
+      color: #5965e0;
+      font-size: 40px;
     }
   }
 `;
@@ -158,11 +170,10 @@ export const Button = styled.button`
   border: none;
   border-radius: 15px;
   box-sizing: border-box;
-  margin: 1em;
-  margin-top: 10px;
+  margin: 2em;
   padding: 5px;
   width: 220px;
-  height: 30px;
+  height: 40px;
 
   button:hover {
     transition: all 250ms linear;
@@ -175,7 +186,7 @@ export const Button = styled.button`
   }
 
   @media (max-width: 1100px) {
-    margin-top: 30px;
+    margin-top: 20px;
     height: 34px;
     width: 210px;
   }

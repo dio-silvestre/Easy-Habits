@@ -27,7 +27,8 @@ body {
     font-size: 1rem;
     min-width: 90vw;
     max-width: 100vw;
-    -webkit-font-smoothing: antialiased !important
+    -webkit-font-smoothing: antialiased !important;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6, strong {

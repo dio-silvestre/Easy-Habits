@@ -5,11 +5,11 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 97%;
+  width: 100%;
   height: 100vh;
 
   gap: 20px;
-  border: 5px solid var(--violetLight);
+
   border-radius: 4px;
   padding: 0px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);

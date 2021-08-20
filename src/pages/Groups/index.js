@@ -73,6 +73,7 @@ const Groups = () => {
     <>
       <HeaderContainer>
         <div className="easyHabits">
+          EasyHabits{" "}
           <div className="arrowBack">
             <Link to="/dashboard">
               <ArrowBackIosIcon />
@@ -128,6 +129,15 @@ const Groups = () => {
       </FormModal>
       {openGroups && (
         <PageContainer>
+          <Button
+            colorSchema
+            onClick={() => {
+              setOpenForm(true);
+              setOpenGroups(false);
+            }}
+          >
+            + Criar Grupo
+          </Button>
           <div className="groupsWrapper">
             <OpenGroups>
               <h1>Meus Grupos</h1>

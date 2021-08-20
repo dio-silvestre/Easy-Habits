@@ -34,6 +34,13 @@ export const CardContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+
+  .msgDsh{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 110px;
+    color: var(--violetCore);
+  }
 `;
 
 export const FormContainer = styled.div`
