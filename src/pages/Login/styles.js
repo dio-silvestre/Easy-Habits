@@ -124,7 +124,7 @@ export const AnimationContainer = styled.div`
     p {
       margin: 5px auto;
       color: #2e384d;
-      font-size: 16px;
+      font-size: 20px;
     }
 
     a {
@@ -163,7 +163,6 @@ export const Button = styled.button`
   border-radius: 15px;
   box-sizing: border-box;
   margin: 2em;
-  margin-top: 2em;
   padding: 5px;
   width: 220px;
   height: 30px;
