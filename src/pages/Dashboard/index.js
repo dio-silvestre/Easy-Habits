@@ -119,77 +119,83 @@ const Dashboard = () => {
             </CardNewHabit>
           </Popup>
         )}
+
         <CardContainer>
           {loading ? (
             <CircularProgress size={50} />
           ) : (
-            habits.map((habit) => (
-              <CardHabit key={habit.id}>
-                <div className="habit-container">
-                  <div className="habit-title">Hábito: {habit.title}</div>
-                  <hr />
-                  <div className="habit-difficulty">
-                    <p>Dificuldade: {habit.difficulty}</p>
-                  </div>
-                  <hr />
-                  <div className="habit-category">
-                    <p>Categoria: {habit.category}</p>
-                  </div>
-                  <hr />
-                  <div className="habit-progression">
-                    <p>Progresso:</p>
-                  </div>
-                  <ProgressBar color='yellow' completed={`${habit.how_much_achieved}%`} />
-                  <div className="container-button">
-                    <button
-                      className="habit-button-giveup"
-                      onClick={() => handleDelete(habit)}
-                    >
-                      <DeleteForeverIcon />
-                    </button>
-                    <button
-                      className="habit-button"
-                      onClick={() => handleUpdate(habit)}
-                    >
-                      <DoubleArrowIcon />
-                    </button>
-                  </div>
-                </div>
-              </CardHabit>
-            ))
-          )}
+            habits.length === 0 ?
+              (<span className='msgDsh'>Comece já um novo hábito</span>) :
+              (
+                habits.map((habit) => (
+                  <CardHabit key={habit.id}>
+                    <div className="habit-container">
+                      <div className="habit-title">Hábito: {habit.title}</div>
+                      <hr />
+                      <div className="habit-difficulty">
+                        <p>Dificuldade: {habit.difficulty}</p>
+                      </div>
+                      <hr />
+                      <div className="habit-category">
+                        <p>Categoria: {habit.category}</p>
+                      </div>
+                      <hr />
+                      <div className="habit-progression">
+                        <p>Progresso:</p>
+                      </div>
+                      <ProgressBar color='yellow' completed={`${habit.how_much_achieved}%`} />
+                      <div className="container-button">
+                        <button
+                          className="habit-button-giveup"
+                          onClick={() => handleDelete(habit)}
+                        >
+                          <DeleteForeverIcon />
+                        </button>
+                        <button
+                          className="habit-button"
+                          onClick={() => handleUpdate(habit)}
+                        >
+                          <DoubleArrowIcon />
+                        </button>
+                      </div>
+                    </div>
+                  </CardHabit>
+                ))
+              ))}
+
         </CardContainer>
         <PContainer>Concluídos</PContainer>
         <CardContainer>
           {loading ? (
             <CircularProgress size={50} />
           ) : (
-            finishedHabits.map((habit) => (
-              <CardHabit key={habit.id}>
-                <div className="habit-container">
-                  <div className="habit-title">Hábito: {habit.title}</div>
-                  <hr />
-                  <div className="habit-difficulty">
-                    <p>Dificuldade: {habit.difficulty}</p>
-                  </div>
-                  <hr />
-                  <div className="habit-category">
-                    <p>Categoria: {habit.category}</p>
-                  </div>
-                  <hr />
-                  <div className="habit-progression">
-                    <p>Progresso:</p>
-                  </div>
-                  <ProgressBar color='blue' completed={`${habit.how_much_achieved}%`} />
-                </div>
-              </CardHabit>
-            ))
+            finishedHabits.length === 0 ?
+              (<span className='msgDsh'>Não há hábitos concluídos, continue firme para concluir os atuais!</span>) :
+              (
+                finishedHabits.map((habit) => (
+                  <CardHabit key={habit.id}>
+                    <div className="habit-container">
+                      <div className="habit-title">Hábito: {habit.title}</div>
+                      <hr />
+                      <div className="habit-difficulty">
+                        <p>Dificuldade: {habit.difficulty}</p>
+                      </div>
+                      <hr />
+                      <div className="habit-category">
+                        <p>Categoria: {habit.category}</p>
+                      </div>
+                      <hr />
+                      <div className="habit-progression">
+                        <p>Progresso:</p>
+                      </div>
+                      <ProgressBar color='blue' completed={`${habit.how_much_achieved}%`} />
+                    </div>
+                  </CardHabit>
+                )))
           )}
         </CardContainer>
       </PageContainer>
     </>
-
-
   );
 };
 
