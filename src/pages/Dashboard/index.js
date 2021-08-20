@@ -142,7 +142,7 @@ const Dashboard = () => {
                       {...register("title")}
                       name="title"
                     />
-                    <div className="error"> {errors.habit?.message}</div>
+                    <div className="error"> {errors.title?.message}</div>
                     <TextField
                       id="standard-basic"
                       label="Categoria"

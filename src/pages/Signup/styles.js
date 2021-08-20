@@ -60,6 +60,10 @@ export const Content = styled.div`
     justify-content: center;
     width: 100%;
     max-width: 720px;
+
+    .MuiSvgIcon-root {
+      font-size: 2.5rem;
+    }
   }
 
   @media (max-width: 1100px) {
@@ -156,7 +160,7 @@ export const Button = styled.button`
 
   padding: 5px;
   width: 220px;
-  height: 30px;
+  height: 40px;
 
   button:hover {
     transition: all 250ms linear;
