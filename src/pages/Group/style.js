@@ -143,26 +143,39 @@ export const GoalsCard = styled.div`
     ul {
       background-color: var(--violetLight);
       width: 100%;
-    }
 
-    li {
-      border-bottom: 1px dotted var(--darkBlue);
-      padding: 3px;
-      display: flex;
-      justify-content: space-between;
-
-      .iconsWrapper {
+      li {
+        border-bottom: 1px dotted var(--darkBlue);
+        padding: 3px;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        .done {
-          svg {
-            color: var(--darkBlue);
-          }
+        p {
+          color: var(--darkBlue);
+          font-size: 1.2rem;
+          font-weight: 600;
+          text-decoration: ${(props) =>
+            props.goalUpdated ? "line-through" : "none"};
         }
 
-        .delete {
-          svg {
-            color: var(--whiteText);
+        .iconsWrapper {
+          display: flex;
+          margin: 5px;
+
+          .done {
+            svg {
+              background-color: var(--green);
+              cursor: pointer;
+              color: var(--darkBlue);
+            }
+          }
+
+          .delete {
+            svg {
+              color: var(--violetCore);
+              cursor: pointer;
+            }
           }
         }
       }

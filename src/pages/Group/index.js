@@ -27,19 +27,17 @@ const Group = () => {
   const idNum = Number(id);
   const {
     groupGoals,
-    specificGoal,
     addNewGroupGoal,
-    getOneGoal,
     getGroupGoals,
     updateGroupGoal,
     deleteGroupGoal,
   } = useGoals();
 
-  console.log(groupGoals);
+  console.log(groupGoals)
 
   const [openForm, setOpenForm] = useState(false);
   const [openGroup, setOpenGroup] = useState(true);
-
+  const [goalUpdated, setGoalUpdated] = useState(false);
   const schema = yup.object().shape({
     title: yup.string().required("Defina uma meta para o grupo"),
     difficulty: yup
@@ -60,12 +58,19 @@ const Group = () => {
     setOpenForm(false);
     setOpenGroup(true);
     getGroupGoals(idNum);
+    setGoalUpdated(false);
   };
 
   useEffect(() => {
     getGroupGoals(idNum);
     // eslint-disable-next-line
-  }, []);
+  }, [deleteGroupGoal]);
+
+  const handleUpdateGoal = (goal_id) => {
+    updateGroupGoal(goal_id);
+    setGoalUpdated(true);
+    console.log(goalUpdated);
+  };
 
   return (
     <>
@@ -131,13 +136,15 @@ const Group = () => {
                 {groupGoals.map((goal, index) => (
                   <ul key={index}>
                     <li>
-                      {goal.title}
+                      <p goalUpdated={goalUpdated}>{goal.title}</p>
                       <div className="iconsWrapper">
                         <div className="done">
-                          <DoneIcon />
+                          <DoneIcon onClick={() => handleUpdateGoal(goal.id)} />
                         </div>
                         <div className="delete">
-                          <DeleteForeverIcon />
+                          <DeleteForeverIcon
+                            onClick={() => deleteGroupGoal(goal.id)}
+                          />
                         </div>
                       </div>
                     </li>

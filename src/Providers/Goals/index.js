@@ -45,13 +45,12 @@ export const GoalsProvider = ({ children }) => {
       .then((_) => toast.success("Meta criada com sucesso"));
   };
 
-  const updateGroupGoal = ({ goal_id, how_much_achieved, achieved }) => {
+  const updateGroupGoal = (goal_id) => {
     api
       .patch(
         `/goals/${goal_id}/`,
         {
-          how_much_achieved: how_much_achieved,
-          achieved: achieved,
+          achieved: true,
         },
         {
           headers: {
@@ -62,14 +61,14 @@ export const GoalsProvider = ({ children }) => {
       .then((_) => toast.success("Objetivo atualizado"));
   };
 
-  const deleteGroupGoal = ({ goal_id }) => {
+  const deleteGroupGoal = (goal_id) => {
     api
       .delete(`/goals/${goal_id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((_) => toast.success("Objetivo deletado"));
+      .then((_) => toast.success("Meta deletada"));
   };
 
   return (
