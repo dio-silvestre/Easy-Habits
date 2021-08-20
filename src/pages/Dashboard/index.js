@@ -105,7 +105,6 @@ const Dashboard = () => {
   const [difficulties, setDifficulties] = useState("Fácil");
 
   const onSubmitFunction = (data) => {
-    console.log(data.difficulty, data.frequency);
     addNewHabit(data);
     reset();
   };
