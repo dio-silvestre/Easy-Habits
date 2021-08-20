@@ -198,9 +198,12 @@ const Dashboard = () => {
             </CardNewHabit>
           </Popup>
         )}
+
         <CardContainer>
           {loading ? (
             <CircularProgress size={50} />
+          ) : habits.length === 0 ? (
+            <span className="msgDsh">Comece já um novo hábito</span>
           ) : (
             habits.map((habit) => (
               <CardHabit key={habit.id}>
@@ -245,6 +248,10 @@ const Dashboard = () => {
         <CardContainer>
           {loading ? (
             <CircularProgress size={50} />
+          ) : finishedHabits.length === 0 ? (
+            <span className="msgDsh">
+              Não há hábitos concluídos, continue firme para concluir os atuais!
+            </span>
           ) : (
             finishedHabits.map((habit) => (
               <CardHabit key={habit.id}>
