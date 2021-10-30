@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+A app easyHabits tem como objetivo auxiliar os usuários que buscam desenvolver e monitorar novos hábitos em todas as áreas do conhecimento para alcançar uma meta determinada.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Qual a solução que a aplicação traz ?
+A plataforma oferece um serviço de monitoramento constante dos novos hábitos definidos pelo usuário, de modo que ele ou ela possa verificar se está cumprindo o plano estabelecido para alcançar seus objetivos. O usuário poderá definir um prêmio a si mesmo se cumpre com o plano estabelecido e desenvolve a disciplina necessária para criar novos hábitos.
 
-## Available Scripts
+Quais as features da aplicação que foram planejadas?
+Dentro do que visualizamos como sprint backlog, o usuário poderá criar e gerenciar seu próprio perfil, criar, monitorar e deletar goals e hábitos, além de poder criar e gerenciar grupos correlatos de ajuda mútua.
 
-In the project directory, you can run:
+Features do Front:
+O usuário poderá criar uma conta na plataforma, definir, gerenciar e deletar seus próprios objetivos, estabelecer um plano de desenvolvimento de novos hábitos / atividades para alcançar esses objetivos, interagir com a respectiva comunidade que possui os mesmos objetivos, tendo a oportunidade de conseguir ajuda dos seus pares para alcançar suas metas, criar e gerenciar atividades em grupo. Ao interagir com a plataforma, o usuário estará autenticado e somente ele ou ela poderão ver suas informações. Ao relacionar-se com a comunidade, o usuário poderá escolher se quer ou não compartilhar seus objetivos e seu progresso.
 
-### `yarn start`
+Quais as bibliotecas foram utilizadas pela equipe ?
+- React-Router-DOM
+- React-Hook-Form
+- Yup e Resolver/yup
+- Material UI
+- Styled Components
+- Framer-Motion
+- Axios
+- Context API
+- Toastify
+- Jwt decode
+- React-lottie
+- Nice-React-Carousel
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Alunos do Q2 mar21 da Kenzie Academy Brasil participantes do projeto:
+Nicole Pimenta - Project Owner
+Vinícius Troyack - Quality Assurance
+Gabriel Freitas - Quality Assurance
+Diogo Silvestre - Tech Lead
+Luiz Federico - Scrum Master
